@@ -2,12 +2,10 @@
 import { t } from '../lib/i18n';
 import type { Locale } from '../lib/constants';
 import { PARENT } from '../lib/constants';
-import { CONCEPT_DETAIL } from '../lib/photos';
-
 interface Props { locale: Locale; image?: string }
 const { locale, image } = Astro.props;
 const d = t(locale);
-const detailImg = image ?? CONCEPT_DETAIL.large;
+const detailImg = image ?? '/img/hero/concept-detail.webp';
 const alt = locale === 'es'
   ? 'Detalle de diseño en Casa Museo: piedra tallada, madera y luz cálida'
   : 'Casa Museo design detail: carved stone, oak and warm light';

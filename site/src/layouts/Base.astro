@@ -61,6 +61,14 @@ const xDefault = locale === 'es' ? canonical : `${SITE.url}${alt}`;
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
+    {/* Preload del hero (AVIF) — clave para LCP <2s en /es y /en */}
+    {(pathname === '/es' || pathname === '/en') && (
+      <>
+        <link rel="preload" as="image" type="image/avif" href="/img/hero/hero-mobile.avif" media="(max-width: 767px)" fetchpriority="high" />
+        <link rel="preload" as="image" type="image/avif" href="/img/hero/hero-desktop.avif" media="(min-width: 768px)" fetchpriority="high" />
+      </>
+    )}
+
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

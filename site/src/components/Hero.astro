@@ -2,25 +2,24 @@
 import { t } from '../lib/i18n';
 import type { Locale } from '../lib/constants';
 import BookingBar from './BookingBar.astro';
-import { HOMEPAGE_HERO } from '../lib/photos';
 
 interface Props { locale: Locale; image?: string }
-const { locale, image } = Astro.props;
+const { locale } = Astro.props;
 const d = t(locale);
-
-// Bootstrap hero — Hostaway CDN. Replace with photographer's hero shot via Cloudinary in Sprint 3.
-const heroImage = image ?? HOMEPAGE_HERO.full;
-const heroImageMobile = image ?? HOMEPAGE_HERO.card;
+// Self-hosted, edge-cached por Vercel. AVIF primary (smaller), WebP fallback.
 const heroAlt = locale === 'es'
   ? 'Loft boutique de Casa Museo en Laureles, Medellín, con jacuzzi privado y diseño curado'
   : 'Casa Museo boutique loft in Laureles, Medellín, with private jacuzzi and curated design';
 ---
 <section class="relative isolate overflow-hidden">
-  <!-- Background image -->
+  <!-- Background image: AVIF primero, WebP fallback. Edge-cached por Vercel. -->
   <picture>
-    <source media="(min-width: 768px)" srcset={heroImage} />
+    <source type="image/avif" media="(min-width: 768px)" srcset="/img/hero/hero-desktop.avif" />
+    <source type="image/avif" srcset="/img/hero/hero-mobile.avif" />
+    <source type="image/webp" media="(min-width: 768px)" srcset="/img/hero/hero-desktop.webp" />
+    <source type="image/webp" srcset="/img/hero/hero-mobile.webp" />
     <img
-      src={heroImageMobile}
+      src="/img/hero/hero-mobile.webp"
       alt={heroAlt}
       width="1920"
       height="1280"
