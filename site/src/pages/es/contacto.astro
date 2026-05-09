@@ -9,7 +9,7 @@ const waText = encodeURIComponent('Hola! Tengo una pregunta sobre Casa Laureles 
 ---
 <Base locale="es" title={title} description={description} pathname={pathname}>
   <section class="container-default pt-12 md:pt-20 pb-20">
-    <p class="label-caps text-accent">Hablemos</p>
+    <p class="label-caps text-accent-deep">Hablemos</p>
     <h1 class="mt-4 font-display font-light text-headline-lg md:text-display-lg text-ink leading-tight max-w-3xl">
       Estamos a un mensaje de distancia
     </h1>
@@ -20,19 +20,19 @@ const waText = encodeURIComponent('Hola! Tengo una pregunta sobre Casa Laureles 
 
     <div class="mt-12 grid gap-6 md:grid-cols-3">
       <a href={`https://wa.me/${NAP.whatsapp}?text=${waText}`} target="_blank" rel="noopener" class="rounded-lg bg-surface-warm p-7 hover:bg-surface-sand transition-colors">
-        <span class="label-caps text-accent">WhatsApp · 24/7</span>
+        <span class="label-caps text-accent-deep">WhatsApp · 24/7</span>
         <p class="mt-3 font-display text-headline-md text-ink">{NAP.phoneDisplay}</p>
-        <p class="mt-2 text-body-sm text-ink-mute">Respuesta en minutos</p>
+        <p class="mt-2 text-body-sm text-ink-soft">Respuesta en minutos</p>
       </a>
       <a href={`tel:${NAP.phone}`} class="rounded-lg bg-surface-warm p-7 hover:bg-surface-sand transition-colors">
-        <span class="label-caps text-accent">Teléfono</span>
+        <span class="label-caps text-accent-deep">Teléfono</span>
         <p class="mt-3 font-display text-headline-md text-ink">{NAP.phoneDisplay}</p>
-        <p class="mt-2 text-body-sm text-ink-mute">Recepción 24/7</p>
+        <p class="mt-2 text-body-sm text-ink-soft">Recepción 24/7</p>
       </a>
       <a href={`mailto:${NAP.email}`} class="rounded-lg bg-surface-warm p-7 hover:bg-surface-sand transition-colors">
-        <span class="label-caps text-accent">Email</span>
+        <span class="label-caps text-accent-deep">Email</span>
         <p class="mt-3 font-display text-headline-md text-ink break-all">{NAP.email}</p>
-        <p class="mt-2 text-body-sm text-ink-mute">Para temas formales</p>
+        <p class="mt-2 text-body-sm text-ink-soft">Para temas formales</p>
       </a>
     </div>
 

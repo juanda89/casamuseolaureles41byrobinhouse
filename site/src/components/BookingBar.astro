@@ -31,15 +31,15 @@ const unitOptions = UNIT_ORDER.map((slug) => ({
   class={`rounded-lg bg-surface/95 backdrop-blur p-4 md:p-5 shadow-2xl shadow-primary-deep/30 grid gap-3 md:grid-cols-[1fr_1fr_auto_1.4fr_auto] md:items-end ${variant === 'hero' ? '' : 'border border-outline-soft'}`}
 >
   <label class="flex flex-col gap-1.5">
-    <span class="label-caps text-ink-mute">{d.bookingBar.checkin}</span>
+    <span class="label-caps text-ink-soft">{d.bookingBar.checkin}</span>
     <input type="date" name="start" min={today} value={start} required class="input-field font-numeric" />
   </label>
   <label class="flex flex-col gap-1.5">
-    <span class="label-caps text-ink-mute">{d.bookingBar.checkout}</span>
+    <span class="label-caps text-ink-soft">{d.bookingBar.checkout}</span>
     <input type="date" name="end" min={today} value={end} required class="input-field font-numeric" />
   </label>
   <label class="flex flex-col gap-1.5">
-    <span class="label-caps text-ink-mute">{d.bookingBar.guests}</span>
+    <span class="label-caps text-ink-soft">{d.bookingBar.guests}</span>
     <select name="numberOfGuests" class="input-field" required>
       <option value="1">1 {d.bookingBar.guest}</option>
       <option value="2" selected>2 {d.bookingBar.guestsPlural}</option>
@@ -49,7 +49,7 @@ const unitOptions = UNIT_ORDER.map((slug) => ({
     </select>
   </label>
   <label class="flex flex-col gap-1.5">
-    <span class="label-caps text-ink-mute">{d.bookingBar.unit}</span>
+    <span class="label-caps text-ink-soft">{d.bookingBar.unit}</span>
     <select name="unit" class="input-field">
       <option value="any" selected={!preselectedUnit}>{d.bookingBar.anyUnit}</option>
       {unitOptions.map((u) => (
@@ -61,7 +61,7 @@ const unitOptions = UNIT_ORDER.map((slug) => ({
 
   <div class="md:col-span-5">
     <p data-booking-error class="hidden text-body-sm text-error" role="alert"></p>
-    <p class="mt-1 text-body-sm text-ink-mute">{d.bookingBar.fiscalNote}</p>
+    <p class="mt-1 text-body-sm text-ink-soft">{d.bookingBar.fiscalNote}</p>
   </div>
 </form>
 

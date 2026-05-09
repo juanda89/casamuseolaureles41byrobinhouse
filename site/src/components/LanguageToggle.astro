@@ -6,14 +6,15 @@ interface Props { locale: Locale; pathname: string }
 const { locale, pathname } = Astro.props;
 const d = t(locale);
 const target = altPath(pathname);
+const ariaLabel = locale === 'es' ? 'Switch language: ES / EN' : 'Cambiar idioma: ES / EN';
 ---
 <a
   href={target}
   class="inline-flex items-center gap-1 rounded-pill border border-outline-soft px-3 py-1.5 text-body-sm text-ink hover:bg-surface-warm hover:border-outline transition-colors"
-  aria-label={d.language.label}
+  aria-label={ariaLabel}
   hreflang={locale === 'es' ? 'en' : 'es'}
 >
-  <span class={`label-caps ${locale === 'es' ? 'text-accent' : 'text-ink-mute'}`}>ES</span>
-  <span class="text-ink-mute" aria-hidden="true">/</span>
-  <span class={`label-caps ${locale === 'en' ? 'text-accent' : 'text-ink-mute'}`}>EN</span>
+  <span class={`label-caps ${locale === 'es' ? 'text-accent' : 'text-ink-soft'}`}>ES</span>
+  <span class="text-ink-soft" aria-hidden="true">/</span>
+  <span class={`label-caps ${locale === 'en' ? 'text-accent' : 'text-ink-soft'}`}>EN</span>
 </a>
