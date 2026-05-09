@@ -18,7 +18,7 @@
     }
   ],
   "redirects": [
-    { "source": "/", "destination": "/es", "permanent": false },
+    { "source": "/", "destination": "/es", "permanent": true },
     { "source": "/unidades/(.*)", "destination": "/es/unidades/$1", "permanent": true },
     { "source": "/units/(.*)", "destination": "/en/units/$1", "permanent": true }
   ]
