@@ -74,18 +74,9 @@ const xDefault = locale === 'es' ? canonical : `${SITE.url}${alt}`;
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.webmanifest" />
 
-    <!-- Fonts: Fraunces (display), DM Sans (body), JetBrains Mono (numeric) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap"
-    />
+    {/* Fonts self-hosted — preload de los 2 archivos críticos above-the-fold */}
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/fraunces-latin-wght.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/dm-sans-400.woff2" crossorigin />
 
     {schemas.map((s) => (
       <script type="application/ld+json" set:html={JSON.stringify(s)} />
