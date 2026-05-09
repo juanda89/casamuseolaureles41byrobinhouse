@@ -10,9 +10,11 @@ colors:
   on-primary: "#F5EFE6"
 
   # Acento — terracota colombiano, único impulsor de acción
-  accent: "#B85C3C"
+  # accent ajustado a #A04A2E (5.46:1 con surface) tras audit Lighthouse —
+  # el #B85C3C original (4.0:1) fallaba WCAG AA para texto pequeño.
+  accent: "#A04A2E"
   accent-soft: "#D17A5A"
-  accent-deep: "#8E4528"
+  accent-deep: "#7A3A22"
   on-accent: "#F5EFE6"
 
   # Dorado curado — galería, hairlines, detalles editoriales
