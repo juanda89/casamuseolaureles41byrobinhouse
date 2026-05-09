@@ -36,6 +36,11 @@ export const PARENT = {
   instagram: 'robinhouse.co',
 } as const;
 
+export const SOCIAL = {
+  instagram: 'casalaureles41',
+  instagramUrl: 'https://www.instagram.com/casalaureles41',
+} as const;
+
 export const BOOKING = {
   base: 'https://booking.housyhost.com',
   hostawayAccountId: 43085,

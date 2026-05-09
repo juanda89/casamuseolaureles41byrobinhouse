@@ -1,5 +1,5 @@
 ---
-import { SITE, NAP, PARENT, UNITS, UNIT_ORDER } from '../../lib/constants';
+import { SITE, NAP, PARENT, UNITS, UNIT_ORDER, SOCIAL } from '../../lib/constants';
 import type { Locale } from '../../lib/constants';
 
 interface Props { locale: Locale }
@@ -30,6 +30,7 @@ const schema = {
     longitude: NAP.geo.lng,
   },
   sameAs: [
+    SOCIAL.instagramUrl,
     NAP.gmapsUrl,
     `https://booking.housyhost.com/listings/${UNITS.standar.id}`,
     `https://booking.housyhost.com/listings/${UNITS.familiar.id}`,

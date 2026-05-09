@@ -1,6 +1,6 @@
 ---
 import { t } from '../lib/i18n';
-import { NAP, PARENT, SITE } from '../lib/constants';
+import { NAP, PARENT, SITE, SOCIAL } from '../lib/constants';
 import type { Locale } from '../lib/constants';
 
 interface Props { locale: Locale }
@@ -61,6 +61,22 @@ const year = new Date().getFullYear();
         <li><a href={`https://wa.me/${NAP.whatsapp}`} class="hover:text-gold transition-colors" target="_blank" rel="noopener">WhatsApp · {NAP.phoneDisplay}</a></li>
         <li><a href={`tel:${NAP.phone}`} class="hover:text-gold transition-colors">Tel · {NAP.phoneDisplay}</a></li>
         <li><a href={`mailto:${NAP.email}`} class="hover:text-gold transition-colors">{NAP.email}</a></li>
+        <li>
+          <a
+            href={SOCIAL.instagramUrl}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2 hover:text-gold transition-colors"
+            aria-label={`Instagram @${SOCIAL.instagram}`}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" />
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+            </svg>
+            Instagram · @{SOCIAL.instagram}
+          </a>
+        </li>
       </ul>
     </div>
 
