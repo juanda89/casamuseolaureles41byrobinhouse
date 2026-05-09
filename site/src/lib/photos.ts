@@ -18,23 +18,23 @@ function img(slug: number, hash: string) {
 
 export const PHOTOS: Record<UnitSlug, { hero: ReturnType<typeof img>; gallery: ReturnType<typeof img>[] }> = {
   standar: {
-    hero: img(485562, 'R--yY--jA05Fz4VmjitB2fN4inYyJESzhjxgYcKtwTBd0-698a23ab8adec'),
+    hero: img(485562, 'U0d0jEVXeFZwIBN74Pk9Rc9Tnl8GrqPHKMSM9btvAWo-698a23aa4a8b1'),
     gallery: [
+      img(485562, 'U0d0jEVXeFZwIBN74Pk9Rc9Tnl8GrqPHKMSM9btvAWo-698a23aa4a8b1'),
       img(485562, 'R--yY--jA05Fz4VmjitB2fN4inYyJESzhjxgYcKtwTBd0-698a23ab8adec'),
       img(485562, 'ABTa--A2APUgDcWeAYoaplfwlR8QabVvwvRp--5xTC-Ps-698a23a6da1de'),
-      img(485562, 'U0d0jEVXeFZwIBN74Pk9Rc9Tnl8GrqPHKMSM9btvAWo-698a23aa4a8b1'),
       img(485562, 'dPNAQG7tfPxu1wRaDzFpZHPMuy6yxrbzM1mPUoMwGTQ-698a23a8695b1'),
       img(485562, '4SP8KLUJVNkDtqXK-rLhfggIfXa--tGSu0tURuUkQUG4-698a7befdcb8d'),
     ],
   },
   familiar: {
-    hero: img(486242, 'bC1MvTkAPRdqAVc9a-wbo91KptBPKGycYw-a--j----818-698be2ce7ab9a'),
+    hero: img(486242, 'oYhw3yKKeHHlZu--zD--RAua1LKEprKLYfryaMt-Ai360-698be2cac2add'),
     gallery: [
+      img(486242, 'oYhw3yKKeHHlZu--zD--RAua1LKEprKLYfryaMt-Ai360-698be2cac2add'),
       img(486242, 'bC1MvTkAPRdqAVc9a-wbo91KptBPKGycYw-a--j----818-698be2ce7ab9a'),
       img(486242, '2AU--x3RaVG9Sdou6QfWrOBEn0w0aSTN5--CtUHcUSkrU-698bea31a7a8b'),
       img(486242, 'G2L01LNNOA3KyZYUfoN0oJrmFRUxirV3Tf69-nb3zto-698be2cc27add'),
       img(486242, 'kPxmzHb5pjM3zxxhCZOlASe3ZO5i22iPA4E6AfwQ8uc-698be2cd43db4'),
-      img(486242, 'oYhw3yKKeHHlZu--zD--RAua1LKEprKLYfryaMt-Ai360-698be2cac2add'),
     ],
   },
   deluxe: {
