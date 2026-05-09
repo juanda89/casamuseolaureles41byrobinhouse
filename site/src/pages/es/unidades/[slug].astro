@@ -1,0 +1,83 @@
+---
+import Base from '../../../layouts/Base.astro';
+import BookingBar from '../../../components/BookingBar.astro';
+import UnitGallery from '../../../components/UnitGallery.astro';
+import ApartmentSchema from '../../../components/schema/ApartmentSchema.astro';
+import { UNITS, UNIT_ORDER, NAP, type UnitSlug } from '../../../lib/constants';
+import { PHOTOS } from '../../../lib/photos';
+import { bookingUrl, defaultRange } from '../../../lib/booking';
+
+export function getStaticPaths() {
+  return UNIT_ORDER.map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params as { slug: UnitSlug };
+const u = UNITS[slug];
+const photo = PHOTOS[slug].hero.large;
+const range = defaultRange();
+const directBooking = bookingUrl(slug, range.start, range.end, Math.min(2, u.maxGuests));
+
+const title = `${u.name.es} · Casa Museo · Laureles, Medellín`;
+const description = `${u.tagline.es} ${u.maxGuests} huéspedes · ${u.bed.es}.`;
+const pathname = `/es/unidades/${u.slug}`;
+---
+<Base locale="es" title={title} description={description} pathname={pathname} image={photo}>
+  <ApartmentSchema slug={slug} locale="es" image={photo} />
+
+  <article class="pb-16">
+    <header class="container-default pt-12 md:pt-20 pb-10">
+      <p class="label-caps text-accent">{u.shortName.es}</p>
+      <h1 class="mt-4 font-display font-light text-headline-lg md:text-display-lg text-ink leading-tight">
+        {u.name.es}
+      </h1>
+      <p class="mt-5 text-body-lg text-ink-soft max-w-3xl">{u.tagline.es}</p>
+
+      <ul class="mt-7 flex flex-wrap gap-2">
+        <li class="badge badge-leaf">{u.maxGuests} huéspedes</li>
+        <li class="badge badge-leaf">{u.bed.es}</li>
+        <li class="badge badge-leaf">{u.bedrooms} habitación</li>
+        <li class="badge badge-leaf">{u.bathrooms} baño</li>
+        {u.highlight && <li class="badge badge-gold">{u.highlight.es}</li>}
+      </ul>
+    </header>
+
+    <UnitGallery slug={slug} locale="es" />
+
+    <section class="container-default py-16 md:py-20 grid gap-12 md:grid-cols-12">
+      <div class="md:col-span-7">
+        <h2 class="font-display text-headline-lg text-ink">Lo que incluye</h2>
+        <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {u.amenities.map((a) => (
+            <li class="flex items-start gap-3 rounded-md bg-surface-warm px-4 py-3">
+              <span class="mt-1 inline-block h-2 w-2 rounded-pill bg-accent" aria-hidden="true"></span>
+              <span class="text-body-md text-ink">{a.es}</span>
+            </li>
+          ))}
+        </ul>
+
+        <h2 class="mt-12 font-display text-headline-lg text-ink">Sobre la unidad</h2>
+        <p class="mt-4 text-body-lg text-ink-soft reading-width">
+          Habitación curada en el corazón de Laureles. Cada elemento — piedra tallada, madera flotante,
+          iluminación LED ambiental y kitchenette equipada — fue seleccionado para que el espacio se
+          sienta como una galería habitada. WiFi de alta velocidad, aire acondicionado y acceso a la
+          piscina compartida del edificio. Recepción 24/7.
+        </p>
+      </div>
+
+      <aside class="md:col-span-5" id="booking">
+        <div class="rounded-lg bg-surface-warm p-6 md:p-8 sticky top-24">
+          <h3 class="font-display text-headline-md text-ink">Reservar esta unidad</h3>
+          <p class="mt-2 text-body-md text-ink-soft">El total final con impuestos lo verás en la página de pago de Housy Host.</p>
+          <BookingBar locale="es" variant="inline" preselectedUnit={slug} />
+          <a href={directBooking} target="_blank" rel="noopener" class="mt-4 block text-center text-body-sm text-accent hover:text-accent-deep underline-offset-4 hover:underline">
+            Ir directo al booking de Housy Host →
+          </a>
+          <p class="mt-6 pt-6 border-t border-outline-soft/60 text-body-sm text-ink-mute">
+            ¿Dudas? Escríbenos por WhatsApp al
+            <a href={`https://wa.me/${NAP.whatsapp}`} target="_blank" rel="noopener" class="text-accent hover:text-accent-deep">{NAP.phoneDisplay}</a>.
+          </p>
+        </div>
+      </aside>
+    </section>
+  </article>
+</Base>

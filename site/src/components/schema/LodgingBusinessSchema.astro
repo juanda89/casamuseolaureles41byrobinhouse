@@ -1,0 +1,63 @@
+---
+import { SITE, NAP, PARENT, UNITS, UNIT_ORDER } from '../../lib/constants';
+import type { Locale } from '../../lib/constants';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'LodgingBusiness',
+  '@id': `${SITE.url}/#lodging`,
+  name: SITE.name,
+  alternateName: ['Casa Museo', 'Casa Laureles 41'],
+  url: SITE.url,
+  image: [`${SITE.url}/og/home.jpg`],
+  description: SITE.description[locale],
+  telephone: NAP.phone,
+  priceRange: '$$',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: NAP.streetAddress,
+    addressLocality: NAP.locality,
+    addressRegion: NAP.region,
+    postalCode: NAP.postalCode,
+    addressCountry: NAP.country,
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: NAP.geo.lat,
+    longitude: NAP.geo.lng,
+  },
+  sameAs: [
+    NAP.gmapsUrl,
+    `https://booking.housyhost.com/listings/${UNITS.standar.id}`,
+    `https://booking.housyhost.com/listings/${UNITS.familiar.id}`,
+    `https://booking.housyhost.com/listings/${UNITS.deluxe.id}`,
+  ],
+  amenityFeature: [
+    { '@type': 'LocationFeatureSpecification', name: 'Free Wi-Fi', value: true },
+    { '@type': 'LocationFeatureSpecification', name: 'Air conditioning', value: true },
+    { '@type': 'LocationFeatureSpecification', name: 'Swimming pool', value: true },
+    { '@type': 'LocationFeatureSpecification', name: '24/7 reception', value: true },
+  ],
+  makesOffer: UNIT_ORDER.map((slug) => {
+    const u = UNITS[slug];
+    return {
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Apartment',
+        name: u.name[locale],
+        occupancy: { '@type': 'QuantitativeValue', maxValue: u.maxGuests },
+      },
+      url: `https://booking.housyhost.com/listings/${u.id}`,
+    };
+  }),
+  parentOrganization: {
+    '@type': 'Organization',
+    name: PARENT.name,
+    url: PARENT.url,
+  },
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

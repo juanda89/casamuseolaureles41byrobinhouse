@@ -1,0 +1,61 @@
+---
+import Base from '../../layouts/Base.astro';
+import LegalLayout from '../../components/LegalLayout.astro';
+import { SITE, BOOKING } from '../../lib/constants';
+
+const title = `Términos y condiciones · ${SITE.shortName}`;
+const description = 'Términos del servicio del sitio web de Casa Laureles 41. El contrato de hospedaje se rige por los términos de Housy Host.';
+const pathname = '/es/terminos';
+---
+<Base locale="es" title={title} description={description} pathname={pathname}>
+  <LegalLayout locale="es" eyebrow="Legal" title="Términos y condiciones" updated="2026-05-09">
+    <p>
+      Estos términos rigen el uso del sitio web <a href={SITE.url}>{SITE.url}</a>. Al usarlo aceptas
+      estos términos. Si no estás de acuerdo, te pedimos no usarlo.
+    </p>
+
+    <h2>1. Naturaleza del sitio</h2>
+    <p>
+      Este sitio es una ventana de marca de Casa Laureles 41 by Robin House. <strong>El contrato
+      de hospedaje se perfecciona en la plataforma de Housy Host</strong> (<a href={BOOKING.base} target="_blank" rel="noopener">{BOOKING.base}</a>) bajo sus términos y condiciones, no en este sitio.
+    </p>
+
+    <h2>2. Reservas y pagos</h2>
+    <p>
+      Las reservas se confirman únicamente con el pago a través del link seguro de Housy Host. Los
+      precios mostrados pueden variar por temporada, demanda y régimen tributario aplicable. El
+      total final se ve detallado en la página de pago antes de confirmar.
+    </p>
+
+    <h2>3. Política de cancelación</h2>
+    <p>
+      Aplica la política descrita en la página <a href="/es/cancelacion">Política de cancelación</a>
+      y en el listing de Housy Host.
+    </p>
+
+    <h2>4. Normas de la propiedad</h2>
+    <ul>
+      <li>Sin mascotas, sin fumar, sin fiestas.</li>
+      <li>Capacidad fija por unidad: Standar 2 · Familiar 4 · Deluxe Jacuzzi 2.</li>
+      <li>Registro de huéspedes con documento de identidad obligatorio por ley colombiana.</li>
+    </ul>
+
+    <h2>5. Limitación de responsabilidad</h2>
+    <p>
+      No nos responsabilizamos por daños indirectos derivados del uso del sitio web, fallas de
+      terceros (pasarelas de pago, plataformas externas) o eventos de fuerza mayor.
+    </p>
+
+    <h2>6. Propiedad intelectual</h2>
+    <p>
+      El contenido del sitio (textos, fotografías, diseño) es propiedad de Casa Laureles 41 by
+      Robin House o de sus licenciantes. Está prohibida la reproducción no autorizada.
+    </p>
+
+    <h2>7. Ley aplicable y jurisdicción</h2>
+    <p>
+      Estos términos se rigen por las leyes de Colombia. Cualquier controversia se someterá a los
+      jueces de Medellín.
+    </p>
+  </LegalLayout>
+</Base>

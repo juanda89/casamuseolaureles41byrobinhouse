@@ -1,0 +1,182 @@
+{
+  "theme": {
+    "extend": {
+      "colors": {
+        "primary": "#2c4a3e",
+        "primary-soft": "#3f5f52",
+        "primary-deep": "#1a2e25",
+        "on-primary": "#f5efe6",
+        "accent": "#b85c3c",
+        "accent-soft": "#d17a5a",
+        "accent-deep": "#8e4528",
+        "on-accent": "#f5efe6",
+        "gold": "#c9a96e",
+        "gold-soft": "#ddc093",
+        "ink": "#2a1f18",
+        "ink-soft": "#5c4a3d",
+        "ink-mute": "#8b7866",
+        "surface": "#f5efe6",
+        "surface-warm": "#ede3d2",
+        "surface-sand": "#e8dcc8",
+        "surface-deep": "#1a2e25",
+        "on-surface": "#2a1f18",
+        "on-surface-mute": "#5c4a3d",
+        "leaf": "#8fa88e",
+        "leaf-pale": "#c8d4c5",
+        "success": "#5c8a6e",
+        "warning": "#d4a24a",
+        "error": "#a8412e",
+        "on-error": "#f5efe6",
+        "outline": "#c8b79c",
+        "outline-soft": "#ddd0bb",
+        "whatsapp": "#25d366"
+      },
+      "fontFamily": {
+        "display-xl": [
+          "Fraunces"
+        ],
+        "display-lg": [
+          "Fraunces"
+        ],
+        "headline-lg": [
+          "Fraunces"
+        ],
+        "headline-md": [
+          "Fraunces"
+        ],
+        "headline-sm": [
+          "Fraunces"
+        ],
+        "body-lg": [
+          "DM Sans"
+        ],
+        "body-md": [
+          "DM Sans"
+        ],
+        "body-sm": [
+          "DM Sans"
+        ],
+        "label-lg": [
+          "DM Sans"
+        ],
+        "label-caps": [
+          "DM Sans"
+        ],
+        "numeric": [
+          "JetBrains Mono"
+        ],
+        "numeric-display": [
+          "JetBrains Mono"
+        ]
+      },
+      "fontSize": {
+        "display-xl": [
+          "5.5rem",
+          {
+            "letterSpacing": "-0.035em",
+            "fontWeight": "300"
+          }
+        ],
+        "display-lg": [
+          "3.75rem",
+          {
+            "letterSpacing": "-0.03em",
+            "fontWeight": "300"
+          }
+        ],
+        "headline-lg": [
+          "2.5rem",
+          {
+            "letterSpacing": "-0.02em",
+            "fontWeight": "400"
+          }
+        ],
+        "headline-md": [
+          "1.75rem",
+          {
+            "letterSpacing": "-0.015em",
+            "fontWeight": "400"
+          }
+        ],
+        "headline-sm": [
+          "1.375rem",
+          {
+            "fontWeight": "500"
+          }
+        ],
+        "body-lg": [
+          "1.125rem",
+          {
+            "fontWeight": "400"
+          }
+        ],
+        "body-md": [
+          "1rem",
+          {
+            "fontWeight": "400"
+          }
+        ],
+        "body-sm": [
+          "0.875rem",
+          {
+            "fontWeight": "400"
+          }
+        ],
+        "label-lg": [
+          "0.9375rem",
+          {
+            "letterSpacing": "0.005em",
+            "fontWeight": "500"
+          }
+        ],
+        "label-caps": [
+          "0.75rem",
+          {
+            "letterSpacing": "0.18em",
+            "fontWeight": "500"
+          }
+        ],
+        "numeric": [
+          "1rem",
+          {
+            "letterSpacing": "-0.01em",
+            "fontWeight": "500"
+          }
+        ],
+        "numeric-display": [
+          "1.875rem",
+          {
+            "letterSpacing": "-0.02em",
+            "fontWeight": "500"
+          }
+        ]
+      },
+      "borderRadius": {
+        "none": "0px",
+        "xs": "2px",
+        "sm": "4px",
+        "md": "8px",
+        "lg": "14px",
+        "xl": "22px",
+        "pill": "9999px"
+      },
+      "spacing": {
+        "unit": "8px",
+        "xs": "4px",
+        "sm": "8px",
+        "md": "16px",
+        "lg": "24px",
+        "xl": "40px",
+        "2xl": "64px",
+        "3xl": "96px",
+        "4xl": "144px",
+        "gutter": "24px",
+        "container": "1200px",
+        "reading": "68ch",
+        "margin-mobile": "20px",
+        "margin-desktop": "48px",
+        "section": "96px"
+      }
+    }
+  }
+}

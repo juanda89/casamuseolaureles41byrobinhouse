@@ -1,0 +1,36 @@
+---
+import Base from '../../layouts/Base.astro';
+import LegalLayout from '../../components/LegalLayout.astro';
+import { SITE } from '../../lib/constants';
+
+const title = `Cookie policy · ${SITE.shortName}`;
+const description = 'List of cookies we use, their purpose and how to manage your consent.';
+const pathname = '/en/cookies';
+---
+<Base locale="en" title={title} description={description} pathname={pathname}>
+  <LegalLayout locale="en" eyebrow="Legal" title="Cookie policy" updated="2026-05-09">
+    <p>
+      Cookies are small files the site stores in your browser to improve the experience. You can
+      accept them all, accept only essential ones, or manage them in your browser settings.
+    </p>
+
+    <h2>Essential cookies (always on)</h2>
+    <ul>
+      <li><strong>cm-consent-v1</strong> — stores your cookie banner decision (12 months).</li>
+    </ul>
+
+    <h2>Analytical cookies (opt-in)</h2>
+    <ul>
+      <li><strong>_ga, _ga_*</strong> — Google Analytics 4 to understand site usage. Only activated if you consent. Anonymized.</li>
+    </ul>
+
+    <h2>Marketing cookies</h2>
+    <p>We do not currently use marketing or advertising cookies.</p>
+
+    <h2>Changing your decision</h2>
+    <p>
+      You can change your consent by clearing the <code>cm-consent-v1</code> cookie in your browser,
+      or resetting the site’s storage. The next visit will show the banner again.
+    </p>
+  </LegalLayout>
+</Base>

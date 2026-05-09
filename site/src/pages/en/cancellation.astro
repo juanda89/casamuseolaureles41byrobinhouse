@@ -1,0 +1,50 @@
+---
+import Base from '../../layouts/Base.astro';
+import LegalLayout from '../../components/LegalLayout.astro';
+import { SITE, NAP } from '../../lib/constants';
+
+const title = `Cancellation policy · ${SITE.shortName}`;
+const description = '100% refund up to 14 days before check-in, 50% up to 7 days. Detailed terms.';
+const pathname = '/en/cancellation';
+---
+<Base locale="en" title={title} description={description} pathname={pathname}>
+  <LegalLayout locale="en" eyebrow="Legal" title="Cancellation policy" updated="2026-05-09">
+    <p>
+      This is the base policy for direct bookings through <a href={SITE.url}>{SITE.url}</a>. If you
+      booked via Airbnb or Booking, the policy of that channel applies.
+    </p>
+
+    <h2>1. Early-cancellation refunds</h2>
+    <ul>
+      <li><strong>14 or more days before check-in:</strong> 100% refund.</li>
+      <li><strong>Between 7 and 14 days before:</strong> 50% refund.</li>
+      <li><strong>Less than 7 days before or no-show:</strong> non-refundable.</li>
+    </ul>
+
+    <h2>2. Date changes</h2>
+    <p>
+      Subject to availability and to the rate difference for the new dates. For changes, message us
+      on WhatsApp at <a href={`https://wa.me/${NAP.whatsapp}`}>{NAP.phoneDisplay}</a> with at least
+      7 days notice.
+    </p>
+
+    <h2>3. Force majeure</h2>
+    <p>
+      For verified medical emergencies and other force-majeure events, contact us as soon as
+      possible. We don’t guarantee a refund but we’ll work toward the best solution.
+    </p>
+
+    <h2>4. Cancellation by us</h2>
+    <p>
+      In the unlikely event we must cancel your booking for operational reasons, we’ll notify you
+      as early as possible and refund 100% of the paid amount, or offer a unit of equal or better
+      category.
+    </p>
+
+    <h2>5. Refund processing</h2>
+    <p>
+      Refunds are processed via the original payment method through Housy Host / Hostaway. Typical
+      crediting time is 5–10 business days.
+    </p>
+  </LegalLayout>
+</Base>

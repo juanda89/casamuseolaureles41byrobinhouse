@@ -1,0 +1,69 @@
+---
+import Base from '../../layouts/Base.astro';
+import LegalLayout from '../../components/LegalLayout.astro';
+import { NAP, SITE } from '../../lib/constants';
+
+const title = `Privacy policy · ${SITE.shortName}`;
+const description = 'Personal data policy under Colombia’s Law 1581/2012 (Habeas Data) and the EU GDPR for European guests.';
+const pathname = '/en/privacy';
+---
+<Base locale="en" title={title} description={description} pathname={pathname}>
+  <LegalLayout locale="en" eyebrow="Legal" title="Privacy policy" updated="2026-05-09">
+    <p>
+      This policy describes how Casa Laureles 41 by Robin House (operated by Housy Host) collects,
+      uses, transfers and protects personal data from visitors to <a href={SITE.url}>{SITE.url}</a>,
+      under <strong>Colombian Law 1581/2012</strong> and <strong>Decree 1377/2013</strong>, and the
+      <strong>EU GDPR</strong> when applicable to guests residing in the European Union.
+    </p>
+
+    <h2>1. Data controller</h2>
+    <p>
+      Casa Laureles 41 by Robin House.<br />
+      {NAP.streetAddress}, {NAP.neighborhood.en}, {NAP.locality}, {NAP.region}, {NAP.countryName.en}.<br />
+      Email: <a href={`mailto:${NAP.email}`}>{NAP.email}</a> · WhatsApp: <a href={`https://wa.me/${NAP.whatsapp}`}>{NAP.phoneDisplay}</a>.
+    </p>
+
+    <h2>2. Data we collect</h2>
+    <ul>
+      <li>Contact data you send us (name, email, WhatsApp number, number of guests and dates).</li>
+      <li>Government-issued ID or passport requested before check-in (mandatory by Colombian tourism law).</li>
+      <li>Anonymous browsing data via analytical cookies (Google Analytics 4), only after you opt-in via the cookie banner.</li>
+    </ul>
+
+    <h2>3. Purposes</h2>
+    <ul>
+      <li>Process your booking and provide the lodging service.</li>
+      <li>Comply with mandatory hotel registration in Colombia (SIRE/Migration).</li>
+      <li>Maintain operational communication during your stay.</li>
+      <li>Improve site experience and service quality (aggregated analytics).</li>
+    </ul>
+
+    <h2>4. Third-party sharing</h2>
+    <p>We share strictly necessary data with:</p>
+    <ul>
+      <li><strong>Housy Host / Hostaway</strong> — booking and payment processor.</li>
+      <li><strong>Google Analytics 4</strong> — anonymized analytics (only if you accept analytical cookies).</li>
+      <li>Colombian authorities — when legally required (hotel registry, SIRE).</li>
+    </ul>
+
+    <h2>5. Your rights</h2>
+    <p>
+      As a data subject you can exercise rights of access, rectification, update, deletion, withdrawal
+      of consent and inquiry. To do so, write us at <a href={`mailto:${NAP.email}`}>{NAP.email}</a>.
+      We will reply within the timeframes set by Law 1581/2012.
+    </p>
+
+    <h2>6. Retention</h2>
+    <p>
+      We keep data for as long as needed to fulfill the purposes above, applicable legal periods
+      (typically 5 years for hotel records) and the statute of limitations for potential claims.
+    </p>
+
+    <h2>7. Security</h2>
+    <p>
+      We apply reasonable technical and organizational measures: TLS in transit, access control,
+      data minimization. We will never ask for card data on WhatsApp — always use Housy’s secure
+      payment link.
+    </p>
+  </LegalLayout>
+</Base>

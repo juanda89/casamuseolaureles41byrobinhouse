@@ -1,0 +1,56 @@
+---
+import { t } from '../lib/i18n';
+import type { Locale } from '../lib/constants';
+import BookingBar from './BookingBar.astro';
+import { HOMEPAGE_HERO } from '../lib/photos';
+
+interface Props { locale: Locale; image?: string }
+const { locale, image } = Astro.props;
+const d = t(locale);
+
+// Bootstrap hero — Hostaway CDN. Replace with photographer's hero shot via Cloudinary in Sprint 3.
+const heroImage = image ?? HOMEPAGE_HERO.full;
+const heroImageMobile = image ?? HOMEPAGE_HERO.card;
+const heroAlt = locale === 'es'
+  ? 'Loft boutique de Casa Museo en Laureles, Medellín, con jacuzzi privado y diseño curado'
+  : 'Casa Museo boutique loft in Laureles, Medellín, with private jacuzzi and curated design';
+---
+<section class="relative isolate overflow-hidden">
+  <!-- Background image -->
+  <picture>
+    <source media="(min-width: 768px)" srcset={heroImage} />
+    <img
+      src={heroImageMobile}
+      alt={heroAlt}
+      width="1920"
+      height="1280"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+      class="absolute inset-0 h-full w-full object-cover"
+    />
+  </picture>
+
+  <!-- Overlay -->
+  <div class="hero-overlay absolute inset-0" aria-hidden="true"></div>
+
+  <!-- Content -->
+  <div class="relative container-default flex flex-col justify-end min-h-[88vh] md:min-h-[92vh] pt-24 pb-10 md:pb-16">
+    <p class="label-caps text-gold-soft mb-5 md:mb-7 max-w-2xl">{d.hero.eyebrow}</p>
+    <h1 class="font-display font-light text-on-primary leading-[0.95] tracking-tight max-w-4xl"
+        style="font-size: clamp(2.75rem, 7.5vw, 5.5rem); letter-spacing: -0.035em;">
+      {d.hero.title}
+    </h1>
+    <p class="mt-6 max-w-2xl text-body-lg md:text-xl text-surface-sand/95">
+      {d.hero.subtitle}
+    </p>
+
+    <div class="mt-10 md:mt-14" id="booking">
+      <BookingBar locale={locale} variant="hero" />
+    </div>
+  </div>
+</section>
+
+<!-- Anchor preserved without redundant nav offset -->
+<a id="concepto" tabindex="-1"></a>
+<a id="concept" tabindex="-1"></a>

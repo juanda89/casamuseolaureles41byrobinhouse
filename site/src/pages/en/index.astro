@@ -1,0 +1,24 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/Hero.astro';
+import ConceptSection from '../../components/ConceptSection.astro';
+import UnitsSection from '../../components/UnitsSection.astro';
+import NeighborhoodSection from '../../components/NeighborhoodSection.astro';
+import TestimonialsSection from '../../components/TestimonialsSection.astro';
+import FAQSection from '../../components/FAQSection.astro';
+import LodgingBusinessSchema from '../../components/schema/LodgingBusinessSchema.astro';
+import { SITE } from '../../lib/constants';
+
+const title = `Casa Museo · Boutique hotel in Laureles, Medellín · Casa Laureles 41 by Robin House`;
+const description = SITE.description.en;
+const pathname = '/en';
+---
+<Base locale="en" title={title} description={description} pathname={pathname}>
+  <LodgingBusinessSchema locale="en" />
+  <Hero locale="en" />
+  <ConceptSection locale="en" />
+  <UnitsSection locale="en" />
+  <NeighborhoodSection locale="en" />
+  <TestimonialsSection locale="en" />
+  <FAQSection locale="en" />
+</Base>

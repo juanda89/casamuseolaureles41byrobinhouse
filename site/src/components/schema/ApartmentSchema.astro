@@ -1,0 +1,44 @@
+---
+import { SITE, NAP, UNITS, type UnitSlug } from '../../lib/constants';
+import type { Locale } from '../../lib/constants';
+
+interface Props { slug: UnitSlug; locale: Locale; image: string }
+const { slug, locale, image } = Astro.props;
+const u = UNITS[slug];
+const detailPath = locale === 'es' ? `/es/unidades/${u.slug}` : `/en/units/${u.enSlug}`;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Apartment',
+  '@id': `${SITE.url}${detailPath}#unit`,
+  name: u.name[locale],
+  description: u.tagline[locale],
+  image: [image],
+  numberOfRooms: u.bedrooms,
+  numberOfBathroomsTotal: u.bathrooms,
+  occupancy: { '@type': 'QuantitativeValue', maxValue: u.maxGuests },
+  containedInPlace: {
+    '@type': 'LodgingBusiness',
+    '@id': `${SITE.url}/#lodging`,
+    name: SITE.name,
+  },
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: NAP.streetAddress,
+    addressLocality: NAP.locality,
+    addressRegion: NAP.region,
+    postalCode: NAP.postalCode,
+    addressCountry: NAP.country,
+  },
+  amenityFeature: u.amenities.map((a) => ({
+    '@type': 'LocationFeatureSpecification',
+    name: a[locale],
+    value: true,
+  })),
+  potentialAction: {
+    '@type': 'ReserveAction',
+    target: `https://booking.housyhost.com/listings/${u.id}`,
+  },
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

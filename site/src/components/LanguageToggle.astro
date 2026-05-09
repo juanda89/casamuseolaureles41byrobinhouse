@@ -1,0 +1,19 @@
+---
+import { t, altPath } from '../lib/i18n';
+import type { Locale } from '../lib/constants';
+
+interface Props { locale: Locale; pathname: string }
+const { locale, pathname } = Astro.props;
+const d = t(locale);
+const target = altPath(pathname);
+---
+<a
+  href={target}
+  class="inline-flex items-center gap-1 rounded-pill border border-outline-soft px-3 py-1.5 text-body-sm text-ink hover:bg-surface-warm hover:border-outline transition-colors"
+  aria-label={d.language.label}
+  hreflang={locale === 'es' ? 'en' : 'es'}
+>
+  <span class={`label-caps ${locale === 'es' ? 'text-accent' : 'text-ink-mute'}`}>ES</span>
+  <span class="text-ink-mute" aria-hidden="true">/</span>
+  <span class={`label-caps ${locale === 'en' ? 'text-accent' : 'text-ink-mute'}`}>EN</span>
+</a>

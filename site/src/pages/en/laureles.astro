@@ -1,0 +1,72 @@
+---
+import Base from '../../layouts/Base.astro';
+import { NAP } from '../../lib/constants';
+
+const title = 'Laureles, Medellín · Full neighborhood guide · Casa Museo';
+const description = 'Why stay in Laureles: cafés, restaurants, safety, distances to Provenza and the airport. The walkable side of Medellín.';
+const pathname = '/en/laureles';
+
+const sections = [
+  {
+    title: 'Why Laureles, not El Poblado',
+    body: 'Laureles is Medellín’s most authentic residential area — flat, walkable, packed with local cafés and restaurants. Compared to El Poblado, there is less mass tourism, more neighborhood life, and better value-for-experience. For digital nomads and travelers who want the real Medellín, it is the best choice.',
+  },
+  {
+    title: 'Specialty coffee (5 min on foot)',
+    body: 'Ritual, Revolución and Semilla are three benchmarks just minutes from Casa Museo. Excellent Wi-Fi, single-origin beans, relaxed vibe. If you work remote, they are your second desk.',
+  },
+  {
+    title: 'Restaurants and nightlife',
+    body: 'Avenida Nutibara and the Laureles Parks range from casual to upscale. La 70 is a short walk away — perfect for dinner or drinks in a livelier setting. The area is safe to walk at night.',
+  },
+  {
+    title: 'Key distances',
+    body: 'Provenza / El Poblado: 15-20 min by car. Atanasio Girardot Stadium: 7 min by car, minutes by bike. José María Córdova Airport (MDE): 45 min via the Oriente Tunnel. Olaya Herrera regional airport: 20 min.',
+  },
+  {
+    title: 'Safety and getting around',
+    body: 'Laureles is one of the safest, best-lit areas in town. Uber, DiDi and Cabify work great with 2-3 min wait. Estadio and Suramericana metro stations are close. The EnCicla bike network covers the whole neighborhood.',
+  },
+  {
+    title: 'Things to visit nearby',
+    body: 'First and Second Laureles Park (5 min), Avenida Nutibara, La 70, Atanasio Girardot Stadium, Cerro El Volador (city viewpoint). Cultural plans: Modern Art Museum (MAMM) 15 min, Comuna 13 25 min.',
+  },
+];
+---
+<Base locale="en" title={title} description={description} pathname={pathname}>
+  <header class="container-default pt-12 md:pt-20 pb-10">
+    <p class="label-caps text-accent">Laureles · Medellín</p>
+    <h1 class="mt-4 font-display font-light text-headline-lg md:text-display-lg text-ink leading-tight max-w-3xl">
+      The walkable side of Medellín
+    </h1>
+    <p class="mt-6 text-body-lg text-ink-soft max-w-3xl reading-width">
+      Laureles is Medellín’s most authentic residential neighborhood — walkable, flat, packed with
+      specialty coffee and restaurants with a local soul. Here’s what you need to know before
+      coming.
+    </p>
+  </header>
+
+  <article class="container-default pb-20 grid gap-10 md:gap-14 md:grid-cols-12">
+    <div class="md:col-span-8 space-y-12">
+      {sections.map((s) => (
+        <section>
+          <h2 class="font-display text-headline-lg text-ink">{s.title}</h2>
+          <p class="mt-4 text-body-lg text-ink-soft reading-width">{s.body}</p>
+        </section>
+      ))}
+    </div>
+
+    <aside class="md:col-span-4">
+      <div class="sticky top-24 rounded-lg bg-surface-warm p-6 md:p-8">
+        <h3 class="label-caps text-gold">Casa Museo in Laureles</h3>
+        <p class="mt-3 font-display text-headline-sm text-ink">{NAP.streetAddress}</p>
+        <p class="mt-1 text-body-md text-ink-soft">{NAP.neighborhood.en}, {NAP.locality}</p>
+        <a href={NAP.gmapsUrl} target="_blank" rel="noopener" class="mt-4 inline-flex text-body-md text-accent hover:text-accent-deep underline-offset-4 hover:underline">
+          See on Google Maps →
+        </a>
+        <hr class="divider-gold my-6" />
+        <a href="/en#booking" class="btn-primary w-full">Book now</a>
+      </div>
+    </aside>
+  </article>
+</Base>

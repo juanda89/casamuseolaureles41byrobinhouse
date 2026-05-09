@@ -1,0 +1,57 @@
+---
+import { t } from '../lib/i18n';
+import type { Locale } from '../lib/constants';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const d = t(locale);
+const moreHref = locale === 'es' ? '/es/faq' : '/en/faq';
+
+const items = locale === 'es'
+  ? [
+      { q: '¿Cuál es la capacidad máxima de cada unidad?', a: 'Standar 2 huéspedes · Familiar hasta 4 · Deluxe Jacuzzi 2. No aceptamos huéspedes adicionales por encima de esa capacidad.' },
+      { q: '¿Aceptan mascotas o niños?', a: 'No aceptamos mascotas. El espacio está diseñado para parejas y viajeros adultos; no es ideal para niños pequeños.' },
+      { q: '¿Cómo es el barrio de Laureles?', a: 'Es la zona residencial más auténtica de Medellín. A 5 min caminando hay cafés, restaurantes y la 1ra de Laureles. Más local y caminable que El Poblado.' },
+      { q: '¿Cuál es la política de cancelación?', a: 'Reembolso del 100% hasta 14 días antes del check-in. Reembolso del 50% hasta 7 días antes. Después no aplica reembolso.' },
+      { q: '¿Tienen parqueadero?', a: 'Casa Museo no tiene parqueadero privado. Hay opciones de parqueadero a unas 2 cuadras (con costo) y parqueo libre al frente, sujeto a disponibilidad.' },
+      { q: '¿Cómo se hace el ingreso?', a: 'Es autónomo. Antes de tu llegada te enviamos código de acceso, dirección exacta y todas las instrucciones por WhatsApp.' },
+    ]
+  : [
+      { q: 'What is the maximum capacity per unit?', a: 'Standard 2 guests · Family up to 4 · Deluxe Jacuzzi 2. We don’t allow extra guests beyond capacity.' },
+      { q: 'Do you accept pets or children?', a: 'No pets. The space is designed for couples and adult travelers; it is not ideal for small children.' },
+      { q: 'How is the Laureles neighborhood?', a: 'It is Medellín’s most authentic residential area. Cafés, restaurants and the main avenue are 5 minutes on foot. More local and walkable than El Poblado.' },
+      { q: 'What is your cancellation policy?', a: '100% refund up to 14 days before check-in. 50% refund up to 7 days before. After that, non-refundable.' },
+      { q: 'Is there parking?', a: 'Casa Museo does not have private parking. There is a paid parking lot 2 blocks away and limited free street parking in front (first-come).' },
+      { q: 'How does check-in work?', a: 'Self check-in. Before arrival we send the access code, exact address and full instructions on WhatsApp.' },
+    ];
+---
+<section class="bg-surface-warm py-24 md:py-32">
+  <div class="container-default max-w-4xl">
+    <header class="mb-12">
+      <p class="label-caps text-accent">{d.faq.eyebrow}</p>
+      <h2 class="mt-4 font-display font-normal text-headline-lg md:text-display-lg text-ink leading-tight">
+        {d.faq.title}
+      </h2>
+    </header>
+
+    <div class="space-y-3">
+      {items.map((item) => (
+        <details class="group rounded-md bg-surface border border-outline-soft/60 px-6 py-5 transition-colors open:border-accent/30 open:bg-surface-sand/50">
+          <summary class="flex items-start justify-between cursor-pointer list-none gap-4">
+            <h3 class="font-display text-headline-sm font-medium text-ink leading-snug">{item.q}</h3>
+            <span class="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center text-accent transition-transform group-open:rotate-180" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </span>
+          </summary>
+          <p class="mt-4 text-body-md text-ink-soft reading-width">{item.a}</p>
+        </details>
+      ))}
+    </div>
+
+    <a href={moreHref} class="mt-10 inline-flex text-body-md text-accent hover:text-accent-deep transition-colors underline-offset-4 hover:underline">
+      {d.faq.moreLink}
+    </a>
+  </div>
+</section>

@@ -1,0 +1,101 @@
+{
+  "locale": "en",
+  "ogLocale": "en_US",
+  "nav": {
+    "concept": "The concept",
+    "units": "Units",
+    "neighborhood": "Laureles",
+    "faq": "FAQ",
+    "blog": "Blog",
+    "contact": "Contact",
+    "book": "Book now",
+    "menu": "Menu",
+    "close": "Close"
+  },
+  "hero": {
+    "eyebrow": "Boutique hotel · Laureles · Medellín",
+    "title": "Live Medellín like a work of art",
+    "subtitle": "Three boutique lofts. Designed by Robin House. A quiet street, 5 minutes from Laureles' main avenue.",
+    "ctaPrimary": "Book now",
+    "ctaSecondary": "See units"
+  },
+  "bookingBar": {
+    "checkin": "Check-in",
+    "checkout": "Check-out",
+    "guests": "Guests",
+    "guest": "guest",
+    "guestsPlural": "guests",
+    "unit": "Unit",
+    "anyUnit": "Any unit",
+    "submit": "Book now",
+    "errorDates": "Check-out must be after check-in.",
+    "tooManyGuests": "For groups larger than 4, please reach out on WhatsApp.",
+    "fiscalNote": "Prices shown by Housy Host may include VAT and other taxes per local regulation. The final invoice itemizes every charge."
+  },
+  "concept": {
+    "eyebrow": "The concept",
+    "title": "A living gallery in the heart of Laureles",
+    "body": "Casa Museo is where the rigor of a curated museum meets the warmth of a paisa home. Every loft was composed with exhibition-grade attention: carved stone, floating oak, ambient LED lighting, custom-built beds. You live inside the artwork.",
+    "designerLabel": "Designed by",
+    "designerName": "Robin House"
+  },
+  "units": {
+    "eyebrow": "The three units",
+    "title": "Three ways to inhabit the house",
+    "viewDetails": "View details",
+    "bookNow": "Book →",
+    "guestsLabel": "Capacity",
+    "from": "From"
+  },
+  "neighborhood": {
+    "eyebrow": "The neighborhood",
+    "title": "Laureles — the walkable side of Medellín",
+    "body": "Five minutes from Laureles' First and Second Park. Specialty coffee (Ritual, Revolución, Semilla), restaurants on Avenida Nutibara, EnCicla bike routes, and the Atanasio Girardot Stadium. The local, walkable face of Medellín.",
+    "highlights": [
+      { "title": "Specialty coffee", "body": "Ritual, Revolución and Semilla, all 5 min on foot." },
+      { "title": "1st & 2nd Park", "body": "Walkable parks with calm nightlife." },
+      { "title": "La 70 & Stadium", "body": "Bars, restaurants and matches a few minutes away." },
+      { "title": "MDE Airport", "body": "45 minutes via the Oriente Tunnel." }
+    ],
+    "moreLink": "Full Laureles guide →"
+  },
+  "testimonials": {
+    "eyebrow": "What guests say",
+    "title": "Voices of the house"
+  },
+  "faq": {
+    "eyebrow": "Before you book",
+    "title": "Frequently asked",
+    "moreLink": "See all questions →"
+  },
+  "footer": {
+    "tagline": "Casa Museo · Live Medellín like a work of art.",
+    "address": "Address",
+    "contact": "Contact",
+    "explore": "Explore",
+    "legal": "Legal",
+    "privacy": "Privacy policy",
+    "terms": "Terms and conditions",
+    "cancellation": "Cancellation policy",
+    "cookies": "Cookie policy",
+    "operated": "Operated by Housy Host",
+    "designed": "Designed by",
+    "rights": "All rights reserved."
+  },
+  "whatsapp": {
+    "label": "Chat on WhatsApp",
+    "tooltip": "Chat with us",
+    "preset": "Hi! I'm browsing Casa Laureles 41 and I have a question about availability."
+  },
+  "cookies": {
+    "title": "Cookies to improve your visit",
+    "body": "We use cookies to understand how you use the site and improve the experience. Accept everything or only essentials.",
+    "acceptAll": "Accept all",
+    "essential": "Essential only",
+    "more": "Learn more"
+  },
+  "language": {
+    "switchTo": "Español",
+    "label": "Language"
+  }
+}

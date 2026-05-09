@@ -1,0 +1,48 @@
+---
+import Base from '../../layouts/Base.astro';
+import { NAP } from '../../lib/constants';
+
+const title = 'Contact · Casa Museo · Casa Laureles 41';
+const description = 'WhatsApp, phone, email and address. Always available before and during your stay.';
+const pathname = '/en/contact';
+const waText = encodeURIComponent('Hi! I have a question about Casa Laureles 41.');
+---
+<Base locale="en" title={title} description={description} pathname={pathname}>
+  <section class="container-default pt-12 md:pt-20 pb-20">
+    <p class="label-caps text-accent">Let's talk</p>
+    <h1 class="mt-4 font-display font-light text-headline-lg md:text-display-lg text-ink leading-tight max-w-3xl">
+      We are one message away
+    </h1>
+    <p class="mt-6 text-body-lg text-ink-soft max-w-2xl">
+      For bookings and operational questions, WhatsApp is the fastest channel. For formal matters
+      or invoicing, email us.
+    </p>
+
+    <div class="mt-12 grid gap-6 md:grid-cols-3">
+      <a href={`https://wa.me/${NAP.whatsapp}?text=${waText}`} target="_blank" rel="noopener" class="rounded-lg bg-surface-warm p-7 hover:bg-surface-sand transition-colors">
+        <span class="label-caps text-accent">WhatsApp · 24/7</span>
+        <p class="mt-3 font-display text-headline-md text-ink">{NAP.phoneDisplay}</p>
+        <p class="mt-2 text-body-sm text-ink-mute">Reply in minutes</p>
+      </a>
+      <a href={`tel:${NAP.phone}`} class="rounded-lg bg-surface-warm p-7 hover:bg-surface-sand transition-colors">
+        <span class="label-caps text-accent">Phone</span>
+        <p class="mt-3 font-display text-headline-md text-ink">{NAP.phoneDisplay}</p>
+        <p class="mt-2 text-body-sm text-ink-mute">24/7 reception</p>
+      </a>
+      <a href={`mailto:${NAP.email}`} class="rounded-lg bg-surface-warm p-7 hover:bg-surface-sand transition-colors">
+        <span class="label-caps text-accent">Email</span>
+        <p class="mt-3 font-display text-headline-md text-ink break-all">{NAP.email}</p>
+        <p class="mt-2 text-body-sm text-ink-mute">For formal matters</p>
+      </a>
+    </div>
+
+    <div class="mt-16 rounded-lg bg-primary-deep text-on-primary p-8 md:p-10">
+      <p class="label-caps text-gold">Address</p>
+      <p class="mt-3 font-display text-headline-md text-on-primary">{NAP.streetAddress}</p>
+      <p class="mt-1 text-body-md text-surface-sand">{NAP.neighborhood.en}, {NAP.locality}, {NAP.region}, {NAP.countryName.en}</p>
+      <a href={NAP.gmapsUrl} target="_blank" rel="noopener" class="mt-5 inline-flex text-body-md text-gold hover:text-gold-soft underline-offset-4 hover:underline">
+        Open in Google Maps →
+      </a>
+    </div>
+  </section>
+</Base>

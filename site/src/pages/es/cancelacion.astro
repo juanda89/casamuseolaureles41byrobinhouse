@@ -1,0 +1,51 @@
+---
+import Base from '../../layouts/Base.astro';
+import LegalLayout from '../../components/LegalLayout.astro';
+import { SITE, NAP } from '../../lib/constants';
+
+const title = `Política de cancelación · ${SITE.shortName}`;
+const description = '100% reembolso hasta 14 días antes del check-in, 50% hasta 7 días antes. Términos detallados.';
+const pathname = '/es/cancelacion';
+---
+<Base locale="es" title={title} description={description} pathname={pathname}>
+  <LegalLayout locale="es" eyebrow="Legal" title="Política de cancelación" updated="2026-05-09">
+    <p>
+      Esta es la política base aplicable a las reservas directas a través de
+      <a href={SITE.url}>{SITE.url}</a>. Si reservaste por Airbnb o Booking, aplica la política del
+      canal correspondiente.
+    </p>
+
+    <h2>1. Reembolsos por cancelación anticipada</h2>
+    <ul>
+      <li><strong>14 días o más antes del check-in:</strong> reembolso del 100%.</li>
+      <li><strong>Entre 7 y 14 días antes:</strong> reembolso del 50%.</li>
+      <li><strong>Menos de 7 días antes o no-show:</strong> sin reembolso.</li>
+    </ul>
+
+    <h2>2. Cambios de fecha</h2>
+    <p>
+      Sujeto a disponibilidad y a la diferencia tarifaria de las nuevas fechas. Para gestionar un
+      cambio escríbenos por WhatsApp al <a href={`https://wa.me/${NAP.whatsapp}`}>{NAP.phoneDisplay}</a>
+      con al menos 7 días de anticipación.
+    </p>
+
+    <h2>3. Casos de fuerza mayor</h2>
+    <p>
+      Para emergencias médicas comprobables u otros casos de fuerza mayor, escríbenos lo antes
+      posible y revisaremos tu caso. No garantizamos reembolso pero buscamos la mejor solución.
+    </p>
+
+    <h2>4. Cancelación por nuestra parte</h2>
+    <p>
+      En el caso poco probable de que debamos cancelar tu reserva por motivos operativos, te
+      avisaremos con la mayor anticipación posible y reembolsaremos el 100% del valor pagado, o te
+      ofreceremos una unidad de igual o mejor categoría.
+    </p>
+
+    <h2>5. Procesamiento del reembolso</h2>
+    <p>
+      Los reembolsos se procesan por el mismo medio del pago original a través de Housy Host /
+      Hostaway. El tiempo típico de acreditación es de 5 a 10 días hábiles.
+    </p>
+  </LegalLayout>
+</Base>

@@ -1,0 +1,85 @@
+---
+import { t, altPath, localizedHref } from '../lib/i18n';
+import { SITE } from '../lib/constants';
+import LanguageToggle from './LanguageToggle.astro';
+import type { Locale } from '../lib/constants';
+
+interface Props {
+  locale: Locale;
+  pathname: string;
+}
+const { locale, pathname } = Astro.props;
+const d = t(locale);
+
+const links = locale === 'es'
+  ? [
+      { href: '/es#concepto', label: d.nav.concept },
+      { href: '/es#unidades', label: d.nav.units },
+      { href: '/es/laureles', label: d.nav.neighborhood },
+      { href: '/es/faq', label: d.nav.faq },
+      { href: '/es/contacto', label: d.nav.contact },
+    ]
+  : [
+      { href: '/en#concept', label: d.nav.concept },
+      { href: '/en#units', label: d.nav.units },
+      { href: '/en/laureles', label: d.nav.neighborhood },
+      { href: '/en/faq', label: d.nav.faq },
+      { href: '/en/contact', label: d.nav.contact },
+    ];
+
+const home = locale === 'es' ? '/es' : '/en';
+---
+<header class="sticky top-0 z-40 backdrop-blur-md bg-surface/85 border-b border-outline-soft/60">
+  <div class="container-default flex items-center justify-between h-16 md:h-20">
+    <a href={home} class="flex items-center gap-3" aria-label={SITE.shortName}>
+      <span class="font-display text-xl md:text-2xl font-light tracking-tight text-ink">
+        Casa Museo
+      </span>
+      <span class="hidden md:inline-block label-caps text-ink-mute">Laureles 41</span>
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-8" aria-label="Primary">
+      {links.map((l) => (
+        <a href={l.href} class="text-body-md text-ink hover:text-accent transition-colors">{l.label}</a>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <LanguageToggle locale={locale} pathname={pathname} />
+      <a href={`${home}#booking`} class="btn-primary !h-11 !px-5 !text-sm hidden md:inline-flex">
+        {d.nav.book}
+      </a>
+      <button
+        class="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-md text-ink"
+        aria-label={d.nav.menu}
+        data-mobile-menu-toggle
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true">
+          <line x1="4" y1="7" x2="20" y2="7" />
+          <line x1="4" y1="12" x2="20" y2="12" />
+          <line x1="4" y1="17" x2="20" y2="17" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="lg:hidden hidden border-t border-outline-soft/60 bg-surface" data-mobile-menu>
+    <nav class="container-default flex flex-col py-4 gap-2" aria-label="Mobile">
+      {links.map((l) => (
+        <a href={l.href} class="text-body-lg text-ink py-2 hover:text-accent">{l.label}</a>
+      ))}
+      <a href={`${home}#booking`} class="btn-primary mt-3 w-full">{d.nav.book}</a>
+    </nav>
+  </div>
+</header>
+
+<script is:inline>
+  document.addEventListener('click', (e) => {
+    const target = e.target;
+    if (!(target instanceof Element)) return;
+    if (target.closest('[data-mobile-menu-toggle]')) {
+      const menu = document.querySelector('[data-mobile-menu]');
+      if (menu) menu.classList.toggle('hidden');
+    }
+  });
+</script>

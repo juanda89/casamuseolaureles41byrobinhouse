@@ -1,0 +1,101 @@
+{
+  "locale": "es-CO",
+  "ogLocale": "es_CO",
+  "nav": {
+    "concept": "El concepto",
+    "units": "Unidades",
+    "neighborhood": "Laureles",
+    "faq": "Preguntas",
+    "blog": "Blog",
+    "contact": "Contacto",
+    "book": "Reservar",
+    "menu": "Menú",
+    "close": "Cerrar"
+  },
+  "hero": {
+    "eyebrow": "Hotel boutique · Laureles · Medellín",
+    "title": "Vivir Medellín como una obra de arte",
+    "subtitle": "Tres lofts boutique. Diseñados por Robin House. Una calle tranquila a 5 minutos de la 1ra de Laureles.",
+    "ctaPrimary": "Reservar",
+    "ctaSecondary": "Ver unidades"
+  },
+  "bookingBar": {
+    "checkin": "Llegada",
+    "checkout": "Salida",
+    "guests": "Huéspedes",
+    "guest": "huésped",
+    "guestsPlural": "huéspedes",
+    "unit": "Unidad",
+    "anyUnit": "Cualquier unidad",
+    "submit": "Reservar",
+    "errorDates": "La salida debe ser posterior a la entrada.",
+    "tooManyGuests": "Para grupos mayores a 4, contáctanos por WhatsApp.",
+    "fiscalNote": "Los precios mostrados por Housy Host pueden incluir IVA y otros tributos según la regulación vigente. La factura final detalla cada concepto."
+  },
+  "concept": {
+    "eyebrow": "El concepto",
+    "title": "Una galería habitada en el corazón de Laureles",
+    "body": "Casa Museo nace del cruce entre el rigor del museo y la calidez del hogar paisa. Cada loft fue curado con la misma atención que se da a una pieza de exhibición: piedra tallada, madera flotante, iluminación LED ambiental, cama con cabecero de roble. Vives dentro de la obra.",
+    "designerLabel": "Diseñado por",
+    "designerName": "Robin House"
+  },
+  "units": {
+    "eyebrow": "Las tres unidades",
+    "title": "Tres formas de habitar la casa",
+    "viewDetails": "Ver detalles",
+    "bookNow": "Reservar →",
+    "guestsLabel": "Capacidad",
+    "from": "Desde"
+  },
+  "neighborhood": {
+    "eyebrow": "El barrio",
+    "title": "Laureles, la Medellín que sí se camina",
+    "body": "A 5 minutos de la Primera y Segunda de Laureles. Cafés especialty (Ritual, Revolución, Semilla), restaurantes en Avenida Nutibara, bici-rutas EnCicla y el Estadio Atanasio Girardot. La cara local y caminable de Medellín.",
+    "highlights": [
+      { "title": "Cafés especialty", "body": "Ritual, Revolución y Semilla a 5 minutos a pie." },
+      { "title": "1ra y 2da de Laureles", "body": "Parques caminables con vida nocturna tranquila." },
+      { "title": "La 70 y el Estadio", "body": "Bares, restaurantes y partidos a pocos minutos." },
+      { "title": "Aeropuerto MDE", "body": "45 minutos por el Túnel de Oriente." }
+    ],
+    "moreLink": "Guía completa de Laureles →"
+  },
+  "testimonials": {
+    "eyebrow": "Lo que dicen los huéspedes",
+    "title": "Voces de la casa"
+  },
+  "faq": {
+    "eyebrow": "Antes de reservar",
+    "title": "Preguntas frecuentes",
+    "moreLink": "Ver todas las preguntas →"
+  },
+  "footer": {
+    "tagline": "Casa Museo · Vivir Medellín como una obra de arte.",
+    "address": "Dirección",
+    "contact": "Contacto",
+    "explore": "Explorar",
+    "legal": "Legal",
+    "privacy": "Política de privacidad",
+    "terms": "Términos y condiciones",
+    "cancellation": "Política de cancelación",
+    "cookies": "Política de cookies",
+    "operated": "Operado por Housy Host",
+    "designed": "Diseñado por",
+    "rights": "Todos los derechos reservados."
+  },
+  "whatsapp": {
+    "label": "Chatear por WhatsApp",
+    "tooltip": "Habla con nosotros",
+    "preset": "Hola! Estoy viendo Casa Laureles 41 y tengo una pregunta sobre la disponibilidad."
+  },
+  "cookies": {
+    "title": "Cookies para mejorar tu visita",
+    "body": "Usamos cookies para entender cómo usas el sitio y mejorar la experiencia. Puedes aceptar todo o solo lo esencial.",
+    "acceptAll": "Aceptar todo",
+    "essential": "Solo esenciales",
+    "more": "Más información"
+  },
+  "language": {
+    "switchTo": "English",
+    "label": "Idioma"
+  }
+}

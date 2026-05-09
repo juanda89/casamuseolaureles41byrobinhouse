@@ -1,0 +1,61 @@
+---
+import Base from '../../layouts/Base.astro';
+import LegalLayout from '../../components/LegalLayout.astro';
+import { SITE, BOOKING } from '../../lib/constants';
+
+const title = `Terms and conditions · ${SITE.shortName}`;
+const description = 'Terms governing the use of the Casa Laureles 41 website. The lodging contract is governed by Housy Host.';
+const pathname = '/en/terms';
+---
+<Base locale="en" title={title} description={description} pathname={pathname}>
+  <LegalLayout locale="en" eyebrow="Legal" title="Terms and conditions" updated="2026-05-09">
+    <p>
+      These terms govern the use of <a href={SITE.url}>{SITE.url}</a>. By using the site you accept
+      them. If you disagree, please do not use the site.
+    </p>
+
+    <h2>1. Nature of this site</h2>
+    <p>
+      This site is a brand showcase for Casa Laureles 41 by Robin House. <strong>The lodging
+      contract is executed on Housy Host</strong> (<a href={BOOKING.base} target="_blank" rel="noopener">{BOOKING.base}</a>) under its own terms, not here.
+    </p>
+
+    <h2>2. Bookings and payments</h2>
+    <p>
+      Bookings are confirmed only after payment via Housy Host’s secure link. Prices may vary by
+      season, demand and applicable tax regime. The final total is itemized on the payment page
+      before confirmation.
+    </p>
+
+    <h2>3. Cancellation policy</h2>
+    <p>
+      The policy on the <a href="/en/cancellation">Cancellation policy</a> page and on the Housy Host
+      listing applies.
+    </p>
+
+    <h2>4. House rules</h2>
+    <ul>
+      <li>No pets, no smoking, no parties.</li>
+      <li>Fixed capacity per unit: Standard 2 · Family 4 · Deluxe Jacuzzi 2.</li>
+      <li>ID registration required by Colombian tourism law.</li>
+    </ul>
+
+    <h2>5. Limitation of liability</h2>
+    <p>
+      We are not liable for indirect damages derived from use of the website, third-party failures
+      (payment gateways, external platforms) or force majeure events.
+    </p>
+
+    <h2>6. Intellectual property</h2>
+    <p>
+      Site content (text, photos, design) is owned by Casa Laureles 41 by Robin House or its
+      licensors. Unauthorized reproduction is prohibited.
+    </p>
+
+    <h2>7. Governing law and jurisdiction</h2>
+    <p>
+      These terms are governed by the laws of Colombia. Any dispute will be submitted to the
+      courts of Medellín.
+    </p>
+  </LegalLayout>
+</Base>

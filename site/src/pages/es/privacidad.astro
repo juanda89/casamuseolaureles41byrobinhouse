@@ -1,0 +1,72 @@
+---
+import Base from '../../layouts/Base.astro';
+import LegalLayout from '../../components/LegalLayout.astro';
+import { NAP, SITE } from '../../lib/constants';
+
+const title = `Política de privacidad · ${SITE.shortName}`;
+const description = 'Política de tratamiento de datos personales conforme a la Ley 1581 de 2012 (Habeas Data) de Colombia y el RGPD para huéspedes europeos.';
+const pathname = '/es/privacidad';
+---
+<Base locale="es" title={title} description={description} pathname={pathname}>
+  <LegalLayout locale="es" eyebrow="Legal" title="Política de privacidad" updated="2026-05-09">
+    <p>
+      Esta política describe cómo Casa Laureles 41 by Robin House (operada por Housy Host) recolecta,
+      usa, transfiere y protege los datos personales de los visitantes del sitio
+      <a href={SITE.url}>{SITE.url}</a>, en cumplimiento de la <strong>Ley 1581 de 2012</strong> y el
+      <strong>Decreto 1377 de 2013</strong> de Colombia, así como del <strong>RGPD</strong> cuando
+      aplique a huéspedes residentes en la Unión Europea.
+    </p>
+
+    <h2>1. Responsable del tratamiento</h2>
+    <p>
+      Casa Laureles 41 by Robin House.<br />
+      {NAP.streetAddress}, {NAP.neighborhood.es}, {NAP.locality}, {NAP.region}, {NAP.countryName.es}.<br />
+      Email: <a href={`mailto:${NAP.email}`}>{NAP.email}</a> · WhatsApp: <a href={`https://wa.me/${NAP.whatsapp}`}>{NAP.phoneDisplay}</a>.
+    </p>
+
+    <h2>2. Datos que recolectamos</h2>
+    <ul>
+      <li>Datos de contacto que tú nos envías (nombre, email, número de WhatsApp, número de huéspedes y fechas).</li>
+      <li>Documento de identidad o pasaporte solicitado antes del check-in (requisito legal de alojamiento turístico en Colombia).</li>
+      <li>Datos de navegación anónimos a través de cookies analíticas (Google Analytics 4) cuando aceptas el banner de cookies.</li>
+    </ul>
+
+    <h2>3. Finalidades</h2>
+    <ul>
+      <li>Procesar tu reserva y prestar el servicio de alojamiento.</li>
+      <li>Cumplir el registro hotelero obligatorio en Colombia (SIRE/MIGRACIÓN).</li>
+      <li>Mantener comunicación operativa contigo durante la estadía.</li>
+      <li>Mejorar la experiencia del sitio web y la calidad del servicio (analítica agregada).</li>
+    </ul>
+
+    <h2>4. Transferencia a terceros</h2>
+    <p>Compartimos datos estrictamente necesarios con:</p>
+    <ul>
+      <li><strong>Housy Host / Hostaway</strong> — gestor de reservas y pagos.</li>
+      <li><strong>Google Analytics 4</strong> — analítica anonimizada (solo si aceptas cookies analíticas).</li>
+      <li>Autoridades colombianas — cuando la ley lo exige (registro hotelero, SIRE).</li>
+    </ul>
+
+    <h2>5. Tus derechos</h2>
+    <p>
+      Como titular de datos puedes ejercer los derechos de acceso, rectificación, actualización,
+      supresión, revocatoria de la autorización y consulta. Para hacerlo, escríbenos al canal
+      PQRS: <a href={`mailto:${NAP.email}`}>{NAP.email}</a>. Responderemos en los plazos definidos
+      por la Ley 1581/2012.
+    </p>
+
+    <h2>6. Conservación</h2>
+    <p>
+      Conservamos los datos por el tiempo necesario para cumplir las finalidades descritas, los
+      plazos legales (típicamente 5 años para registros hoteleros) y el período de prescripción de
+      eventuales reclamaciones.
+    </p>
+
+    <h2>7. Seguridad</h2>
+    <p>
+      Aplicamos medidas técnicas y organizativas razonables para proteger tus datos: cifrado en
+      tránsito (TLS), control de accesos y minimización del tratamiento. Nunca pediremos datos de
+      tarjeta por WhatsApp — siempre usamos el link seguro de pago de Housy.
+    </p>
+  </LegalLayout>
+</Base>

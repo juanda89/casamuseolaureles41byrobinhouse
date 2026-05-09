@@ -1,0 +1,92 @@
+---
+import Base from '../../../layouts/Base.astro';
+import BookingBar from '../../../components/BookingBar.astro';
+import UnitGallery from '../../../components/UnitGallery.astro';
+import ApartmentSchema from '../../../components/schema/ApartmentSchema.astro';
+import { UNITS, UNIT_ORDER, NAP, type UnitSlug } from '../../../lib/constants';
+import { PHOTOS } from '../../../lib/photos';
+import { bookingUrl, defaultRange } from '../../../lib/booking';
+
+const SLUG_BY_EN: Record<string, UnitSlug> = {
+  standard: 'standar',
+  family: 'familiar',
+  deluxe: 'deluxe',
+};
+
+export function getStaticPaths() {
+  return UNIT_ORDER.map((slug) => ({ params: { slug: UNITS[slug].enSlug } }));
+}
+
+const enSlug = Astro.params.slug as string;
+const slug = SLUG_BY_EN[enSlug];
+if (!slug) throw new Error(`Unknown unit slug: ${enSlug}`);
+
+const u = UNITS[slug];
+const photo = PHOTOS[slug].hero.large;
+const range = defaultRange();
+const directBooking = bookingUrl(slug, range.start, range.end, Math.min(2, u.maxGuests));
+
+const title = `${u.name.en} · Casa Museo · Laureles, Medellín`;
+const description = `${u.tagline.en} ${u.maxGuests} guests · ${u.bed.en}.`;
+const pathname = `/en/units/${u.enSlug}`;
+---
+<Base locale="en" title={title} description={description} pathname={pathname} image={photo}>
+  <ApartmentSchema slug={slug} locale="en" image={photo} />
+
+  <article class="pb-16">
+    <header class="container-default pt-12 md:pt-20 pb-10">
+      <p class="label-caps text-accent">{u.shortName.en}</p>
+      <h1 class="mt-4 font-display font-light text-headline-lg md:text-display-lg text-ink leading-tight">
+        {u.name.en}
+      </h1>
+      <p class="mt-5 text-body-lg text-ink-soft max-w-3xl">{u.tagline.en}</p>
+
+      <ul class="mt-7 flex flex-wrap gap-2">
+        <li class="badge badge-leaf">{u.maxGuests} guests</li>
+        <li class="badge badge-leaf">{u.bed.en}</li>
+        <li class="badge badge-leaf">{u.bedrooms} bedroom</li>
+        <li class="badge badge-leaf">{u.bathrooms} bath</li>
+        {u.highlight && <li class="badge badge-gold">{u.highlight.en}</li>}
+      </ul>
+    </header>
+
+    <UnitGallery slug={slug} locale="en" />
+
+    <section class="container-default py-16 md:py-20 grid gap-12 md:grid-cols-12">
+      <div class="md:col-span-7">
+        <h2 class="font-display text-headline-lg text-ink">What's included</h2>
+        <ul class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {u.amenities.map((a) => (
+            <li class="flex items-start gap-3 rounded-md bg-surface-warm px-4 py-3">
+              <span class="mt-1 inline-block h-2 w-2 rounded-pill bg-accent" aria-hidden="true"></span>
+              <span class="text-body-md text-ink">{a.en}</span>
+            </li>
+          ))}
+        </ul>
+
+        <h2 class="mt-12 font-display text-headline-lg text-ink">About the unit</h2>
+        <p class="mt-4 text-body-lg text-ink-soft reading-width">
+          A curated room in the heart of Laureles. Every element — carved stone, floating oak,
+          ambient LED lighting, equipped kitchenette — was selected so the space feels like a living
+          gallery. High-speed Wi-Fi, air conditioning, and access to the building's shared pool.
+          Reception 24/7.
+        </p>
+      </div>
+
+      <aside class="md:col-span-5" id="booking">
+        <div class="rounded-lg bg-surface-warm p-6 md:p-8 sticky top-24">
+          <h3 class="font-display text-headline-md text-ink">Book this unit</h3>
+          <p class="mt-2 text-body-md text-ink-soft">The final total with taxes is shown on the Housy Host checkout page.</p>
+          <BookingBar locale="en" variant="inline" preselectedUnit={slug} />
+          <a href={directBooking} target="_blank" rel="noopener" class="mt-4 block text-center text-body-sm text-accent hover:text-accent-deep underline-offset-4 hover:underline">
+            Go directly to the Housy Host booking →
+          </a>
+          <p class="mt-6 pt-6 border-t border-outline-soft/60 text-body-sm text-ink-mute">
+            Questions? Reach us on WhatsApp at
+            <a href={`https://wa.me/${NAP.whatsapp}`} target="_blank" rel="noopener" class="text-accent hover:text-accent-deep">{NAP.phoneDisplay}</a>.
+          </p>
+        </div>
+      </aside>
+    </section>
+  </article>
+</Base>

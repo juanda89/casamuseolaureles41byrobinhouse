@@ -1,0 +1,127 @@
+---
+import '../styles/global.css';
+import { SITE, NAP, ANALYTICS } from '../lib/constants';
+import { t, altPath } from '../lib/i18n';
+import type { Locale } from '../lib/constants';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+import CookieBanner from '../components/CookieBanner.astro';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+  image?: string;
+  pathname: string;
+  schemas?: any[]; // JSON-LD blocks
+}
+
+const { locale, title, description, image, pathname, schemas = [] } = Astro.props;
+const dict = t(locale);
+const lang = locale === 'es' ? 'es-CO' : 'en';
+const ogLocale = dict.ogLocale;
+
+const canonical = `${SITE.url}${pathname}`;
+const ogImage = image ?? `${SITE.url}/og/home.jpg`;
+
+// hreflang alternates
+const alt = altPath(pathname);
+const hreflangEs = locale === 'es' ? canonical : `${SITE.url}${alt}`;
+const hreflangEn = locale === 'en' ? canonical : `${SITE.url}${alt}`;
+const xDefault = locale === 'es' ? canonical : `${SITE.url}${alt}`;
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#1A2E25" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <link rel="alternate" hreflang="es" href={hreflangEs} />
+    <link rel="alternate" hreflang="en" href={hreflangEn} />
+    <link rel="alternate" hreflang="x-default" href={xDefault} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- Fonts: Fraunces (display), DM Sans (body), JetBrains Mono (numeric) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap"
+    />
+
+    {schemas.map((s) => (
+      <script type="application/ld+json" set:html={JSON.stringify(s)} />
+    ))}
+
+    {/* GTM consent mode v2 — denies all storage by default; CookieBanner unlocks analytics */}
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){window.dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('consent', 'default', {
+        analytics_storage: 'denied',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        functionality_storage: 'granted',
+        security_storage: 'granted',
+        wait_for_update: 500,
+      });
+      try {
+        var c = JSON.parse(localStorage.getItem('cm-consent-v1') || 'null');
+        if (c && c.exp > Date.now() && c.level === 'all') {
+          gtag('consent', 'update', { analytics_storage: 'granted' });
+        }
+      } catch (e) {}
+    </script>
+    {ANALYTICS.gtmId && (
+      <script is:inline set:html={`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${ANALYTICS.gtmId}');`} />
+    )}
+    {ANALYTICS.ga4Id && !ANALYTICS.gtmId && (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${ANALYTICS.ga4Id}`} />
+        <script is:inline set:html={`gtag('js', new Date()); gtag('config', '${ANALYTICS.ga4Id}', { anonymize_ip: true });`} />
+      </>
+    )}
+  </head>
+  <body>
+    <a href="#main" class="skip-link">{locale === 'es' ? 'Saltar al contenido' : 'Skip to content'}</a>
+    <Nav locale={locale} pathname={pathname} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer locale={locale} />
+    <WhatsAppFloat locale={locale} pathname={pathname} />
+    <CookieBanner locale={locale} />
+  </body>
+</html>

@@ -1,0 +1,38 @@
+---
+import Base from '../../layouts/Base.astro';
+import LegalLayout from '../../components/LegalLayout.astro';
+import { SITE } from '../../lib/constants';
+
+const title = `Política de cookies · ${SITE.shortName}`;
+const description = 'Listado de cookies que usamos, su finalidad y cómo gestionar tu consentimiento.';
+const pathname = '/es/cookies';
+---
+<Base locale="es" title={title} description={description} pathname={pathname}>
+  <LegalLayout locale="es" eyebrow="Legal" title="Política de cookies" updated="2026-05-09">
+    <p>
+      Las cookies son pequeños archivos que el sitio guarda en tu navegador para mejorar la
+      experiencia. Puedes aceptarlas todas, aceptar solo las esenciales o gestionarlas desde la
+      configuración de tu navegador.
+    </p>
+
+    <h2>Cookies esenciales (siempre activas)</h2>
+    <ul>
+      <li><strong>cm-consent-v1</strong> — guarda tu decisión sobre el banner de cookies (12 meses).</li>
+    </ul>
+
+    <h2>Cookies analíticas (opcionales)</h2>
+    <ul>
+      <li><strong>_ga, _ga_*</strong> — Google Analytics 4 para entender el uso del sitio. Solo se activan si das consentimiento. Anonimizadas.</li>
+    </ul>
+
+    <h2>Cookies de marketing</h2>
+    <p>Actualmente no usamos cookies de marketing ni publicidad.</p>
+
+    <h2>Cómo cambiar tu decisión</h2>
+    <p>
+      Puedes cambiar tu consentimiento limpiando la cookie <code>cm-consent-v1</code> en la
+      configuración de tu navegador, o reseteando los datos del sitio. La próxima visita verás de
+      nuevo el banner.
+    </p>
+  </LegalLayout>
+</Base>

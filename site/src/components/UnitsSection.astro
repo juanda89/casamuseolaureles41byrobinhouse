@@ -1,0 +1,27 @@
+---
+import { t } from '../lib/i18n';
+import { UNIT_ORDER } from '../lib/constants';
+import type { Locale } from '../lib/constants';
+import UnitCard from './UnitCard.astro';
+import { PHOTOS } from '../lib/photos';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const d = t(locale);
+---
+<section class="container-default py-24 md:py-28" id={locale === 'es' ? 'unidades' : 'units'}>
+  <header class="grid gap-6 md:grid-cols-12 items-end mb-12 md:mb-16">
+    <div class="md:col-span-7">
+      <p class="label-caps text-accent">{d.units.eyebrow}</p>
+      <h2 class="mt-4 font-display font-normal text-headline-lg md:text-display-lg text-ink leading-tight">
+        {d.units.title}
+      </h2>
+    </div>
+  </header>
+
+  <div class="grid gap-6 md:gap-8 md:grid-cols-3">
+    {UNIT_ORDER.map((slug, i) => (
+      <UnitCard slug={slug} locale={locale} image={PHOTOS[slug].hero.card} index={i} />
+    ))}
+  </div>
+</section>

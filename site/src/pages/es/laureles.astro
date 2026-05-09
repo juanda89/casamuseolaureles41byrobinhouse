@@ -1,0 +1,71 @@
+---
+import Base from '../../layouts/Base.astro';
+import { NAP } from '../../lib/constants';
+
+const title = 'Laureles, Medellín · Guía completa del barrio · Casa Museo';
+const description = 'Por qué hospedarse en Laureles: cafés, restaurantes, seguridad, distancias a Provenza y al aeropuerto. La Medellín que sí se camina.';
+const pathname = '/es/laureles';
+
+const sections = [
+  {
+    title: 'Por qué Laureles y no El Poblado',
+    body: 'Laureles es la zona residencial más auténtica de Medellín. Plana, caminable, llena de cafés y restaurantes locales. Comparado con El Poblado, hay menos turismo masivo, más vida de barrio y mejor relación precio-experiencia. Para nómadas digitales y viajeros que quieren conocer la Medellín real, es la mejor opción.',
+  },
+  {
+    title: 'Cafés especialty (5 min a pie)',
+    body: 'Ritual, Revolución y Semilla son tres referentes a pocos minutos de Casa Museo. Excelente WiFi, granos de origen y vibe relajado. Si trabajas remoto, son tu segundo escritorio.',
+  },
+  {
+    title: 'Restaurantes y vida nocturna',
+    body: 'Avenida Nutibara y los Parques de Laureles tienen desde casual hasta upscale. La 70 queda a poca distancia caminando — perfecta para salir a comer o tomar algo en un ambiente más vibrante. Zona segura para caminar de noche.',
+  },
+  {
+    title: 'Distancias clave',
+    body: 'Provenza / El Poblado: 15-20 min en carro. Estadio Atanasio Girardot: 7 min en carro o pocos minutos en bici. Aeropuerto José María Córdova (MDE): 45 min por el Túnel de Oriente. Aeropuerto Olaya Herrera (regional): 20 min.',
+  },
+  {
+    title: 'Seguridad y movilidad',
+    body: 'Laureles es de las zonas más seguras y bien iluminadas de la ciudad. Uber, DiDi y Cabify funcionan perfecto con esperas de 2-3 min. Las estaciones Estadio y Suramericana del Metro están cerca. Bici-rutas EnCicla cubren todo el barrio.',
+  },
+  {
+    title: 'Lugares cercanos para visitar',
+    body: 'Primer y Segundo Parque de Laureles (5 min), Avenida Nutibara, La 70, Estadio Atanasio Girardot, Cerro El Volador (mirador). Para planes culturales: Museo de Arte Moderno (MAMM) a 15 min, Comuna 13 a 25 min.',
+  },
+];
+---
+<Base locale="es" title={title} description={description} pathname={pathname}>
+  <header class="container-default pt-12 md:pt-20 pb-10">
+    <p class="label-caps text-accent">Laureles · Medellín</p>
+    <h1 class="mt-4 font-display font-light text-headline-lg md:text-display-lg text-ink leading-tight max-w-3xl">
+      La Medellín que sí se camina
+    </h1>
+    <p class="mt-6 text-body-lg text-ink-soft max-w-3xl reading-width">
+      Laureles es el barrio residencial más auténtico de Medellín — caminable, plano, lleno de cafés
+      especialty y restaurantes con alma local. Aquí está todo lo que necesitas saber antes de venir.
+    </p>
+  </header>
+
+  <article class="container-default pb-20 grid gap-10 md:gap-14 md:grid-cols-12">
+    <div class="md:col-span-8 space-y-12">
+      {sections.map((s) => (
+        <section>
+          <h2 class="font-display text-headline-lg text-ink">{s.title}</h2>
+          <p class="mt-4 text-body-lg text-ink-soft reading-width">{s.body}</p>
+        </section>
+      ))}
+    </div>
+
+    <aside class="md:col-span-4">
+      <div class="sticky top-24 rounded-lg bg-surface-warm p-6 md:p-8">
+        <h3 class="label-caps text-gold">Casa Museo en Laureles</h3>
+        <p class="mt-3 font-display text-headline-sm text-ink">{NAP.streetAddress}</p>
+        <p class="mt-1 text-body-md text-ink-soft">{NAP.neighborhood.es}, {NAP.locality}</p>
+        <a href={NAP.gmapsUrl} target="_blank" rel="noopener" class="mt-4 inline-flex text-body-md text-accent hover:text-accent-deep underline-offset-4 hover:underline">
+          Ver en Google Maps →
+        </a>
+        <hr class="divider-gold my-6" />
+        <a href="/es#booking" class="btn-primary w-full">Reservar</a>
+      </div>
+    </aside>
+  </article>
+</Base>

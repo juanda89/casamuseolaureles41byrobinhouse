@@ -1,0 +1,78 @@
+---
+import Base from '../../layouts/Base.astro';
+import FAQPageSchema from '../../components/schema/FAQPageSchema.astro';
+
+const title = 'FAQ · Casa Museo · Casa Laureles 41';
+const description = 'Availability, location, parking, check-in, payments, cancellations and more. Everything to know before booking.';
+const pathname = '/en/faq';
+
+const groups = [
+  {
+    title: 'Availability & booking',
+    items: [
+      { q: 'Do you have availability for my dates?', a: 'Send us your exact dates (check-in and check-out) and number of guests on WhatsApp and we’ll confirm right away.' },
+      { q: 'What is the minimum stay?', a: '1 night.' },
+      { q: 'How do I book?', a: 'We send a direct, secure Housy payment link with everything pre-filled. You pay online and the booking is confirmed.' },
+      { q: 'Are there long-stay rates?', a: 'Yes: 7+ nights 15% off, 28+ nights 30% off.' },
+    ],
+  },
+  {
+    title: 'Location & parking',
+    items: [
+      { q: 'Where is Casa Museo?', a: 'Tv. 41 #73-42, Laureles, Medellín. 5-min walk from First and Second Park, surrounded by cafés and restaurants.' },
+      { q: 'Do you have parking?', a: 'No private parking. Paid options 2 blocks away and limited free street parking out front (first-come).' },
+      { q: 'How do I get from the airport?', a: 'MDE airport: 45 min via the Oriente Tunnel. Uber/DiDi/Cabify work great.' },
+    ],
+  },
+  {
+    title: 'Check-in & house rules',
+    items: [
+      { q: 'What are check-in / check-out times?', a: 'Check-in from 3:00 PM. Check-out by 11:00 AM.' },
+      { q: 'Is check-in self-service?', a: 'Yes. Before arrival we send access code, address and full instructions on WhatsApp.' },
+      { q: 'Do you accept pets or children?', a: 'No pets. The space is designed for couples and adult travelers; it is not ideal for small children.' },
+      { q: 'Are parties allowed?', a: 'No. Casa Museo is in a residential area; calm gatherings at low volume are fine, parties are not.' },
+    ],
+  },
+  {
+    title: 'Payments & cancellations',
+    items: [
+      { q: 'How do I pay?', a: 'Up-front via the secure Housy link. International cards accepted.' },
+      { q: 'What is your cancellation policy?', a: '100% refund up to 14 days before check-in. 50% refund up to 7 days before. Non-refundable after.' },
+      { q: 'Are taxes included?', a: 'It depends. Foreign visitors on a tourist visa of up to 60 days are exempt from the 19% Colombian VAT on lodging (Decree 297/2016). Colombian residents pay full VAT. The exact total is itemized on the Housy Host checkout page before you confirm.' },
+      { q: 'I am a foreigner — do I get a VAT refund?', a: 'It is not a refund — it is an automatic exemption at checkout. You need a valid passport, an entry stamp into Colombia, and a stay of 60 days or less. Housy Host applies the exemption when verifying your document.' },
+    ],
+  },
+];
+const allItems = groups.flatMap((g) => g.items);
+---
+<Base locale="en" title={title} description={description} pathname={pathname}>
+  <FAQPageSchema items={allItems} />
+
+  <header class="container-default pt-12 md:pt-20 pb-10">
+    <p class="label-caps text-accent">Before you book</p>
+    <h1 class="mt-4 font-display font-light text-headline-lg md:text-display-lg text-ink leading-tight max-w-3xl">
+      Frequently asked
+    </h1>
+  </header>
+
+  <article class="container-default pb-20 max-w-4xl space-y-14">
+    {groups.map((g) => (
+      <section>
+        <h2 class="font-display text-headline-lg text-ink">{g.title}</h2>
+        <div class="mt-6 space-y-3">
+          {g.items.map((item) => (
+            <details class="group rounded-md bg-surface-warm border border-outline-soft/60 px-6 py-5 open:border-accent/30">
+              <summary class="flex items-start justify-between cursor-pointer list-none gap-4">
+                <h3 class="font-display text-headline-sm font-medium text-ink leading-snug">{item.q}</h3>
+                <span class="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center text-accent transition-transform group-open:rotate-180" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9" /></svg>
+                </span>
+              </summary>
+              <p class="mt-4 text-body-md text-ink-soft reading-width">{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+    ))}
+  </article>
+</Base>

@@ -1,0 +1,57 @@
+---
+import { t } from '../lib/i18n';
+import type { Locale } from '../lib/constants';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const d = t(locale);
+const moreHref = locale === 'es' ? '/es/cookies' : '/en/cookies';
+---
+<div
+  data-cookie-banner
+  class="hidden fixed inset-x-0 bottom-0 z-30 px-4 pb-4 md:px-6 md:pb-6"
+  role="dialog"
+  aria-live="polite"
+  aria-label={d.cookies.title}
+>
+  <div class="container-default !px-0">
+    <div class="rounded-md bg-primary-deep text-on-primary p-5 md:p-6 shadow-2xl flex flex-col md:flex-row items-start md:items-center gap-4">
+      <div class="flex-1">
+        <p class="font-display text-headline-sm text-on-primary">{d.cookies.title}</p>
+        <p class="mt-1.5 text-body-sm text-surface-sand/85">{d.cookies.body}</p>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <button data-cookie-essential class="btn-ghost !h-10 !text-on-primary hover:!bg-on-primary/10">{d.cookies.essential}</button>
+        <button data-cookie-accept class="btn-primary !h-10 !px-5 !text-sm">{d.cookies.acceptAll}</button>
+        <a href={moreHref} class="btn-ghost !h-10 !text-on-primary hover:!bg-on-primary/10">{d.cookies.more}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    const KEY = 'cm-consent-v1';
+    try {
+      const saved = JSON.parse(localStorage.getItem(KEY) || 'null');
+      if (saved && saved.exp > Date.now()) return;
+    } catch {}
+    const banner = document.querySelector('[data-cookie-banner]');
+    if (!banner) return;
+    banner.classList.remove('hidden');
+
+    function persist(level) {
+      const expDays = 365;
+      localStorage.setItem(KEY, JSON.stringify({ level, exp: Date.now() + expDays * 86400000 }));
+      banner.remove();
+      if (window.gtag) {
+        window.gtag('consent', 'update', {
+          analytics_storage: level === 'all' ? 'granted' : 'denied',
+          ad_storage: 'denied',
+        });
+      }
+    }
+    banner.querySelector('[data-cookie-accept]').addEventListener('click', () => persist('all'));
+    banner.querySelector('[data-cookie-essential]').addEventListener('click', () => persist('essential'));
+  })();
+</script>

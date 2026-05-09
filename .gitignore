@@ -1,0 +1,25 @@
+# Astro
+site/dist/
+site/.astro/
+node_modules/
+site/node_modules/
+
+# Env
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# OS / editors
+.DS_Store
+.vscode/
+.idea/
+*.log
+
+# Vendor (clon del repo público de Google — re-clonable con git clone)
+vendor/
+
+# Specs internas y voz de marca (no exponer en repo público)
+Landing_CasaLaureles41.docx
+PREGUNTAS AGENTE00RH.docx
+*.docx

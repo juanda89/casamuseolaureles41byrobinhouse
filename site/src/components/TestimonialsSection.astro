@@ -1,0 +1,44 @@
+---
+import { t } from '../lib/i18n';
+import type { Locale } from '../lib/constants';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const d = t(locale);
+
+// Placeholder testimonials — to be replaced with verified guest reviews + signed permission (spec §20.7)
+const items = locale === 'es'
+  ? [
+      { quote: 'Una experiencia que se sale del molde de hotel. Cada detalle estaba pensado.', author: 'Camila R.', from: 'Bogotá' },
+      { quote: 'Laureles es el secreto mejor guardado de Medellín, y Casa Museo es la mejor forma de vivirlo.', author: 'Luis M.', from: 'Ciudad de México' },
+      { quote: 'Diseño impecable, ubicación tranquila, atención cercana por WhatsApp. Volvería sin pensarlo.', author: 'Sofía A.', from: 'Buenos Aires' },
+    ]
+  : [
+      { quote: 'An experience that breaks the hotel mold. Every detail thought through.', author: 'Camila R.', from: 'Bogotá' },
+      { quote: 'Laureles is Medellín’s best-kept secret, and Casa Museo is the best way to live it.', author: 'Luis M.', from: 'Mexico City' },
+      { quote: 'Impeccable design, quiet location, warm WhatsApp support. I’d come back in a heartbeat.', author: 'Sofía A.', from: 'Buenos Aires' },
+    ];
+---
+<section class="container-default py-24 md:py-32">
+  <header class="mb-12 md:mb-16 max-w-2xl">
+    <p class="label-caps text-accent">{d.testimonials.eyebrow}</p>
+    <h2 class="mt-4 font-display font-normal text-headline-lg md:text-display-lg text-ink leading-tight">
+      {d.testimonials.title}
+    </h2>
+  </header>
+
+  <div class="grid gap-6 md:grid-cols-3">
+    {items.map((t) => (
+      <figure class="rounded-lg bg-surface-warm p-7 md:p-8 flex flex-col">
+        <span class="font-display text-display-lg text-gold leading-none -mt-2" aria-hidden="true">«</span>
+        <blockquote class="mt-2 font-display font-normal text-headline-sm text-ink leading-snug">
+          {t.quote}
+        </blockquote>
+        <figcaption class="mt-6 pt-6 border-t border-outline-soft/60">
+          <span class="label-caps text-accent">{t.author}</span>
+          <span class="block mt-1 text-body-sm text-ink-mute">{t.from}</span>
+        </figcaption>
+      </figure>
+    ))}
+  </div>
+</section>

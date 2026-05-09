@@ -1,0 +1,286 @@
+@import "tailwindcss";
+
+/* =============================================================
+   Casa Museo · Casa Laureles 41
+   Tokens generados desde DESIGN.md (formato Google design.md)
+   No editar valores directamente — actualizar DESIGN.md y regenerar.
+   ============================================================= */
+
+@theme {
+  /* Colors */
+  --color-primary: #2C4A3E;
+  --color-primary-soft: #3F5F52;
+  --color-primary-deep: #1A2E25;
+  --color-on-primary: #F5EFE6;
+
+  --color-accent: #B85C3C;
+  --color-accent-soft: #D17A5A;
+  --color-accent-deep: #8E4528;
+  --color-on-accent: #F5EFE6;
+
+  --color-gold: #C9A96E;
+  --color-gold-soft: #DDC093;
+
+  --color-ink: #2A1F18;
+  --color-ink-soft: #5C4A3D;
+  --color-ink-mute: #8B7866;
+
+  --color-surface: #F5EFE6;
+  --color-surface-warm: #EDE3D2;
+  --color-surface-sand: #E8DCC8;
+  --color-surface-deep: #1A2E25;
+  --color-on-surface: #2A1F18;
+  --color-on-surface-mute: #5C4A3D;
+
+  --color-leaf: #8FA88E;
+  --color-leaf-pale: #C8D4C5;
+
+  --color-success: #5C8A6E;
+  --color-warning: #D4A24A;
+  --color-error: #A8412E;
+  --color-on-error: #F5EFE6;
+
+  --color-outline: #C8B79C;
+  --color-outline-soft: #DDD0BB;
+
+  --color-whatsapp: #25D366;
+
+  /* Typography families */
+  --font-display: "Fraunces", "Cormorant Garamond", Georgia, serif;
+  --font-body: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-numeric: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Typography scale */
+  --text-display-xl: 5.5rem;
+  --text-display-xl--line-height: 0.95;
+  --text-display-xl--letter-spacing: -0.035em;
+  --text-display-xl--font-weight: 300;
+
+  --text-display-lg: 3.75rem;
+  --text-display-lg--line-height: 1;
+  --text-display-lg--letter-spacing: -0.03em;
+  --text-display-lg--font-weight: 300;
+
+  --text-headline-lg: 2.5rem;
+  --text-headline-lg--line-height: 1.1;
+  --text-headline-lg--letter-spacing: -0.02em;
+  --text-headline-lg--font-weight: 400;
+
+  --text-headline-md: 1.75rem;
+  --text-headline-md--line-height: 1.2;
+  --text-headline-md--letter-spacing: -0.015em;
+  --text-headline-md--font-weight: 400;
+
+  --text-headline-sm: 1.375rem;
+  --text-headline-sm--line-height: 1.25;
+  --text-headline-sm--font-weight: 500;
+
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.65;
+  --text-body-lg--font-weight: 400;
+
+  --text-body-md: 1rem;
+  --text-body-md--line-height: 1.6;
+  --text-body-md--font-weight: 400;
+
+  --text-body-sm: 0.875rem;
+  --text-body-sm--line-height: 1.55;
+  --text-body-sm--font-weight: 400;
+
+  --text-label-lg: 0.9375rem;
+  --text-label-lg--line-height: 1.4;
+  --text-label-lg--letter-spacing: 0.005em;
+  --text-label-lg--font-weight: 500;
+
+  --text-label-caps: 0.75rem;
+  --text-label-caps--line-height: 1;
+  --text-label-caps--letter-spacing: 0.18em;
+  --text-label-caps--font-weight: 500;
+
+  --text-numeric: 1rem;
+  --text-numeric--line-height: 1.4;
+  --text-numeric--letter-spacing: -0.01em;
+  --text-numeric--font-weight: 500;
+
+  --text-numeric-display: 1.875rem;
+  --text-numeric-display--line-height: 1;
+  --text-numeric-display--letter-spacing: -0.02em;
+  --text-numeric-display--font-weight: 500;
+
+  /* Rounded */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-xl: 22px;
+
+  /* Container */
+  --container-narrow: 720px;
+  --container-default: 1200px;
+  --container-reading: 68ch;
+}
+
+/* =============================================================
+   Pill rounded utility (Tailwind v4 custom utility)
+   ============================================================= */
+@utility rounded-pill {
+  border-radius: 9999px;
+}
+
+/* =============================================================
+   Base layer
+   ============================================================= */
+@layer base {
+  :root {
+    color-scheme: light;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    background-color: var(--color-surface);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-feature-settings: "ss01", "cv11";
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--color-gold);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .skip-link {
+    position: absolute;
+    top: -100px;
+    left: 16px;
+    background: var(--color-primary-deep);
+    color: var(--color-on-primary);
+    padding: 8px 16px;
+    z-index: 100;
+    border-radius: var(--radius-md);
+  }
+  .skip-link:focus {
+    top: 16px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* =============================================================
+   Component utilities
+   ============================================================= */
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-pill bg-accent px-8 text-on-accent font-medium transition-colors;
+    height: 52px;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    letter-spacing: 0.005em;
+  }
+  .btn-primary:hover { background-color: var(--color-accent-deep); }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-pill bg-primary px-7 text-on-primary font-medium transition-colors;
+    height: 52px;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+  }
+  .btn-secondary:hover { background-color: var(--color-primary-deep); }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-pill px-5 text-ink font-medium transition-colors;
+    height: 44px;
+    font-family: var(--font-body);
+  }
+  .btn-ghost:hover { background-color: var(--color-surface-warm); }
+
+  .input-field {
+    @apply w-full rounded-md bg-surface-warm px-4 text-ink transition-colors;
+    height: 52px;
+    font-family: var(--font-body);
+    border: 1px solid var(--color-outline-soft);
+  }
+  .input-field:focus { border-color: var(--color-accent); outline: none; }
+
+  .container-narrow {
+    @apply mx-auto px-5;
+    max-width: var(--container-narrow);
+  }
+  @media (min-width: 768px) {
+    .container-narrow { padding-inline: 2rem; }
+  }
+
+  .container-default {
+    @apply mx-auto px-5;
+    max-width: var(--container-default);
+  }
+  @media (min-width: 768px) {
+    .container-default { padding-inline: 3rem; }
+  }
+
+  .reading-width { max-width: var(--container-reading); }
+
+  .label-caps {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .divider-gold {
+    height: 1px;
+    background-color: var(--color-gold);
+    width: 100%;
+    border: 0;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1.5 rounded-pill;
+    padding: 6px 14px;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .badge-leaf { background-color: var(--color-leaf-pale); color: var(--color-primary-deep); }
+  .badge-gold { background-color: var(--color-gold-soft); color: var(--color-ink); }
+
+  /* Hero overlay (45% primary-deep) */
+  .hero-overlay {
+    background: linear-gradient(180deg, rgba(26, 46, 37, 0.25) 0%, rgba(26, 46, 37, 0.55) 70%, rgba(26, 46, 37, 0.7) 100%);
+  }
+}

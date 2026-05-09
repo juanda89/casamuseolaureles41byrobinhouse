@@ -1,0 +1,78 @@
+---
+import Base from '../../layouts/Base.astro';
+import FAQPageSchema from '../../components/schema/FAQPageSchema.astro';
+
+const title = 'Preguntas frecuentes · Casa Museo · Casa Laureles 41';
+const description = 'Disponibilidad, ubicación, parqueadero, check-in, pagos, cancelaciones y más. Todo lo que necesitas saber antes de reservar.';
+const pathname = '/es/faq';
+
+const groups = [
+  {
+    title: 'Disponibilidad y reservas',
+    items: [
+      { q: '¿Tienen disponibilidad para mis fechas?', a: 'Cuéntanos las fechas exactas (check-in y check-out) y cuántas personas son por WhatsApp y te confirmamos al instante.' },
+      { q: '¿Cuál es la estadía mínima?', a: '1 noche.' },
+      { q: '¿Cómo reservo?', a: 'Te enviamos un link directo y seguro de pago de Housy con todo pre-llenado. Pagas en línea y la reserva queda confirmada.' },
+      { q: '¿Hay tarifa por estadías largas?', a: 'Sí: 7+ noches 15% de descuento, 28+ noches 30% de descuento.' },
+    ],
+  },
+  {
+    title: 'Ubicación y parqueadero',
+    items: [
+      { q: '¿Dónde queda Casa Museo?', a: 'Tv. 41 #73-42, Laureles, Medellín. A 5 min a pie del Primer y Segundo Parque, rodeado de cafés y restaurantes.' },
+      { q: '¿Tienen parqueadero?', a: 'No tenemos parqueadero privado. Hay opciones a 2 cuadras (con costo) y parqueo libre al frente, sujeto a disponibilidad.' },
+      { q: '¿Cómo llego desde el aeropuerto?', a: 'Aeropuerto MDE: 45 min por el Túnel de Oriente. Uber/DiDi/Cabify funcionan perfecto.' },
+    ],
+  },
+  {
+    title: 'Check-in y normas',
+    items: [
+      { q: '¿Cuál es el horario de check-in/out?', a: 'Check-in desde las 3:00 PM. Check-out hasta las 11:00 AM.' },
+      { q: '¿El ingreso es autónomo?', a: 'Sí. Antes de tu llegada te enviamos código de acceso, dirección y todas las instrucciones por WhatsApp.' },
+      { q: '¿Aceptan mascotas o niños?', a: 'No aceptamos mascotas. El espacio está diseñado para parejas y viajeros adultos; no es ideal para niños pequeños.' },
+      { q: '¿Se permiten fiestas?', a: 'No. Casa Museo está en zona residencial; reuniones tranquilas con volumen moderado están bien, fiestas no.' },
+    ],
+  },
+  {
+    title: 'Pagos y cancelaciones',
+    items: [
+      { q: '¿Cómo se paga?', a: 'Por adelantado a través del link seguro de Housy. Acepta tarjetas internacionales.' },
+      { q: '¿Cuál es la política de cancelación?', a: 'Reembolso del 100% hasta 14 días antes del check-in. Reembolso del 50% hasta 7 días antes. Después no aplica reembolso.' },
+      { q: '¿La tarifa incluye impuestos?', a: 'Depende. Si eres extranjero/a con visa de turismo de hasta 60 días, estás exento del IVA del 19% en alojamiento turístico (Decreto 297/2016). Si eres residente colombiano, la tarifa incluye IVA. El total exacto lo verás detallado en la página de pago de Housy Host antes de confirmar.' },
+      { q: 'Soy extranjero/a, ¿me devuelven el IVA?', a: 'No es una devolución — es una exención automática al momento del pago. Necesitas pasaporte vigente, sello de ingreso a Colombia y permanencia ≤60 días. El sistema de Housy Host aplica la exención al verificar tu documento.' },
+    ],
+  },
+];
+const allItems = groups.flatMap((g) => g.items);
+---
+<Base locale="es" title={title} description={description} pathname={pathname}>
+  <FAQPageSchema items={allItems} />
+
+  <header class="container-default pt-12 md:pt-20 pb-10">
+    <p class="label-caps text-accent">Antes de reservar</p>
+    <h1 class="mt-4 font-display font-light text-headline-lg md:text-display-lg text-ink leading-tight max-w-3xl">
+      Preguntas frecuentes
+    </h1>
+  </header>
+
+  <article class="container-default pb-20 max-w-4xl space-y-14">
+    {groups.map((g) => (
+      <section>
+        <h2 class="font-display text-headline-lg text-ink">{g.title}</h2>
+        <div class="mt-6 space-y-3">
+          {g.items.map((item) => (
+            <details class="group rounded-md bg-surface-warm border border-outline-soft/60 px-6 py-5 open:border-accent/30">
+              <summary class="flex items-start justify-between cursor-pointer list-none gap-4">
+                <h3 class="font-display text-headline-sm font-medium text-ink leading-snug">{item.q}</h3>
+                <span class="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center text-accent transition-transform group-open:rotate-180" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9" /></svg>
+                </span>
+              </summary>
+              <p class="mt-4 text-body-md text-ink-soft reading-width">{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+    ))}
+  </article>
+</Base>

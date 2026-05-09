@@ -1,0 +1,35 @@
+---
+import { t } from '../lib/i18n';
+import type { Locale } from '../lib/constants';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const d = t(locale);
+const moreHref = locale === 'es' ? '/es/laureles' : '/en/laureles';
+---
+<section class="bg-surface-warm py-24 md:py-32">
+  <div class="container-default">
+    <hr class="divider-gold mb-16" />
+    <div class="grid gap-12 md:gap-16 md:grid-cols-12">
+      <div class="md:col-span-5">
+        <p class="label-caps text-accent">{d.neighborhood.eyebrow}</p>
+        <h2 class="mt-5 font-display font-normal text-headline-lg md:text-display-lg text-ink leading-tight">
+          {d.neighborhood.title}
+        </h2>
+        <p class="mt-6 text-body-lg text-ink-soft reading-width">{d.neighborhood.body}</p>
+        <a href={moreHref} class="mt-8 inline-flex text-body-md text-accent hover:text-accent-deep transition-colors underline-offset-4 hover:underline">
+          {d.neighborhood.moreLink}
+        </a>
+      </div>
+
+      <ul class="md:col-span-7 grid gap-6 md:grid-cols-2 self-end">
+        {d.neighborhood.highlights.map((h) => (
+          <li class="rounded-md bg-surface p-6 border border-outline-soft/60">
+            <h3 class="font-display text-headline-sm font-medium text-ink">{h.title}</h3>
+            <p class="mt-2 text-body-md text-ink-soft">{h.body}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
