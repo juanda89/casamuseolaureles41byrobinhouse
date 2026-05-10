@@ -27,13 +27,15 @@ export const NAP = {
   phone: '+573117337110',
   phoneDisplay: '+57 311 733 7110',
   whatsapp: '573117337110',
-  email: 'hello@housyhost.com',
+  email: 'hello@casamuseolaureles.com',
+  emailOperator: 'hello@housyhost.com',
 } as const;
 
 export const PARENT = {
   name: 'Robin House',
   url: 'https://robinhouse.co',
   instagram: 'robinhouse.co',
+  instagramUrl: 'https://www.instagram.com/robinhouse.co',
 } as const;
 
 export const SOCIAL = {
