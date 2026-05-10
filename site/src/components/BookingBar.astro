@@ -99,8 +99,23 @@ const unitOptions = UNIT_ORDER.map((slug) => ({
               ? `Hi! We are ${guests} guests for Casa Laureles 41 from ${start} to ${end}. Could you help us combine units?`
               : `Hola! Somos ${guests} huéspedes y queremos hospedarnos en Casa Laureles 41 del ${start} al ${end}. ¿Pueden ayudarnos a combinar unidades?`)
           );
-          window.open(`https://wa.me/${wa}?text=${text}`, '_blank', 'noopener');
-          if (window.gtag) window.gtag('event', 'booking_intent', { unit: 'whatsapp_overflow', start, end, numberOfGuests: guests });
+          // Track ANTES de window.open. event_callback abre la pestaña cuando GA confirma envío;
+          // setTimeout fallback de 700ms por si gtag.js falla en cargar.
+          let opened = false;
+          const openWA = () => {
+            if (opened) return;
+            opened = true;
+            window.open(`https://wa.me/${wa}?text=${text}`, '_blank', 'noopener');
+          };
+          if (window.gtag) {
+            window.gtag('event', 'booking_intent', {
+              unit: 'whatsapp_overflow', start, end, numberOfGuests: guests,
+              event_callback: openWA,
+            });
+            setTimeout(openWA, 700);
+          } else {
+            openWA();
+          }
           return;
         }
 
@@ -118,9 +133,23 @@ const unitOptions = UNIT_ORDER.map((slug) => ({
           unit = guests >= 3 ? 'familiar' : 'standar';
         }
 
-        if (window.gtag) window.gtag('event', 'booking_intent', { unit, start, end, numberOfGuests: guests });
         const url = `https://booking.housyhost.com/listings/${UNITS[unit]}?start=${start}&end=${end}&numberOfGuests=${guests}`;
-        window.open(url, '_blank', 'noopener');
+        // Mismo patrón: gtag con event_callback + fallback timeout
+        let openedH = false;
+        const openH = () => {
+          if (openedH) return;
+          openedH = true;
+          window.open(url, '_blank', 'noopener');
+        };
+        if (window.gtag) {
+          window.gtag('event', 'booking_intent', {
+            unit, start, end, numberOfGuests: guests,
+            event_callback: openH,
+          });
+          setTimeout(openH, 700);
+        } else {
+          openH();
+        }
       });
     });
   })();
