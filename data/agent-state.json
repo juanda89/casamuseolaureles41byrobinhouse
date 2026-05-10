@@ -1,7 +1,18 @@
 {
   "schema": "casa-museo-agent-state-v1",
-  "lastRun": null,
-  "runs": [],
+  "lastRun": "2026-05-10T01:57:42.681Z",
+  "runs": [
+    {
+      "ts": "2026-05-10T01:57:42.681Z",
+      "citationsPicked": [
+        "tripadvisor",
+        "apple-maps",
+        "bing-places"
+      ],
+      "gscOk": true,
+      "bingOk": true
+    }
+  ],
   "nap": {
     "name": "Casa Laureles 41 by Robin House",
     "altName": "Casa Museo",
@@ -123,7 +134,7 @@
     }
   ],
   "indexingTracker": {
-    "lastChecked": null,
+    "lastChecked": "2026-05-10T01:57:42.681Z",
     "pendingUrls": [
       "https://casamuseolaureles.com/en",
       "https://casamuseolaureles.com/es/laureles",
