@@ -1,0 +1,46 @@
+name: notion-feedback-tracker
+
+# Corre todos los días a las 6:00 AM Bogotá (11:00 UTC).
+# Detecta cambios de status en el kanban de Notion, captura comentarios + body
+# + adjuntos del humano, y los append al human-feedback-log.md.
+# El brain semanal (lunes) lee este log como contexto al generar nuevas tareas.
+
+on:
+  schedule:
+    - cron: '0 11 * * *'  # daily 06:00 Bogotá
+  workflow_dispatch:       # disparable manualmente desde la pestaña Actions
+
+permissions:
+  contents: write
+
+jobs:
+  track-feedback:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run feedback tracker
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DB_ID: ${{ secrets.NOTION_DB_ID }}
+        run: node scripts/skills/notion-feedback-tracker.mjs
+
+      - name: Commit log + snapshot if changed
+        run: |
+          git config user.name  "casa-museo-feedback-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/human-feedback-log.md data/notion-state-snapshot.json
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore(feedback): daily notion sync $(date -u +%Y-%m-%d)"
+            git push
+          fi

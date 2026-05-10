@@ -1,0 +1,53 @@
+{
+  "generatedAt": "2026-05-10T04:03:36.921Z",
+  "tasks": {
+    "35c45399-79ca-8137-8ee9-dedebbdc7e43": {
+      "id": "35c45399-79ca-8137-8ee9-dedebbdc7e43",
+      "url": "https://www.notion.so/Agregar-casamuseolaureles-com-en-bio-de-casalaureles41-35c4539979ca81378ee9dedebbdc7e43",
+      "title": "Agregar casamuseolaureles.com en bio de @casalaureles41",
+      "status": "Review",
+      "priority": "P0",
+      "type": "Other",
+      "createdBy": "Human",
+      "forUseIn": "Backlink IG → web (ya tienen autoridad)",
+      "acceptanceCriteria": "Link visible al inicio de la bio. Verificar que renderiza como link clickeable.",
+      "lastEditedTime": "2026-05-10T04:03:00.000Z"
+    },
+    "35c45399-79ca-81a5-ad1c-c13fe8f69582": {
+      "id": "35c45399-79ca-81a5-ad1c-c13fe8f69582",
+      "url": "https://www.notion.so/Sesi-n-de-fotograf-a-profesional-de-las-3-unidades-35c4539979ca81a5ad1cc13fe8f69582",
+      "title": "Sesión de fotografía profesional de las 3 unidades",
+      "status": "To Do",
+      "priority": "P1",
+      "type": "Photo",
+      "createdBy": "Human",
+      "forUseIn": "Hero del sitio + galería de cada /unidades/* + assets para Instagram + OG images",
+      "acceptanceCriteria": "Mínimo 12 fotos por unidad en RAW + JPEG ≥4000px. Luz natural lateral. Sin objetos personales. Una foto hero apaisada por unidad para web. Presupuesto estimado: $300-700 USD.",
+      "lastEditedTime": "2026-05-10T03:58:00.000Z"
+    },
+    "35c45399-79ca-81cc-9535-fe997917656b": {
+      "id": "35c45399-79ca-81cc-9535-fe997917656b",
+      "url": "https://www.notion.so/EJEMPLO-BRAIN-Grabar-30s-vertical-del-Estadio-Atanasio-en-horario-de-entrenamiento-35c4539979ca81cc9535fe997917656b",
+      "title": "[EJEMPLO BRAIN] Grabar 30s vertical del Estadio Atanasio en horario de entrenamiento",
+      "status": "To Do",
+      "priority": "P2",
+      "type": "Video",
+      "createdBy": "Brain",
+      "forUseIn": "Post blog \"Best things to do near Laureles\" + reel @casalaureles41",
+      "acceptanceCriteria": "9:16, sin texto sobreimpreso, luz natural, mínimo 1080p, archivo .mp4. Esta es una tarea de ejemplo que el agente generará automáticamente cada lunes basándose en gaps detectados.",
+      "lastEditedTime": "2026-05-10T03:58:00.000Z"
+    },
+    "35c45399-79ca-81e1-82c1-f951e98b19af": {
+      "id": "35c45399-79ca-81e1-82c1-f951e98b19af",
+      "url": "https://www.notion.so/Agregar-Casa-Museo-al-footer-de-robinhouse-co-35c4539979ca81e182c1f951e98b19af",
+      "title": "Agregar Casa Museo al footer de robinhouse.co",
+      "status": "To Do",
+      "priority": "P0",
+      "type": "Outreach",
+      "createdBy": "Human",
+      "forUseIn": "Backlink de mayor impacto disponible (costo cero, autoridad inmediata)",
+      "acceptanceCriteria": "Link en footer global de robinhouse.co que diga \"Proyectos · Casa Museo Laureles\" → casamuseolaureles.com",
+      "lastEditedTime": "2026-05-10T03:58:00.000Z"
+    }
+  }
+}

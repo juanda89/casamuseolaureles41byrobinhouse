@@ -19,7 +19,28 @@
   ],
   "redirects": [
     { "source": "/", "destination": "/es", "permanent": true },
-    { "source": "/unidades/(.*)", "destination": "/es/unidades/$1", "permanent": true },
-    { "source": "/units/(.*)", "destination": "/en/units/$1", "permanent": true }
+
+    { "source": "/unidades/:slug*", "destination": "/es/unidades/:slug*", "permanent": true },
+    { "source": "/units/:slug*", "destination": "/en/units/:slug*", "permanent": true },
+    { "source": "/laureles", "destination": "/es/laureles", "permanent": true },
+    { "source": "/faq", "destination": "/es/faq", "permanent": true },
+
+    { "source": "/en/unidades/standar", "destination": "/en/units/standard", "permanent": true },
+    { "source": "/en/unidades/familiar", "destination": "/en/units/family", "permanent": true },
+    { "source": "/en/unidades/deluxe", "destination": "/en/units/deluxe", "permanent": true },
+    { "source": "/en/unidades/:slug*", "destination": "/en/units/:slug*", "permanent": true },
+    { "source": "/en/contacto", "destination": "/en/contact", "permanent": true },
+    { "source": "/en/privacidad", "destination": "/en/privacy", "permanent": true },
+    { "source": "/en/terminos", "destination": "/en/terms", "permanent": true },
+    { "source": "/en/cancelacion", "destination": "/en/cancellation", "permanent": true },
+
+    { "source": "/es/units/standard", "destination": "/es/unidades/standar", "permanent": true },
+    { "source": "/es/units/family", "destination": "/es/unidades/familiar", "permanent": true },
+    { "source": "/es/units/deluxe", "destination": "/es/unidades/deluxe", "permanent": true },
+    { "source": "/es/units/:slug*", "destination": "/es/unidades/:slug*", "permanent": true },
+    { "source": "/es/contact", "destination": "/es/contacto", "permanent": true },
+    { "source": "/es/privacy", "destination": "/es/privacidad", "permanent": true },
+    { "source": "/es/terms", "destination": "/es/terminos", "permanent": true },
+    { "source": "/es/cancellation", "destination": "/es/cancelacion", "permanent": true }
   ]
 }
