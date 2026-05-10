@@ -108,14 +108,25 @@ const xDefault = locale === 'es' ? canonical : `${SITE.url}${alt}`;
     )}
     {ANALYTICS.ga4Id && !ANALYTICS.gtmId && (
       <>
-        {/* Config se mete a dataLayer inline (queue). gtag.js carga idle → no afecta LCP. */}
+        {/* gtag('config') queue inline. gtag.js carga al 1er user interaction
+            o idle (lo que pase primero). Garantiza tracking del primer evento
+            sin penalizar LCP. */}
         <script is:inline set:html={`gtag('js', new Date()); gtag('config', '${ANALYTICS.ga4Id}', { anonymize_ip: true, transport_type: 'beacon' });`} />
         <script is:inline set:html={`
           (function(){
             var src = 'https://www.googletagmanager.com/gtag/js?id=${ANALYTICS.ga4Id}';
-            function loadGA(){ var s=document.createElement('script'); s.async=true; s.src=src; document.head.appendChild(s); }
-            if ('requestIdleCallback' in window) { requestIdleCallback(loadGA, { timeout: 3000 }); }
-            else { setTimeout(loadGA, 1500); }
+            var loaded = false;
+            function loadGA(){
+              if (loaded) return; loaded = true;
+              var s = document.createElement('script'); s.async = true; s.src = src;
+              document.head.appendChild(s);
+            }
+            // Eager: 1er interacción del usuario (scroll, click, key, touch)
+            var events = ['pointerdown','keydown','scroll','touchstart'];
+            events.forEach(function(e){ addEventListener(e, loadGA, { once: true, passive: true, capture: true }); });
+            // Fallback: idle callback (timeout 2s para que llegue antes que el típico click)
+            if ('requestIdleCallback' in window) { requestIdleCallback(loadGA, { timeout: 2000 }); }
+            else { setTimeout(loadGA, 1200); }
           })();
         `} />
       </>
