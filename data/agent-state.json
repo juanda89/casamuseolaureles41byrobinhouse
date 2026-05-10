@@ -1,0 +1,141 @@
+{
+  "schema": "casa-museo-agent-state-v1",
+  "lastRun": null,
+  "runs": [],
+  "nap": {
+    "name": "Casa Laureles 41 by Robin House",
+    "altName": "Casa Museo",
+    "address": "Tv. 41 #73-42",
+    "neighborhood": "Laureles - Estadio",
+    "city": "Medellín",
+    "region": "Antioquia",
+    "country": "Colombia",
+    "postalCode": "050031",
+    "phone": "+57 311 733 7110",
+    "email": "hello@housyhost.com",
+    "website": "https://casamuseolaureles.com",
+    "lat": 6.2476716,
+    "lng": -75.5928653,
+    "categoryEs": "Hotel boutique",
+    "categoryEn": "Boutique hotel",
+    "instagram": "@casalaureles41"
+  },
+  "citations": [
+    {
+      "id": "google-business-profile",
+      "name": "Google Business Profile",
+      "url": "https://business.google.com",
+      "priority": "high",
+      "status": "done",
+      "estimatedTimeMin": 0,
+      "completedAt": "2026-05-09",
+      "notes": "Ya verificado. Revisar fotos cada mes y publicar 1 post / semana en GBP para mantener relevancia."
+    },
+    {
+      "id": "tripadvisor",
+      "name": "TripAdvisor",
+      "url": "https://www.tripadvisor.com/Owners",
+      "priority": "high",
+      "status": "pending",
+      "estimatedTimeMin": 25,
+      "category": "Boutique Hotel",
+      "tips": "Subir 8-12 fotos curadas. Pedir review a los primeros huéspedes con un follow-up por email. Verifica vía email del dominio o teléfono."
+    },
+    {
+      "id": "apple-maps",
+      "name": "Apple Maps Connect",
+      "url": "https://mapsconnect.apple.com",
+      "priority": "high",
+      "status": "pending",
+      "estimatedTimeMin": 15,
+      "tips": "Login con Apple ID. Crítico para iOS users (~50% del tráfico móvil en LATAM premium). Verifica vía teléfono."
+    },
+    {
+      "id": "bing-places",
+      "name": "Bing Places for Business",
+      "url": "https://www.bingplaces.com",
+      "priority": "high",
+      "status": "pending",
+      "estimatedTimeMin": 20,
+      "tips": "Bing alimenta Copilot y ChatGPT-with-Bing. Importa desde Google Business Profile en 1 click si tu Microsoft account ve el listing."
+    },
+    {
+      "id": "waze",
+      "name": "Waze (For Business)",
+      "url": "https://www.waze.com/business",
+      "priority": "medium",
+      "status": "pending",
+      "estimatedTimeMin": 15,
+      "tips": "Permite que aparezcan instrucciones y ofertas a quienes navegan cerca. Útil para llegada autónoma de huéspedes."
+    },
+    {
+      "id": "yelp-co",
+      "name": "Yelp Colombia",
+      "url": "https://biz.yelp.com",
+      "priority": "medium",
+      "status": "pending",
+      "estimatedTimeMin": 15,
+      "tips": "Citation strength residual. Verifica vía postal o teléfono."
+    },
+    {
+      "id": "foursquare",
+      "name": "Foursquare for Business",
+      "url": "https://business.foursquare.com",
+      "priority": "low",
+      "status": "pending",
+      "estimatedTimeMin": 10,
+      "tips": "Citation legacy pero alimenta varios servicios de mapas (Snapchat, Apple's place data fallback). Bajo esfuerzo, beneficio long-tail."
+    },
+    {
+      "id": "trip-com",
+      "name": "Trip.com",
+      "url": "https://supplier.trip.com",
+      "priority": "low",
+      "status": "pending",
+      "estimatedTimeMin": 30,
+      "tips": "Mercado asiático. Solo si vamos a target turistas chinos/coreanos."
+    },
+    {
+      "id": "camara-comercio-medellin",
+      "name": "Cámara de Comercio Medellín",
+      "url": "https://www.camaramedellin.com.co",
+      "priority": "medium",
+      "status": "pending",
+      "estimatedTimeMin": 30,
+      "tips": "Si la operación está formalmente registrada en CCMA, agregar el sitio web al listado oficial. Requiere RUT y matrícula mercantil."
+    },
+    {
+      "id": "paginas-amarillas-co",
+      "name": "Páginas Amarillas Colombia",
+      "url": "https://www.paginasamarillas.com.co",
+      "priority": "low",
+      "status": "pending",
+      "estimatedTimeMin": 15,
+      "tips": "Directorio legacy con autoridad residual para SEO local Colombia."
+    },
+    {
+      "id": "hostelworld",
+      "name": "Hostelworld",
+      "url": "https://www.hostelworld.com",
+      "priority": "skip",
+      "status": "not_applicable",
+      "notes": "Casa Museo es boutique, no mochilero. No aplica."
+    }
+  ],
+  "indexingTracker": {
+    "lastChecked": null,
+    "pendingUrls": [
+      "https://casamuseolaureles.com/en",
+      "https://casamuseolaureles.com/es/laureles",
+      "https://casamuseolaureles.com/en/laureles",
+      "https://casamuseolaureles.com/es/unidades/standar",
+      "https://casamuseolaureles.com/es/unidades/familiar",
+      "https://casamuseolaureles.com/es/unidades/deluxe",
+      "https://casamuseolaureles.com/en/units/standard",
+      "https://casamuseolaureles.com/en/units/family",
+      "https://casamuseolaureles.com/en/units/deluxe",
+      "https://casamuseolaureles.com/es/contacto",
+      "https://casamuseolaureles.com/en/contact"
+    ]
+  }
+}
