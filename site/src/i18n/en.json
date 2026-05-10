@@ -89,9 +89,9 @@
   },
   "cookies": {
     "title": "Cookies to improve your visit",
-    "body": "We use cookies to understand how you use the site and improve the experience. Accept everything or only essentials.",
-    "acceptAll": "Accept all",
-    "essential": "Essential only",
+    "body": "We use analytics cookies to understand how the site is used and improve it. You can disable them at any time.",
+    "acceptAll": "Sounds good",
+    "essential": "Disable analytics",
     "more": "Cookie policy"
   },
   "language": {

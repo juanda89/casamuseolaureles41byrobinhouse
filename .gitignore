@@ -26,3 +26,6 @@ PREGUNTAS AGENTE00RH.docx
 
 # Inventario privado de cuentas
 CUENTAS.md
+
+# Tokens de API que YO uso para hacer setup — nunca subir
+.secrets.local

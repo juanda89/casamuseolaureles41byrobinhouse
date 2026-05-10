@@ -82,24 +82,24 @@ const xDefault = locale === 'es' ? canonical : `${SITE.url}${alt}`;
       <script type="application/ld+json" set:html={JSON.stringify(s)} />
     ))}
 
-    {/* GTM consent mode v2 — denies all storage by default; CookieBanner unlocks analytics */}
+    {/* GTM consent mode v2 — analytics granted por default (opt-out vía cookie banner) */}
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){window.dataLayer.push(arguments);}
       window.gtag = gtag;
       gtag('consent', 'default', {
-        analytics_storage: 'denied',
+        analytics_storage: 'granted',
         ad_storage: 'denied',
         ad_user_data: 'denied',
         ad_personalization: 'denied',
         functionality_storage: 'granted',
         security_storage: 'granted',
-        wait_for_update: 500,
       });
+      // Si el usuario optó previamente por "Solo esenciales", respetar
       try {
         var c = JSON.parse(localStorage.getItem('cm-consent-v1') || 'null');
-        if (c && c.exp > Date.now() && c.level === 'all') {
-          gtag('consent', 'update', { analytics_storage: 'granted' });
+        if (c && c.exp > Date.now() && c.level === 'essential') {
+          gtag('consent', 'update', { analytics_storage: 'denied' });
         }
       } catch (e) {}
     </script>

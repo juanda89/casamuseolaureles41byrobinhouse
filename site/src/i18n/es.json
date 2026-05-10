@@ -89,9 +89,9 @@
   },
   "cookies": {
     "title": "Cookies para mejorar tu visita",
-    "body": "Usamos cookies para entender cómo usas el sitio y mejorar la experiencia. Puedes aceptar todo o solo lo esencial.",
-    "acceptAll": "Aceptar todo",
-    "essential": "Solo esenciales",
+    "body": "Usamos cookies analíticas para entender cómo se usa el sitio y mejorarlo. Puedes desactivarlas en cualquier momento.",
+    "acceptAll": "Está bien",
+    "essential": "Desactivar analíticas",
     "more": "Política de cookies"
   },
   "language": {
