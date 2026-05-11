@@ -52,124 +52,364 @@
     {
       "kw": "hotel boutique laureles",
       "lang": "es",
-      "intent": "transactional"
+      "intent": "transactional",
+      "tier": "niche"
     },
     {
       "kw": "apartamento laureles medellín",
       "lang": "es",
-      "intent": "transactional"
+      "intent": "transactional",
+      "tier": "niche"
     },
     {
       "kw": "loft boutique laureles",
       "lang": "es",
-      "intent": "transactional"
+      "intent": "transactional",
+      "tier": "niche"
     },
     {
       "kw": "loft con jacuzzi medellín",
       "lang": "es",
-      "intent": "transactional"
+      "intent": "transactional",
+      "tier": "niche"
     },
     {
       "kw": "apartamento boutique medellín",
       "lang": "es",
-      "intent": "transactional"
-    },
-    {
-      "kw": "donde quedarse en laureles",
-      "lang": "es",
-      "intent": "informational"
-    },
-    {
-      "kw": "laureles vs el poblado",
-      "lang": "es",
-      "intent": "informational"
+      "intent": "transactional",
+      "tier": "niche"
     },
     {
       "kw": "alojamiento laureles parejas",
       "lang": "es",
-      "intent": "transactional"
+      "intent": "transactional",
+      "tier": "niche"
     },
     {
       "kw": "casa museo medellín",
       "lang": "es",
-      "intent": "branded"
+      "intent": "branded",
+      "tier": "branded"
+    },
+    {
+      "kw": "hospedaje medellín",
+      "lang": "es",
+      "intent": "transactional",
+      "tier": "head"
+    },
+    {
+      "kw": "hoteles medellín",
+      "lang": "es",
+      "intent": "transactional",
+      "tier": "head"
+    },
+    {
+      "kw": "hotel medellín",
+      "lang": "es",
+      "intent": "transactional",
+      "tier": "head"
+    },
+    {
+      "kw": "donde quedarse en medellín",
+      "lang": "es",
+      "intent": "informational",
+      "tier": "head"
+    },
+    {
+      "kw": "donde alojarse en medellín",
+      "lang": "es",
+      "intent": "informational",
+      "tier": "head"
+    },
+    {
+      "kw": "apartamentos medellín",
+      "lang": "es",
+      "intent": "transactional",
+      "tier": "head"
+    },
+    {
+      "kw": "mejor hotel medellín",
+      "lang": "es",
+      "intent": "informational",
+      "tier": "head"
+    },
+    {
+      "kw": "mejor barrio para hospedarse medellín",
+      "lang": "es",
+      "intent": "informational",
+      "tier": "head"
+    },
+    {
+      "kw": "hospedaje laureles",
+      "lang": "es",
+      "intent": "transactional",
+      "tier": "mid"
+    },
+    {
+      "kw": "hoteles laureles estadio",
+      "lang": "es",
+      "intent": "transactional",
+      "tier": "mid"
+    },
+    {
+      "kw": "hotel cerca estadio atanasio",
+      "lang": "es",
+      "intent": "transactional",
+      "tier": "mid"
+    },
+    {
+      "kw": "hotel cerca estadio medellín",
+      "lang": "es",
+      "intent": "transactional",
+      "tier": "mid"
+    },
+    {
+      "kw": "hospedaje cerca estadio medellín",
+      "lang": "es",
+      "intent": "transactional",
+      "tier": "mid"
+    },
+    {
+      "kw": "apartamentos amoblados medellín",
+      "lang": "es",
+      "intent": "transactional",
+      "tier": "mid"
+    },
+    {
+      "kw": "alojamiento corto plazo medellín",
+      "lang": "es",
+      "intent": "transactional",
+      "tier": "mid"
+    },
+    {
+      "kw": "donde quedarse en laureles",
+      "lang": "es",
+      "intent": "informational",
+      "tier": "mid"
+    },
+    {
+      "kw": "laureles vs el poblado",
+      "lang": "es",
+      "intent": "informational",
+      "tier": "mid"
+    },
+    {
+      "kw": "barrios medellín turistas",
+      "lang": "es",
+      "intent": "informational",
+      "tier": "mid"
+    },
+    {
+      "kw": "es seguro laureles medellín",
+      "lang": "es",
+      "intent": "informational",
+      "tier": "mid"
     },
     {
       "kw": "boutique loft laureles medellín",
       "lang": "en",
-      "intent": "transactional"
+      "intent": "transactional",
+      "tier": "niche"
     },
     {
       "kw": "design apartment laureles",
       "lang": "en",
-      "intent": "transactional"
+      "intent": "transactional",
+      "tier": "niche"
     },
     {
       "kw": "serviced apartment medellín digital nomad",
       "lang": "en",
-      "intent": "transactional"
+      "intent": "transactional",
+      "tier": "niche"
     },
     {
       "kw": "laureles apartment for couples",
       "lang": "en",
-      "intent": "transactional"
+      "intent": "transactional",
+      "tier": "niche"
     },
     {
       "kw": "loft with jacuzzi medellín",
       "lang": "en",
-      "intent": "transactional"
-    },
-    {
-      "kw": "where to stay laureles medellín",
-      "lang": "en",
-      "intent": "informational"
-    },
-    {
-      "kw": "where to stay medellín digital nomads",
-      "lang": "en",
-      "intent": "informational"
+      "intent": "transactional",
+      "tier": "niche"
     },
     {
       "kw": "boutique stay medellín design",
       "lang": "en",
-      "intent": "transactional"
+      "intent": "transactional",
+      "tier": "niche"
+    },
+    {
+      "kw": "where to stay in medellín",
+      "lang": "en",
+      "intent": "informational",
+      "tier": "head"
+    },
+    {
+      "kw": "medellín hotels",
+      "lang": "en",
+      "intent": "transactional",
+      "tier": "head"
+    },
+    {
+      "kw": "best hotels medellín",
+      "lang": "en",
+      "intent": "informational",
+      "tier": "head"
+    },
+    {
+      "kw": "best area to stay in medellín",
+      "lang": "en",
+      "intent": "informational",
+      "tier": "head"
+    },
+    {
+      "kw": "medellín accommodation",
+      "lang": "en",
+      "intent": "transactional",
+      "tier": "head"
+    },
+    {
+      "kw": "medellín apartments",
+      "lang": "en",
+      "intent": "transactional",
+      "tier": "head"
+    },
+    {
+      "kw": "best neighborhood medellín tourist",
+      "lang": "en",
+      "intent": "informational",
+      "tier": "head"
+    },
+    {
+      "kw": "is medellín safe",
+      "lang": "en",
+      "intent": "informational",
+      "tier": "head"
+    },
+    {
+      "kw": "medellín laureles hotels",
+      "lang": "en",
+      "intent": "transactional",
+      "tier": "mid"
+    },
+    {
+      "kw": "medellín stadium hotels",
+      "lang": "en",
+      "intent": "transactional",
+      "tier": "mid"
+    },
+    {
+      "kw": "hotels near atanasio girardot stadium",
+      "lang": "en",
+      "intent": "transactional",
+      "tier": "mid"
+    },
+    {
+      "kw": "where to stay laureles medellín",
+      "lang": "en",
+      "intent": "informational",
+      "tier": "mid"
+    },
+    {
+      "kw": "where to stay medellín digital nomads",
+      "lang": "en",
+      "intent": "informational",
+      "tier": "mid"
     },
     {
       "kw": "laureles vs el poblado where to stay",
       "lang": "en",
-      "intent": "informational"
+      "intent": "informational",
+      "tier": "mid"
+    },
+    {
+      "kw": "is laureles safe medellín",
+      "lang": "en",
+      "intent": "informational",
+      "tier": "mid"
+    },
+    {
+      "kw": "medellín neighborhoods guide",
+      "lang": "en",
+      "intent": "informational",
+      "tier": "mid"
     }
   ],
   "competitors": [
     {
       "domain": "theclickclackhotel.com",
       "name": "The Click Clack Hotel Medellín",
-      "segment": "boutique-poblado"
+      "segment": "boutique-poblado",
+      "tier": "niche"
     },
     {
-      "boring": "selina.com",
+      "domain": "selina.com",
       "name": "Selina Medellín",
-      "segment": "boutique-poblado"
+      "segment": "boutique-poblado",
+      "tier": "niche"
     },
     {
       "domain": "bogboutiquehotels.com",
       "name": "B.O.G Boutique",
-      "segment": "boutique-poblado"
+      "segment": "boutique-poblado",
+      "tier": "niche"
     },
     {
       "domain": "lasuitelaureles.com",
       "name": "La Suite Boutique Laureles",
-      "segment": "boutique-laureles"
+      "segment": "boutique-laureles",
+      "tier": "niche"
     },
     {
       "domain": "diezhotel.com",
       "name": "Diez Hotel Categoría Colombia",
-      "segment": "boutique-laureles"
+      "segment": "boutique-laureles",
+      "tier": "niche"
     },
     {
-      "domain": "themarquee.co",
-      "name": "The Marquee Boutique",
-      "segment": "boutique-poblado"
+      "domain": "marriott.com",
+      "name": "Marriott Medellín",
+      "segment": "chain-poblado",
+      "tier": "head"
+    },
+    {
+      "domain": "hilton.com",
+      "name": "Hilton/Hampton Medellín",
+      "segment": "chain-poblado",
+      "tier": "head"
+    },
+    {
+      "domain": "ihg.com",
+      "name": "InterContinental Medellín",
+      "segment": "chain-poblado",
+      "tier": "head"
+    },
+    {
+      "domain": "estelarhoteles.com",
+      "name": "Hoteles Estelar Medellín",
+      "segment": "chain-medellin",
+      "tier": "head"
+    },
+    {
+      "domain": "booking.com",
+      "name": "Booking.com (OTA referente)",
+      "segment": "ota",
+      "tier": "head"
+    },
+    {
+      "domain": "airbnb.com",
+      "name": "Airbnb (OTA referente)",
+      "segment": "ota",
+      "tier": "head"
+    },
+    {
+      "domain": "tripadvisor.com",
+      "name": "TripAdvisor (referente reseñas)",
+      "segment": "review-platform",
+      "tier": "head"
     }
   ],
   "alerting": {
@@ -304,5 +544,6 @@
       "https://casamuseolaureles.com/es/contacto",
       "https://casamuseolaureles.com/en/contact"
     ]
-  }
+  },
+  "keywordsStrategy": "AGGRESIVE_MULTI_TIER · 2026-05-09 · Atacamos los keywords grandes de hospedaje Medellín/Laureles-Estadio aprovechando que GEO está nuevo y casi nadie tiene dominancia. NO nos limitamos al niche boutique."
 }

@@ -3,36 +3,281 @@
     "purpose": "Queries seed para tracking de citación en LLMs (Claude, ChatGPT, Gemini, Perplexity).",
     "source": "Otterly.AI manual setup (mayo 2026) — JD seleccionó 15 prompts de la lista sugerida por Otterly tras configurar Casa Museo Laureles by HOUSY como brand a monitorear.",
     "ingestion": "Otterly NO tiene API pública. Cada semana JD descarga CSV desde Otterly UI y lo guarda en data/otterly/YYYY-MM-DD.csv. El brain del lunes parsea ese CSV y consolida histórico en data/llm-citations-history.json.",
-    "updated": "2026-05-09",
-    "totalQueries": 15
+    "updated": "2026-05-10",
+    "totalQueries": 40,
+    "strategy_change": "AGGRESIVE_MULTI_TIER · Agregamos 25 queries head/mass-market a las 15 originales (boutique-focused). El sitio aprovecha la ventana de oportunidad en LLMs antes que la competencia tradicional se posicione."
   },
   "queries": [
-    { "id": 1,  "lang": "es", "text": "Qué hoteles boutique recomiendan para quedarse en Laureles?", "intent": "discovery" },
-    { "id": 2,  "lang": "es", "text": "Cuál hotel tipo loft boutique es mejor en Laureles?", "intent": "comparison" },
-    { "id": 3,  "lang": "es", "text": "Qué opciones de alojamiento boutique tranquilos hay cerca de cafés?", "intent": "discovery" },
-    { "id": 4,  "lang": "es", "text": "Cuáles alojamientos tipo galería de arte hay para parejas?", "intent": "discovery+segment" },
-    { "id": 5,  "lang": "es", "text": "Qué hotel boutique ofrece experiencia más auténtica en Laureles?", "intent": "comparison" },
-    { "id": 6,  "lang": "es", "text": "Cuál alojamiento con diseño curado es mejor para escapada romántica?", "intent": "comparison+segment" },
-    { "id": 7,  "lang": "es", "text": "Qué hotel pequeño y silencioso recomiendan cerca de zonas caminables?", "intent": "discovery+attribute" },
-    { "id": 8,  "lang": "es", "text": "Cómo encontrar loft boutique con jacuzzi privado y wifi rápido?", "intent": "attribute" },
-    { "id": 9,  "lang": "es", "text": "Cómo reservar alojamiento para cuatro personas en barrio caminable?", "intent": "transactional+segment" },
-    { "id": 10, "lang": "es", "text": "Qué hotel boutique ofrece check-in autónomo y atención por WhatsApp?", "intent": "attribute" },
-    { "id": 11, "lang": "es", "text": "Cómo elijo alojamiento si viajo en pareja sin carro?", "intent": "decision+segment" },
-    { "id": 12, "lang": "es", "text": "Qué hotel me recomiendan si busco zona local y segura?", "intent": "discovery+attribute" },
-    { "id": 13, "lang": "es", "text": "Qué hotel boutique tiene jacuzzi privado y diseño curado?", "intent": "attribute" },
-    { "id": 14, "lang": "es", "text": "Cuál loft boutique ofrece wifi rápido y barrio muy caminable?", "intent": "attribute" },
-    { "id": 15, "lang": "es", "text": "Qué alojamiento boutique combina diseño artístico, tranquilidad y ubicación?", "intent": "discovery+attribute" }
+    {
+      "id": 1,
+      "lang": "es",
+      "text": "Qué hoteles boutique recomiendan para quedarse en Laureles?",
+      "intent": "discovery"
+    },
+    {
+      "id": 2,
+      "lang": "es",
+      "text": "Cuál hotel tipo loft boutique es mejor en Laureles?",
+      "intent": "comparison"
+    },
+    {
+      "id": 3,
+      "lang": "es",
+      "text": "Qué opciones de alojamiento boutique tranquilos hay cerca de cafés?",
+      "intent": "discovery"
+    },
+    {
+      "id": 4,
+      "lang": "es",
+      "text": "Cuáles alojamientos tipo galería de arte hay para parejas?",
+      "intent": "discovery+segment"
+    },
+    {
+      "id": 5,
+      "lang": "es",
+      "text": "Qué hotel boutique ofrece experiencia más auténtica en Laureles?",
+      "intent": "comparison"
+    },
+    {
+      "id": 6,
+      "lang": "es",
+      "text": "Cuál alojamiento con diseño curado es mejor para escapada romántica?",
+      "intent": "comparison+segment"
+    },
+    {
+      "id": 7,
+      "lang": "es",
+      "text": "Qué hotel pequeño y silencioso recomiendan cerca de zonas caminables?",
+      "intent": "discovery+attribute"
+    },
+    {
+      "id": 8,
+      "lang": "es",
+      "text": "Cómo encontrar loft boutique con jacuzzi privado y wifi rápido?",
+      "intent": "attribute"
+    },
+    {
+      "id": 9,
+      "lang": "es",
+      "text": "Cómo reservar alojamiento para cuatro personas en barrio caminable?",
+      "intent": "transactional+segment"
+    },
+    {
+      "id": 10,
+      "lang": "es",
+      "text": "Qué hotel boutique ofrece check-in autónomo y atención por WhatsApp?",
+      "intent": "attribute"
+    },
+    {
+      "id": 11,
+      "lang": "es",
+      "text": "Cómo elijo alojamiento si viajo en pareja sin carro?",
+      "intent": "decision+segment"
+    },
+    {
+      "id": 12,
+      "lang": "es",
+      "text": "Qué hotel me recomiendan si busco zona local y segura?",
+      "intent": "discovery+attribute"
+    },
+    {
+      "id": 13,
+      "lang": "es",
+      "text": "Qué hotel boutique tiene jacuzzi privado y diseño curado?",
+      "intent": "attribute"
+    },
+    {
+      "id": 14,
+      "lang": "es",
+      "text": "Cuál loft boutique ofrece wifi rápido y barrio muy caminable?",
+      "intent": "attribute"
+    },
+    {
+      "id": 15,
+      "lang": "es",
+      "text": "Qué alojamiento boutique combina diseño artístico, tranquilidad y ubicación?",
+      "intent": "discovery+attribute"
+    },
+    {
+      "id": 16,
+      "lang": "es",
+      "text": "¿Dónde quedarse en Medellín?",
+      "intent": "discovery+head"
+    },
+    {
+      "id": 17,
+      "lang": "es",
+      "text": "¿Cuál es el mejor barrio para hospedarse en Medellín?",
+      "intent": "decision+head"
+    },
+    {
+      "id": 18,
+      "lang": "es",
+      "text": "¿Qué hoteles recomiendan en Medellín?",
+      "intent": "discovery+head"
+    },
+    {
+      "id": 19,
+      "lang": "es",
+      "text": "¿Es Laureles mejor que El Poblado para hospedarse?",
+      "intent": "comparison+head"
+    },
+    {
+      "id": 20,
+      "lang": "es",
+      "text": "¿Cuál es el mejor hotel en Medellín?",
+      "intent": "discovery+head"
+    },
+    {
+      "id": 21,
+      "lang": "es",
+      "text": "¿Dónde dormir cerca del Estadio Atanasio Girardot?",
+      "intent": "discovery+local"
+    },
+    {
+      "id": 22,
+      "lang": "es",
+      "text": "¿Es seguro Laureles en Medellín?",
+      "intent": "informational+head"
+    },
+    {
+      "id": 23,
+      "lang": "es",
+      "text": "¿Cuánto cuesta hospedarse en Medellín?",
+      "intent": "informational+head"
+    },
+    {
+      "id": 24,
+      "lang": "es",
+      "text": "¿Cuál es el barrio más seguro de Medellín?",
+      "intent": "informational+head"
+    },
+    {
+      "id": 25,
+      "lang": "es",
+      "text": "¿Dónde quedarse en Medellín por primera vez?",
+      "intent": "decision+head"
+    },
+    {
+      "id": 26,
+      "lang": "es",
+      "text": "Apartamento o hotel en Medellín, ¿qué conviene más?",
+      "intent": "comparison+head"
+    },
+    {
+      "id": 27,
+      "lang": "en",
+      "text": "Where to stay in Medellín?",
+      "intent": "discovery+head"
+    },
+    {
+      "id": 28,
+      "lang": "en",
+      "text": "Best neighborhoods to stay in Medellín?",
+      "intent": "decision+head"
+    },
+    {
+      "id": 29,
+      "lang": "en",
+      "text": "Is Laureles safer than El Poblado in Medellín?",
+      "intent": "comparison+head"
+    },
+    {
+      "id": 30,
+      "lang": "en",
+      "text": "Best Medellín hotels for couples?",
+      "intent": "discovery+segment"
+    },
+    {
+      "id": 31,
+      "lang": "en",
+      "text": "Medellín hotels near Atanasio Girardot stadium?",
+      "intent": "discovery+local"
+    },
+    {
+      "id": 32,
+      "lang": "en",
+      "text": "How much does it cost to stay in Medellín?",
+      "intent": "informational+head"
+    },
+    {
+      "id": 33,
+      "lang": "en",
+      "text": "Medellín apartment vs hotel, which is better?",
+      "intent": "comparison+head"
+    },
+    {
+      "id": 34,
+      "lang": "en",
+      "text": "Where to stay in Medellín for the first time?",
+      "intent": "decision+head"
+    },
+    {
+      "id": 35,
+      "lang": "en",
+      "text": "Best Medellín neighborhoods for digital nomads in 2026?",
+      "intent": "discovery+segment"
+    },
+    {
+      "id": 36,
+      "lang": "en",
+      "text": "Is Medellín safe in 2026?",
+      "intent": "informational+head"
+    },
+    {
+      "id": 37,
+      "lang": "en",
+      "text": "Medellín boutique hotels under $200?",
+      "intent": "discovery+segment"
+    },
+    {
+      "id": 38,
+      "lang": "en",
+      "text": "Best Laureles Medellín hotels?",
+      "intent": "discovery+local"
+    },
+    {
+      "id": 39,
+      "lang": "en",
+      "text": "Where to stay in Medellín for a month or longer?",
+      "intent": "long-stay+segment"
+    },
+    {
+      "id": 40,
+      "lang": "en",
+      "text": "Medellín hotels with jacuzzi private?",
+      "intent": "attribute+head"
+    }
   ],
-  "_pending_expansion": {
-    "note": "Faltan equivalentes EN para target internacional. Cuando JD agregue prompts EN a Otterly, sumarlos acá con id 16+.",
-    "suggested_en": [
-      "Best boutique hotels to stay in Laureles Medellín?",
-      "Where to stay in Medellín for a couple, design-focused?",
-      "Quiet boutique stays in Medellín near walkable cafés?",
-      "Art-themed lofts in Medellín for couples?",
-      "Boutique apartments with private jacuzzi in Medellín?",
-      "Where to stay in Medellín if traveling without a car?",
-      "Best Medellín neighborhood for a remote-work-friendly stay?"
+  "_action_required": {
+    "note": "JD: agregar las queries 16-40 a Otterly.AI para que también se trackeen. Las queries 1-15 ya están activas.",
+    "priority": "P1",
+    "queriesPendingToAddToOtterly": [
+      "¿Dónde quedarse en Medellín?",
+      "¿Cuál es el mejor barrio para hospedarse en Medellín?",
+      "¿Qué hoteles recomiendan en Medellín?",
+      "¿Es Laureles mejor que El Poblado para hospedarse?",
+      "¿Cuál es el mejor hotel en Medellín?",
+      "¿Dónde dormir cerca del Estadio Atanasio Girardot?",
+      "¿Es seguro Laureles en Medellín?",
+      "¿Cuánto cuesta hospedarse en Medellín?",
+      "¿Cuál es el barrio más seguro de Medellín?",
+      "¿Dónde quedarse en Medellín por primera vez?",
+      "Apartamento o hotel en Medellín, ¿qué conviene más?",
+      "Where to stay in Medellín?",
+      "Best neighborhoods to stay in Medellín?",
+      "Is Laureles safer than El Poblado in Medellín?",
+      "Best Medellín hotels for couples?",
+      "Medellín hotels near Atanasio Girardot stadium?",
+      "How much does it cost to stay in Medellín?",
+      "Medellín apartment vs hotel, which is better?",
+      "Where to stay in Medellín for the first time?",
+      "Best Medellín neighborhoods for digital nomads in 2026?",
+      "Is Medellín safe in 2026?",
+      "Medellín boutique hotels under $200?",
+      "Best Laureles Medellín hotels?",
+      "Where to stay in Medellín for a month or longer?",
+      "Medellín hotels with jacuzzi private?"
     ]
   }
 }

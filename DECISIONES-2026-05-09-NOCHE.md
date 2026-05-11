@@ -65,6 +65,44 @@
 - **Decidí:** mantuve `categoryEs: "Hotel boutique"` y `categoryEn: "Boutique hotel"` en el state.
 - **Caveat:** técnicamente Casa Museo es un "serviced apartment" / "vacation rental" más que hotel tradicional. Lo dejé como "boutique hotel" porque es lo que la audiencia busca y lo que Google entiende mejor en SERP turismo. Pero si querés afinar más, lo cambiamos.
 
+## D13 · ESTRATEGIA AGRESIVA MULTI-TIER (2026-05-09 23:30 — decisión del usuario, ejecutada)
+
+**Cambio de estrategia explícito de JD:** "Para LLM positioning, seamos agresivos. Vamos por keywords de alto volumen e intención, está muy nuevo y casi nadie tiene dominancia. No nos vayamos solo por nuestro niche de hotel boutique, sino por los grandes keywords de hospedaje en Medellín / Laureles - Estadio."
+
+**Lo que hice:**
+
+1. **Expansión de `keywordsToTrack`** de 18 → 48 keywords con tags `tier`:
+   - **head (16):** keywords mass-market alto volumen — "hospedaje medellín", "donde quedarse en medellín", "where to stay in medellín", "best hotels medellín", "is medellín safe", etc.
+   - **mid (19):** zona Laureles-Estadio específica — "hoteles laureles estadio", "hotel cerca estadio atanasio", "medellín stadium hotels", etc.
+   - **niche (12):** boutique-focused (las originales) — "loft boutique laureles", "design apartment laureles", etc.
+   - **branded (1):** "casa museo medellín"
+
+2. **Expansión de `competitors`** de 6 → 12, agregando tier "head":
+   - Marriott, Hilton/Hampton, InterContinental, Estelar (cadenas grandes Medellín)
+   - **Booking.com, Airbnb, TripAdvisor** como referentes OTA/reviews para gap analysis sobre keywords mass-market
+   - Mantengo los 5 boutique originales como tier "niche"
+
+3. **Expansión de queries LLM tracking** de 15 → 40 (data/llm-tracking-queries.json):
+   - 15 originales boutique-focused (ya activas en Otterly de JD)
+   - 11 nuevas ES head/mass-market ("¿Dónde quedarse en Medellín?", "¿Cuál es el mejor barrio para hospedarse en Medellín?", etc.)
+   - 14 nuevas EN head/mass-market ("Where to stay in Medellín?", "Best Medellín hotels for couples?", "Is Medellín safe in 2026?", etc.)
+   - **Tarea P0 creada en Notion** (id 4bf72e3d) para que JD agregue las 25 nuevas a Otterly.AI
+
+4. **Tag `keywordsStrategy`** en el state file para que el brain entienda en futuros runs que estamos en modo agresivo multi-tier.
+
+**Why esto tiene sentido (mi análisis):**
+
+GEO/LLM positioning tiene reglas distintas a Google clásico:
+- En Google rankear top-1 para "hoteles medellín" es prácticamente imposible para un sitio nuevo (compite con Booking, TripAdvisor, cadenas grandes).
+- Pero los LLMs **citan múltiples fuentes por respuesta** (3-7 típico). Una página bien escrita con datos cuantitativos y sourcing puede ser citada en respuestas para "Where to stay in Medellín?" incluso si Google la rankea P50.
+- La ventana de oportunidad es REAL: Booking/Airbnb dominan Google pero NO dominan respuestas LLM. La marca que produzca el mejor contenido informacional sobre Medellín ahora se vuelve referencia citada en Claude/ChatGPT/Gemini durante años.
+
+**Riesgo asumido:** algunos keywords tier "head" pueden tardar 6+ meses en moverse en Google. No los esperamos como tráfico orgánico inmediato — los trackeamos como **señal de citación LLM**. Si después de 3 meses no hay movimiento ni en citation ni en posición, evaluamos retirarlos.
+
+**Reversible:** ajustar tier "head" o "mid" en `data/agent-state.json` → `keywordsToTrack`. Si querés retirar alguno o agregar otros, lo hacemos en 2 min.
+
+---
+
 ## D12 · No construí skills que requieren Anthropic/OpenAI API key
 Te las dejo specced para cuando me pases ANTHROPIC_API_KEY:
 - **content-draft-generator** — genera drafts ES+EN de blog posts cuando el brain detecta gap

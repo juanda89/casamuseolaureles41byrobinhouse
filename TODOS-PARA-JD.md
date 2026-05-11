@@ -60,6 +60,47 @@ Una vez tengas data en Otterly (puede tomar 24-48h después de configurar las qu
 
 El brain del próximo lunes ya lo procesa y consolida en el reporte por email.
 
+### 8.5 🆕 Agregar 25 queries head/mass-market a Otterly · 15 min · → Notion (tarjeta P0)
+**Decisión agresiva tomada:** ataquemos keywords grandes de hospedaje Medellín (no solo niche boutique) aprovechando la ventana en LLM positioning.
+
+Pasos:
+1. Abrir Otterly.AI dashboard de Casa Museo → Prompts.
+2. Agregar las 25 queries que están en `data/llm-tracking-queries.json` bajo `_action_required.queriesPendingToAddToOtterly`. Las copio acá para que las pegues directo:
+
+```
+ES (11 nuevas):
+¿Dónde quedarse en Medellín?
+¿Cuál es el mejor barrio para hospedarse en Medellín?
+¿Qué hoteles recomiendan en Medellín?
+¿Es Laureles mejor que El Poblado para hospedarse?
+¿Cuál es el mejor hotel en Medellín?
+¿Dónde dormir cerca del Estadio Atanasio Girardot?
+¿Es seguro Laureles en Medellín?
+¿Cuánto cuesta hospedarse en Medellín?
+¿Cuál es el barrio más seguro de Medellín?
+¿Dónde quedarse en Medellín por primera vez?
+Apartamento o hotel en Medellín, ¿qué conviene más?
+
+EN (14 nuevas):
+Where to stay in Medellín?
+Best neighborhoods to stay in Medellín?
+Is Laureles safer than El Poblado in Medellín?
+Best Medellín hotels for couples?
+Medellín hotels near Atanasio Girardot stadium?
+How much does it cost to stay in Medellín?
+Medellín apartment vs hotel, which is better?
+Where to stay in Medellín for the first time?
+Best Medellín neighborhoods for digital nomads in 2026?
+Is Medellín safe in 2026?
+Medellín boutique hotels under $200?
+Best Laureles Medellín hotels?
+Where to stay in Medellín for a month or longer?
+Medellín hotels with jacuzzi private?
+```
+
+3. En Otterly, hacer que los queries se ejecuten contra ChatGPT + Claude + Gemini + Perplexity si tu plan lo permite.
+4. El próximo CSV semanal traerá citation data de las 40 queries (15 boutique + 25 head/mass).
+
 ### 9. Verificar la lista de competidores · 2 min
 Abrí `data/agent-state.json` y mirá el bloque `"competitors"`. Me inventé 6 boutiques (Click Clack, Selina, B.O.G, La Suite, Diez Hotel, The Marquee). Si querés agregar/quitar, decime y los cambio. **Importante:** una entry tiene un typo (`boring` en vez de `domain` en Selina) que te dejé como recordatorio de revisión.
 
