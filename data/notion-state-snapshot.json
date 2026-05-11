@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-11T04:25:40.120Z",
+  "generatedAt": "2026-05-11T13:36:39.561Z",
   "tasks": {
     "35c45399-79ca-8111-a7a7-de6107842034": {
       "id": "35c45399-79ca-8111-a7a7-de6107842034",
@@ -132,6 +132,18 @@
       "forUseIn": "Alimenta el reporte semanal del brain con datos de citaciones en LLMs. Sin esto, la sección 'Citas LLM' del reporte queda stale.",
       "acceptanceCriteria": "Cada lunes antes de las 06:00 Bogotá:\n1. Entrar a Otterly.AI dashboard del proyecto\n2. Reporte semanal → Export → CSV\n3. Guardar como data/otterly/YYYY-MM-DD.csv (fecha del lunes)\n4. Commit + push al repo\n\nEl brain detecta el archivo nuevo y consolida el histórico.",
       "lastEditedTime": "2026-05-11T04:24:00.000Z"
+    },
+    "35d45399-79ca-8164-8038-d9274bf72e3d": {
+      "id": "35d45399-79ca-8164-8038-d9274bf72e3d",
+      "url": "https://www.notion.so/Agregar-25-queries-head-mass-market-a-Otterly-estrategia-agresiva-35d4539979ca81648038d9274bf72e3d",
+      "title": "Agregar 25 queries head/mass-market a Otterly (estrategia agresiva)",
+      "status": "To Do",
+      "priority": "P0",
+      "type": "Other",
+      "createdBy": "Brain",
+      "forUseIn": "Trackear LLM citations en keywords amplias de hospedaje Medellín, no solo niche boutique. Decisión estratégica del usuario 2026-05-09: ser agresivos mientras GEO está nuevo.",
+      "acceptanceCriteria": "Ir a Otterly.AI dashboard de Casa Museo → Prompts → Add. Agregar las 25 queries listadas en data/llm-tracking-queries.json (queries 16-40). Mix de ES head/mass-market + EN broad. Ejemplos:\n\n• ¿Dónde quedarse en Medellín?\n• ¿Cuál es el mejor barrio para hospedarse en Medellín?\n• ¿Dónde dormir cerca del Estadio Atanasio Girardot?\n• Where to stay in Medellín?\n• Best Medellín hotels for couples?\n• Is Medellín safe in 2026?\n\nLista completa en data/llm-tracking-queries.json sección _action_required.",
+      "lastEditedTime": "2026-05-11T04:46:00.000Z"
     }
   }
 }
