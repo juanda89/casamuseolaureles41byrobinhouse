@@ -22,10 +22,23 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { runLighthouse } from './skills/lighthouse-audit.mjs';
+import { runAhrefs } from './skills/ahrefs-research.mjs';
+import { runOtterly } from './skills/otterly-csv-ingest.mjs';
+import { runGapDetector } from './skills/keyword-gap-detector.mjs';
+import { renderEmail, sendReportEmail } from './lib/email-renderer.mjs';
+import { syncCitationTasks, syncGapTasks } from './lib/notion-sync.mjs';
+
 const FLAGS = {
   dryRun: process.argv.includes('--dry-run'),
   noGoogle: process.argv.includes('--no-google'),
   noBing: process.argv.includes('--no-bing'),
+  noLighthouse: process.argv.includes('--no-lighthouse'),
+  noAhrefs: process.argv.includes('--no-ahrefs'),
+  noOtterly: process.argv.includes('--no-otterly'),
+  noGaps: process.argv.includes('--no-gaps'),
+  noEmail: process.argv.includes('--no-email'),
+  noNotion: process.argv.includes('--no-notion'),
 };
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -329,11 +342,11 @@ async function createGitHubIssue(title, body) {
   const now = new Date();
   const weekStr = now.toISOString().slice(0, 10);
 
-  let gsc = null, bing = null;
+  let gsc = null, bing = null, googleToken = null;
   if (!FLAGS.noGoogle) {
     try {
-      const token = await getGoogleAccessToken();
-      gsc = await gscHealthCheck(token);
+      googleToken = await getGoogleAccessToken();
+      gsc = await gscHealthCheck(googleToken);
       console.log('✓ GSC checked:', gsc.sitemap?.submitted || 0, 'urls,', gsc.topQueries.length, 'queries');
     } catch (e) {
       console.error('✗ GSC failed:', e.message);
@@ -348,22 +361,127 @@ async function createGitHubIssue(title, body) {
     }
   }
 
+  // ─── Skills nuevas (cada una con su try/catch para no romper la cadena) ─
+  let lighthouse = null, ahrefs = null, otterly = null, gaps = null;
+
+  if (!FLAGS.noLighthouse) {
+    try {
+      lighthouse = await runLighthouse(state);
+      console.log('✓ Lighthouse:', lighthouse.summary);
+    } catch (e) {
+      console.error('✗ Lighthouse failed:', e.message);
+      lighthouse = { ok: false, stale: true, summary: 'Lighthouse failed: ' + e.message, alerts: [], data: null };
+    }
+  }
+
+  if (!FLAGS.noAhrefs) {
+    try {
+      ahrefs = await runAhrefs(state);
+      console.log('✓ Ahrefs:', ahrefs.summary);
+    } catch (e) {
+      console.error('✗ Ahrefs failed:', e.message);
+      ahrefs = { ok: false, stale: true, summary: 'Ahrefs failed: ' + e.message, alerts: [], data: null };
+    }
+  }
+
+  if (!FLAGS.noOtterly) {
+    try {
+      otterly = await runOtterly(state);
+      console.log('✓ Otterly:', otterly.summary);
+    } catch (e) {
+      console.error('✗ Otterly failed:', e.message);
+      otterly = { ok: false, stale: true, summary: 'Otterly failed: ' + e.message, alerts: [], data: null };
+    }
+  }
+
+  if (!FLAGS.noGaps && googleToken) {
+    try {
+      gaps = await runGapDetector(state, googleToken, ahrefs);
+      console.log('✓ Gap detector:', gaps.summary);
+    } catch (e) {
+      console.error('✗ Gap detector failed:', e.message);
+      gaps = { ok: false, stale: true, summary: 'Gap detector failed: ' + e.message, alerts: [], data: null };
+    }
+  }
+
+  // ─── Consolidación de alertas y wins ─
+  const allAlerts = [
+    ...(lighthouse?.alerts || []),
+    ...(ahrefs?.alerts || []),
+    ...(otterly?.alerts || []),
+    ...(gaps?.alerts || []),
+  ];
+  const allWins = [];
+  // Wins simples derivados:
+  if (gsc?.sitemap && gsc.sitemap.indexed === gsc.sitemap.submitted && gsc.sitemap.submitted > 0) {
+    allWins.push(`Todas las URLs del sitemap (${gsc.sitemap.submitted}) están indexadas en Google.`);
+  }
+  if (ahrefs?.ok && Array.isArray(ahrefs.data?.newBacklinks) && ahrefs.data.newBacklinks.length > 0) {
+    allWins.push(`${ahrefs.data.newBacklinks.length} backlinks nuevos en los últimos 7 días.`);
+  }
+  if (otterly?.ok && !otterly.stale && otterly.data?.byEngine) {
+    const totalCited = Object.values(otterly.data.byEngine).reduce((s, e) => s + e.cited, 0);
+    if (totalCited > 0) allWins.push(`Citados en ${totalCited} respuestas de LLMs esta semana.`);
+  }
+
+  // ─── GitHub Issue (sigue siendo el respaldo técnico) ─
   const citations = pickWeeklyCitations(state, 3);
   const title = `🌱 Weekly tasks · ${weekStr} · ${citations.length} citations + SEO check`;
   const body = buildIssueBody({ state, gsc, bing, citations, weekStr });
+  let issueUrl = null;
+  try {
+    issueUrl = await createGitHubIssue(title, body);
+    if (issueUrl) console.log('✓ Issue created:', issueUrl);
+  } catch (e) {
+    console.error('✗ GH Issue failed:', e.message);
+  }
 
-  const issueUrl = await createGitHubIssue(title, body);
-  if (issueUrl) console.log('✓ Issue created:', issueUrl);
+  // ─── Email semanal vía Resend ─
+  if (!FLAGS.noEmail && !FLAGS.dryRun) {
+    try {
+      const html = renderEmail({ weekStr, gsc, bing, lighthouse, ahrefs, otterly, gaps, citations, allAlerts, allWins, issueUrl });
+      const subject = `📊 SEO/GEO · ${weekStr} · ${allAlerts.length ? `${allAlerts.length} alertas` : 'todo en verde'}`;
+      const res = await sendReportEmail({ subject, html });
+      if (res.ok) console.log('✓ Email sent:', res.id);
+      else console.error('✗ Email failed:', res.error);
+    } catch (e) {
+      console.error('✗ Email render/send failed:', e.message);
+    }
+  }
 
-  // Update state
+  // ─── Notion sync (crear tarjetas humanas) ─
+  if (!FLAGS.noNotion && !FLAGS.dryRun) {
+    try {
+      const cs = await syncCitationTasks(citations, state.nap);
+      console.log(`✓ Notion citations: ${cs.created} created, ${cs.skipped} skipped`);
+      if (gaps?.ok && gaps.data?.gaps?.length) {
+        const gs = await syncGapTasks(gaps.data.gaps, 3);
+        console.log(`✓ Notion gap tasks: ${gs.created} created`);
+      }
+    } catch (e) {
+      console.error('✗ Notion sync failed:', e.message);
+    }
+  }
+
+  // ─── Update state ─
   state.lastRun = now.toISOString();
   state.runs = [
-    { ts: now.toISOString(), citationsPicked: citations.map((c) => c.id), gscOk: !!gsc, bingOk: !!bing },
+    {
+      ts: now.toISOString(),
+      citationsPicked: citations.map((c) => c.id),
+      gscOk: !!gsc, bingOk: !!bing,
+      lighthouseOk: !!lighthouse?.ok,
+      ahrefsOk: !!ahrefs?.ok,
+      otterlyOk: !!otterly?.ok && !otterly?.stale,
+      gapsOk: !!gaps?.ok,
+      alertsCount: allAlerts.length,
+      winsCount: allWins.length,
+    },
     ...(state.runs || []),
-  ].slice(0, 12); // keep last 12 runs
+  ].slice(0, 12);
   state.indexingTracker.lastChecked = now.toISOString();
   await saveState(state);
-  console.log('✓ State saved');
+  console.log('✓ State saved · summary:', { alerts: allAlerts.length, wins: allWins.length });
 })().catch((e) => {
   console.error('FATAL:', e);
   process.exit(1);

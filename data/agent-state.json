@@ -1,7 +1,23 @@
 {
   "schema": "casa-museo-agent-state-v1",
-  "lastRun": "2026-05-10T01:57:42.681Z",
+  "lastRun": "2026-05-11T04:38:31.744Z",
   "runs": [
+    {
+      "ts": "2026-05-11T04:38:31.744Z",
+      "citationsPicked": [
+        "tripadvisor",
+        "apple-maps",
+        "bing-places"
+      ],
+      "gscOk": true,
+      "bingOk": true,
+      "lighthouseOk": false,
+      "ahrefsOk": true,
+      "otterlyOk": false,
+      "gapsOk": true,
+      "alertsCount": 4,
+      "winsCount": 0
+    },
     {
       "ts": "2026-05-10T01:57:42.681Z",
       "citationsPicked": [
@@ -14,8 +30,9 @@
     }
   ],
   "nap": {
-    "name": "Casa Laureles 41 by Robin House",
+    "name": "Casa Museo Laureles by HOUSY",
     "altName": "Casa Museo",
+    "legacyName": "Casa Laureles 41 by Robin House",
     "address": "Tv. 41 #73-42",
     "neighborhood": "Laureles - Estadio",
     "city": "Medellín",
@@ -30,6 +47,145 @@
     "categoryEs": "Hotel boutique",
     "categoryEn": "Boutique hotel",
     "instagram": "@casalaureles41"
+  },
+  "keywordsToTrack": [
+    {
+      "kw": "hotel boutique laureles",
+      "lang": "es",
+      "intent": "transactional"
+    },
+    {
+      "kw": "apartamento laureles medellín",
+      "lang": "es",
+      "intent": "transactional"
+    },
+    {
+      "kw": "loft boutique laureles",
+      "lang": "es",
+      "intent": "transactional"
+    },
+    {
+      "kw": "loft con jacuzzi medellín",
+      "lang": "es",
+      "intent": "transactional"
+    },
+    {
+      "kw": "apartamento boutique medellín",
+      "lang": "es",
+      "intent": "transactional"
+    },
+    {
+      "kw": "donde quedarse en laureles",
+      "lang": "es",
+      "intent": "informational"
+    },
+    {
+      "kw": "laureles vs el poblado",
+      "lang": "es",
+      "intent": "informational"
+    },
+    {
+      "kw": "alojamiento laureles parejas",
+      "lang": "es",
+      "intent": "transactional"
+    },
+    {
+      "kw": "casa museo medellín",
+      "lang": "es",
+      "intent": "branded"
+    },
+    {
+      "kw": "boutique loft laureles medellín",
+      "lang": "en",
+      "intent": "transactional"
+    },
+    {
+      "kw": "design apartment laureles",
+      "lang": "en",
+      "intent": "transactional"
+    },
+    {
+      "kw": "serviced apartment medellín digital nomad",
+      "lang": "en",
+      "intent": "transactional"
+    },
+    {
+      "kw": "laureles apartment for couples",
+      "lang": "en",
+      "intent": "transactional"
+    },
+    {
+      "kw": "loft with jacuzzi medellín",
+      "lang": "en",
+      "intent": "transactional"
+    },
+    {
+      "kw": "where to stay laureles medellín",
+      "lang": "en",
+      "intent": "informational"
+    },
+    {
+      "kw": "where to stay medellín digital nomads",
+      "lang": "en",
+      "intent": "informational"
+    },
+    {
+      "kw": "boutique stay medellín design",
+      "lang": "en",
+      "intent": "transactional"
+    },
+    {
+      "kw": "laureles vs el poblado where to stay",
+      "lang": "en",
+      "intent": "informational"
+    }
+  ],
+  "competitors": [
+    {
+      "domain": "theclickclackhotel.com",
+      "name": "The Click Clack Hotel Medellín",
+      "segment": "boutique-poblado"
+    },
+    {
+      "boring": "selina.com",
+      "name": "Selina Medellín",
+      "segment": "boutique-poblado"
+    },
+    {
+      "domain": "bogboutiquehotels.com",
+      "name": "B.O.G Boutique",
+      "segment": "boutique-poblado"
+    },
+    {
+      "domain": "lasuitelaureles.com",
+      "name": "La Suite Boutique Laureles",
+      "segment": "boutique-laureles"
+    },
+    {
+      "domain": "diezhotel.com",
+      "name": "Diez Hotel Categoría Colombia",
+      "segment": "boutique-laureles"
+    },
+    {
+      "domain": "themarquee.co",
+      "name": "The Marquee Boutique",
+      "segment": "boutique-poblado"
+    }
+  ],
+  "alerting": {
+    "lighthousePerformanceMin": 90,
+    "lighthouseAccessibilityMin": 95,
+    "lighthouseSEOMin": 95,
+    "cwvLcpMaxSec": 2.5,
+    "cwvClsMax": 0.1,
+    "cwvInpMaxMs": 200,
+    "ctrDropPctAlert": 10,
+    "positionDropMinPositions": 5
+  },
+  "llmTracking": {
+    "queriesSeedFile": "data/llm-tracking-queries.json",
+    "csvUploadFolder": "data/otterly",
+    "historyFile": "data/llm-citations-history.json"
   },
   "citations": [
     {
@@ -134,7 +290,7 @@
     }
   ],
   "indexingTracker": {
-    "lastChecked": "2026-05-10T01:57:42.681Z",
+    "lastChecked": "2026-05-11T04:38:31.744Z",
     "pendingUrls": [
       "https://casamuseolaureles.com/en",
       "https://casamuseolaureles.com/es/laureles",

@@ -16,25 +16,36 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
       - name: Run weekly agent
         env:
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
           BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}
+          AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
+          PSI_API_KEY: ${{ secrets.PSI_API_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RESEND_FROM_EMAIL: ${{ secrets.RESEND_FROM_EMAIL }}
+          RESEND_TO_EMAIL: ${{ secrets.RESEND_TO_EMAIL }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DB_ID: ${{ secrets.NOTION_DB_ID }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_RUN_ID: ${{ github.run_id }}
         run: node scripts/weekly-agent.mjs
 
-      - name: Commit state changes (si hubo)
+      - name: Commit state + history changes (si hubo)
         run: |
           git config user.name "casamuseo-agent[bot]"
           git config user.email "agent@casamuseolaureles.com"
-          if ! git diff --quiet -- data/agent-state.json; then
-            git add data/agent-state.json
-            git commit -m "agent: state update $(date -u +%Y-%m-%d)"
-            git push
+          git add data/agent-state.json data/lighthouse-history.json data/ahrefs-history.json data/llm-citations-history.json 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "No state/history changes."
           else
-            echo "No state changes."
+            git commit -m "agent: weekly run $(date -u +%Y-%m-%d)"
+            git push
           fi

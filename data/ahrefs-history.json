@@ -1,0 +1,633 @@
+{
+  "runs": [
+    {
+      "ts": "2026-05-11T04:33:37.830Z",
+      "overview": {
+        "error": "Ahrefs site-explorer/overview 404: Not found"
+      },
+      "ranks": [],
+      "newBacklinksCount": 0,
+      "gapKeywordsCount": 0
+    },
+    {
+      "ts": "2026-05-11T04:35:14.802Z",
+      "overview": {
+        "domain_rating": 0,
+        "ahrefs_rank": null
+      },
+      "ranks": [
+        {
+          "kw": "hotel boutique laureles",
+          "lang": "es",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "apartamento laureles medellín",
+          "lang": "es",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "loft boutique laureles",
+          "lang": "es",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "loft con jacuzzi medellín",
+          "lang": "es",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "apartamento boutique medellín",
+          "lang": "es",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "donde quedarse en laureles",
+          "lang": "es",
+          "intent": "informational",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "laureles vs el poblado",
+          "lang": "es",
+          "intent": "informational",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "alojamiento laureles parejas",
+          "lang": "es",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "casa museo medellín",
+          "lang": "es",
+          "intent": "branded",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "boutique loft laureles medellín",
+          "lang": "en",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "design apartment laureles",
+          "lang": "en",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "serviced apartment medellín digital nomad",
+          "lang": "en",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "laureles apartment for couples",
+          "lang": "en",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "loft with jacuzzi medellín",
+          "lang": "en",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "where to stay laureles medellín",
+          "lang": "en",
+          "intent": "informational",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "where to stay medellín digital nomads",
+          "lang": "en",
+          "intent": "informational",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "boutique stay medellín design",
+          "lang": "en",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "laureles vs el poblado where to stay",
+          "lang": "en",
+          "intent": "informational",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        }
+      ],
+      "newBacklinksCount": 0,
+      "gapKeywordsCount": 0
+    },
+    {
+      "ts": "2026-05-11T04:36:51.443Z",
+      "overview": {
+        "domain_rating": 0,
+        "ahrefs_rank": null
+      },
+      "ranks": [
+        {
+          "kw": "hotel boutique laureles",
+          "lang": "es",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "apartamento laureles medellín",
+          "lang": "es",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "loft boutique laureles",
+          "lang": "es",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "loft con jacuzzi medellín",
+          "lang": "es",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "apartamento boutique medellín",
+          "lang": "es",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "donde quedarse en laureles",
+          "lang": "es",
+          "intent": "informational",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "laureles vs el poblado",
+          "lang": "es",
+          "intent": "informational",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "alojamiento laureles parejas",
+          "lang": "es",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "casa museo medellín",
+          "lang": "es",
+          "intent": "branded",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "boutique loft laureles medellín",
+          "lang": "en",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "design apartment laureles",
+          "lang": "en",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "serviced apartment medellín digital nomad",
+          "lang": "en",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "laureles apartment for couples",
+          "lang": "en",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "loft with jacuzzi medellín",
+          "lang": "en",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "where to stay laureles medellín",
+          "lang": "en",
+          "intent": "informational",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "where to stay medellín digital nomads",
+          "lang": "en",
+          "intent": "informational",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "boutique stay medellín design",
+          "lang": "en",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "laureles vs el poblado where to stay",
+          "lang": "en",
+          "intent": "informational",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        }
+      ],
+      "newBacklinksCount": 0,
+      "gapKeywordsCount": 0
+    },
+    {
+      "ts": "2026-05-11T04:38:16.965Z",
+      "overview": {
+        "domain_rating": 0,
+        "ahrefs_rank": null
+      },
+      "ranks": [
+        {
+          "kw": "hotel boutique laureles",
+          "lang": "es",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "apartamento laureles medellín",
+          "lang": "es",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "loft boutique laureles",
+          "lang": "es",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "loft con jacuzzi medellín",
+          "lang": "es",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "apartamento boutique medellín",
+          "lang": "es",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "donde quedarse en laureles",
+          "lang": "es",
+          "intent": "informational",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "laureles vs el poblado",
+          "lang": "es",
+          "intent": "informational",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "alojamiento laureles parejas",
+          "lang": "es",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "casa museo medellín",
+          "lang": "es",
+          "intent": "branded",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "boutique loft laureles medellín",
+          "lang": "en",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "design apartment laureles",
+          "lang": "en",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "serviced apartment medellín digital nomad",
+          "lang": "en",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "laureles apartment for couples",
+          "lang": "en",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "loft with jacuzzi medellín",
+          "lang": "en",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "where to stay laureles medellín",
+          "lang": "en",
+          "intent": "informational",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "where to stay medellín digital nomads",
+          "lang": "en",
+          "intent": "informational",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "boutique stay medellín design",
+          "lang": "en",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "laureles vs el poblado where to stay",
+          "lang": "en",
+          "intent": "informational",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        }
+      ],
+      "newBacklinksCount": 0,
+      "gapKeywordsCount": 0
+    },
+    {
+      "ts": "2026-05-11T04:39:39.752Z",
+      "overview": {
+        "domain_rating": 0,
+        "ahrefs_rank": null
+      },
+      "ranks": [
+        {
+          "kw": "hotel boutique laureles",
+          "lang": "es",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "apartamento laureles medellín",
+          "lang": "es",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "loft boutique laureles",
+          "lang": "es",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "loft con jacuzzi medellín",
+          "lang": "es",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "apartamento boutique medellín",
+          "lang": "es",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "donde quedarse en laureles",
+          "lang": "es",
+          "intent": "informational",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "laureles vs el poblado",
+          "lang": "es",
+          "intent": "informational",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "alojamiento laureles parejas",
+          "lang": "es",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "casa museo medellín",
+          "lang": "es",
+          "intent": "branded",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "boutique loft laureles medellín",
+          "lang": "en",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "design apartment laureles",
+          "lang": "en",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "serviced apartment medellín digital nomad",
+          "lang": "en",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "laureles apartment for couples",
+          "lang": "en",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "loft with jacuzzi medellín",
+          "lang": "en",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "where to stay laureles medellín",
+          "lang": "en",
+          "intent": "informational",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "where to stay medellín digital nomads",
+          "lang": "en",
+          "intent": "informational",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "boutique stay medellín design",
+          "lang": "en",
+          "intent": "transactional",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        },
+        {
+          "kw": "laureles vs el poblado where to stay",
+          "lang": "en",
+          "intent": "informational",
+          "position": null,
+          "volume": null,
+          "landingUrl": null
+        }
+      ],
+      "newBacklinksCount": 0,
+      "gapKeywordsCount": 0
+    }
+  ]
+}

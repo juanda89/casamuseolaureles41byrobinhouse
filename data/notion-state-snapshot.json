@@ -1,6 +1,18 @@
 {
-  "generatedAt": "2026-05-10T04:03:36.921Z",
+  "generatedAt": "2026-05-11T04:25:40.120Z",
   "tasks": {
+    "35c45399-79ca-8111-a7a7-de6107842034": {
+      "id": "35c45399-79ca-8111-a7a7-de6107842034",
+      "url": "https://www.notion.so/Request-indexing-manual-en-GSC-para-URLs-core-no-indexadas-35c4539979ca8111a7a7de6107842034",
+      "title": "Request indexing manual en GSC para URLs core no indexadas",
+      "status": "Done",
+      "priority": "P0",
+      "type": "Other",
+      "createdBy": "Human",
+      "forUseIn": "Acelerar indexación de 7-14 días a 1-3 días.",
+      "acceptanceCriteria": "Search Console → URL Inspection → pegar cada URL core (home ES, home EN, /unidades/standar, /unidades/familiar, /unidades/deluxe, /laureles, /faq) → click \"Request indexing\". Marcar done cuando las 7 estén submitted.",
+      "lastEditedTime": "2026-05-10T16:22:00.000Z"
+    },
     "35c45399-79ca-8137-8ee9-dedebbdc7e43": {
       "id": "35c45399-79ca-8137-8ee9-dedebbdc7e43",
       "url": "https://www.notion.so/Agregar-casamuseolaureles-com-en-bio-de-casalaureles41-35c4539979ca81378ee9dedebbdc7e43",
@@ -13,41 +25,113 @@
       "acceptanceCriteria": "Link visible al inicio de la bio. Verificar que renderiza como link clickeable.",
       "lastEditedTime": "2026-05-10T04:03:00.000Z"
     },
-    "35c45399-79ca-81a5-ad1c-c13fe8f69582": {
-      "id": "35c45399-79ca-81a5-ad1c-c13fe8f69582",
-      "url": "https://www.notion.so/Sesi-n-de-fotograf-a-profesional-de-las-3-unidades-35c4539979ca81a5ad1cc13fe8f69582",
-      "title": "Sesión de fotografía profesional de las 3 unidades",
+    "35c45399-79ca-8146-8a4a-c057014dcbd7": {
+      "id": "35c45399-79ca-8146-8a4a-c057014dcbd7",
+      "url": "https://www.notion.so/Reservar-handles-casamuseolaureles-en-TikTok-y-X-35c4539979ca81468a4ac057014dcbd7",
+      "title": "Reservar handles @casamuseolaureles en TikTok y X",
       "status": "To Do",
-      "priority": "P1",
-      "type": "Photo",
+      "priority": "P0",
+      "type": "Other",
       "createdBy": "Human",
-      "forUseIn": "Hero del sitio + galería de cada /unidades/* + assets para Instagram + OG images",
-      "acceptanceCriteria": "Mínimo 12 fotos por unidad en RAW + JPEG ≥4000px. Luz natural lateral. Sin objetos personales. Una foto hero apaisada por unidad para web. Presupuesto estimado: $300-700 USD.",
-      "lastEditedTime": "2026-05-10T03:58:00.000Z"
+      "forUseIn": "Bloquear handles antes que alguien los tome (preserva consistencia cross-platform con dominio).",
+      "acceptanceCriteria": "Crear cuentas con handle @casamuseolaureles en TikTok y X. Sin postear contenido todavía. Solo bio mínima + link a casamuseolaureles.com.",
+      "lastEditedTime": "2026-05-10T04:49:00.000Z"
     },
-    "35c45399-79ca-81cc-9535-fe997917656b": {
-      "id": "35c45399-79ca-81cc-9535-fe997917656b",
-      "url": "https://www.notion.so/EJEMPLO-BRAIN-Grabar-30s-vertical-del-Estadio-Atanasio-en-horario-de-entrenamiento-35c4539979ca81cc9535fe997917656b",
-      "title": "[EJEMPLO BRAIN] Grabar 30s vertical del Estadio Atanasio en horario de entrenamiento",
+    "35c45399-79ca-8147-b819-c91202987416": {
+      "id": "35c45399-79ca-8147-b819-c91202987416",
+      "url": "https://www.notion.so/Citation-Bing-Places-for-Business-35c4539979ca8147b819c91202987416",
+      "title": "Citation: Bing Places for Business",
       "status": "To Do",
-      "priority": "P2",
-      "type": "Video",
-      "createdBy": "Brain",
-      "forUseIn": "Post blog \"Best things to do near Laureles\" + reel @casalaureles41",
-      "acceptanceCriteria": "9:16, sin texto sobreimpreso, luz natural, mínimo 1080p, archivo .mp4. Esta es una tarea de ejemplo que el agente generará automáticamente cada lunes basándose en gaps detectados.",
-      "lastEditedTime": "2026-05-10T03:58:00.000Z"
+      "priority": "P0",
+      "type": "Citation",
+      "createdBy": "Human",
+      "forUseIn": "Bing alimenta Microsoft Copilot + ChatGPT-with-Bing + Yahoo. Citation directo para LLM visibility.",
+      "acceptanceCriteria": "NAP exacto:\n\nCasa Museo Laureles by HOUSY\nTv. 41 #73-42, Laureles - Estadio\nMedellín, Antioquia\n+57 311 7337110\nhttps://casamuseolaureles.com\n\nPasos: bingplaces.com → Sign in with Microsoft → Import from Google Business Profile (más rápido que crear desde cero) o Add manually. Verificar por teléfono o postal.",
+      "lastEditedTime": "2026-05-10T04:49:00.000Z"
+    },
+    "35c45399-79ca-818a-b859-d76ed999668d": {
+      "id": "35c45399-79ca-818a-b859-d76ed999668d",
+      "url": "https://www.notion.so/Citation-TripAdvisor-Owners-Center-35c4539979ca818ab859d76ed999668d",
+      "title": "Citation: TripAdvisor Owners Center",
+      "status": "To Do",
+      "priority": "P0",
+      "type": "Citation",
+      "createdBy": "Human",
+      "forUseIn": "Citation #1 hospitality. Mayor peso en SEO de hoteles + Google Knowledge Graph + alta probabilidad de citación en LLMs.",
+      "acceptanceCriteria": "NAP a usar EXACTO (copy-paste, no varíes ni un caracter):\n\nCasa Museo Laureles by HOUSY\nTv. 41 #73-42, Laureles - Estadio\nMedellín, Antioquia\n+57 311 7337110\nhttps://casamuseolaureles.com\n\nPasos: tripadvisor.com/Owners → Add a Property → Vacation Rentals → completar con NAP exacto + 8-12 fotos curadas. Done cuando el listing esté live.",
+      "lastEditedTime": "2026-05-10T04:49:00.000Z"
+    },
+    "35c45399-79ca-818b-8cf1-d3b4120b069b": {
+      "id": "35c45399-79ca-818b-8cf1-d3b4120b069b",
+      "url": "https://www.notion.so/Renombrar-GBP-de-Casa-Museo-by-HOUSY-Casa-Museo-Laureles-by-HOUSY-35c4539979ca818b8cf1d3b4120b069b",
+      "title": "Renombrar GBP de \"Casa Museo by HOUSY\" → \"Casa Museo Laureles by HOUSY\"",
+      "status": "To Do",
+      "priority": "P0",
+      "type": "Other",
+      "createdBy": "Human",
+      "forUseIn": "Alineación NAP entre dominio + GBP. Necesario antes de empezar citation building.",
+      "acceptanceCriteria": "Entrar a Google Business Profile manager → editar nombre → cambiar a \"Casa Museo Laureles by HOUSY\". Reviews y Place ID se conservan. Google revisa 1-3 días.",
+      "lastEditedTime": "2026-05-10T04:49:00.000Z"
+    },
+    "35c45399-79ca-819c-8f31-c53bca25fd14": {
+      "id": "35c45399-79ca-819c-8f31-c53bca25fd14",
+      "url": "https://www.notion.so/Citation-Apple-Maps-Connect-35c4539979ca819c8f31c53bca25fd14",
+      "title": "Citation: Apple Maps Connect",
+      "status": "To Do",
+      "priority": "P0",
+      "type": "Citation",
+      "createdBy": "Human",
+      "forUseIn": "iOS = ~50% del tráfico móvil de turismo premium en LATAM. Sin Apple Maps el huésped en iPhone no encuentra el sitio en mapa.",
+      "acceptanceCriteria": "NAP exacto:\n\nCasa Museo Laureles by HOUSY\nTv. 41 #73-42, Laureles - Estadio\nMedellín, Antioquia\n+57 311 7337110\nhttps://casamuseolaureles.com\n\nPasos: mapsconnect.apple.com → Add Place → Vacation Rental / Lodging → completar NAP + 4-6 fotos. Verificación Apple toma 3-7 días.",
+      "lastEditedTime": "2026-05-10T04:49:00.000Z"
+    },
+    "35c45399-79ca-81a7-bf5e-f454b871eb50": {
+      "id": "35c45399-79ca-81a7-bf5e-f454b871eb50",
+      "url": "https://www.notion.so/Crear-cuenta-Ahrefs-Lite-129-mes-pasar-API-token-35c4539979ca81a7bf5ef454b871eb50",
+      "title": "Crear cuenta Ahrefs Lite ($129/mes) + pasar API token",
+      "status": "Done",
+      "priority": "P0",
+      "type": "Other",
+      "createdBy": "Human",
+      "forUseIn": "Desbloquea skill B2 (keyword research expandido + tracking de posiciones + backlink monitoring).",
+      "acceptanceCriteria": "ahrefs.com → plan Lite ($129/mes) → site setup con casamuseolaureles.com → API → generar token con scope read-only para sitio + keyword research → pasarme el token. Yo lo guardo y conecto la skill.",
+      "lastEditedTime": "2026-05-11T04:25:00.000Z"
+    },
+    "35c45399-79ca-81b2-9efc-e02630642321": {
+      "id": "35c45399-79ca-81b2-9efc-e02630642321",
+      "url": "https://www.notion.so/Crear-cuenta-Otterly-AI-starter-29-mes-cargar-30-queries-seed-pasar-API-key-35c4539979ca81b29efce02630642321",
+      "title": "Crear cuenta Otterly.AI starter ($29/mes) + cargar 30 queries seed + pasar API key",
+      "status": "Done",
+      "priority": "P0",
+      "type": "Other",
+      "createdBy": "Human",
+      "forUseIn": "Desbloquea skill B1 (citation tracking en Claude/ChatGPT/Gemini) — la única forma de medir si los LLMs nos están citando.",
+      "acceptanceCriteria": "otterly.ai → signup → plan Starter ($29/mes) → cargar las 30 queries del Anexo §7.6 del doc Estrategia → generar API key → pasarme la API key en chat. Yo la guardo en .secrets.local + GH Secrets y conecto la skill.",
+      "lastEditedTime": "2026-05-11T04:25:00.000Z"
     },
     "35c45399-79ca-81e1-82c1-f951e98b19af": {
       "id": "35c45399-79ca-81e1-82c1-f951e98b19af",
       "url": "https://www.notion.so/Agregar-Casa-Museo-al-footer-de-robinhouse-co-35c4539979ca81e182c1f951e98b19af",
       "title": "Agregar Casa Museo al footer de robinhouse.co",
-      "status": "To Do",
+      "status": "Done",
       "priority": "P0",
       "type": "Outreach",
       "createdBy": "Human",
       "forUseIn": "Backlink de mayor impacto disponible (costo cero, autoridad inmediata)",
       "acceptanceCriteria": "Link en footer global de robinhouse.co que diga \"Proyectos · Casa Museo Laureles\" → casamuseolaureles.com",
-      "lastEditedTime": "2026-05-10T03:58:00.000Z"
+      "lastEditedTime": "2026-05-10T16:13:00.000Z"
+    },
+    "35d45399-79ca-814e-8b88-d503c2ae09e8": {
+      "id": "35d45399-79ca-814e-8b88-d503c2ae09e8",
+      "url": "https://www.notion.so/RECURRENTE-LUNES-Subir-CSV-semanal-de-Otterly-35d4539979ca814e8b88d503c2ae09e8",
+      "title": "[RECURRENTE LUNES] Subir CSV semanal de Otterly",
+      "status": "To Do",
+      "priority": "P1",
+      "type": "Other",
+      "createdBy": "Brain",
+      "forUseIn": "Alimenta el reporte semanal del brain con datos de citaciones en LLMs. Sin esto, la sección 'Citas LLM' del reporte queda stale.",
+      "acceptanceCriteria": "Cada lunes antes de las 06:00 Bogotá:\n1. Entrar a Otterly.AI dashboard del proyecto\n2. Reporte semanal → Export → CSV\n3. Guardar como data/otterly/YYYY-MM-DD.csv (fecha del lunes)\n4. Commit + push al repo\n\nEl brain detecta el archivo nuevo y consolida el histórico.",
+      "lastEditedTime": "2026-05-11T04:24:00.000Z"
     }
   }
 }

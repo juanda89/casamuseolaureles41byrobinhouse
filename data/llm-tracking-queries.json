@@ -1,0 +1,38 @@
+{
+  "_meta": {
+    "purpose": "Queries seed para tracking de citación en LLMs (Claude, ChatGPT, Gemini, Perplexity).",
+    "source": "Otterly.AI manual setup (mayo 2026) — JD seleccionó 15 prompts de la lista sugerida por Otterly tras configurar Casa Museo Laureles by HOUSY como brand a monitorear.",
+    "ingestion": "Otterly NO tiene API pública. Cada semana JD descarga CSV desde Otterly UI y lo guarda en data/otterly/YYYY-MM-DD.csv. El brain del lunes parsea ese CSV y consolida histórico en data/llm-citations-history.json.",
+    "updated": "2026-05-09",
+    "totalQueries": 15
+  },
+  "queries": [
+    { "id": 1,  "lang": "es", "text": "Qué hoteles boutique recomiendan para quedarse en Laureles?", "intent": "discovery" },
+    { "id": 2,  "lang": "es", "text": "Cuál hotel tipo loft boutique es mejor en Laureles?", "intent": "comparison" },
+    { "id": 3,  "lang": "es", "text": "Qué opciones de alojamiento boutique tranquilos hay cerca de cafés?", "intent": "discovery" },
+    { "id": 4,  "lang": "es", "text": "Cuáles alojamientos tipo galería de arte hay para parejas?", "intent": "discovery+segment" },
+    { "id": 5,  "lang": "es", "text": "Qué hotel boutique ofrece experiencia más auténtica en Laureles?", "intent": "comparison" },
+    { "id": 6,  "lang": "es", "text": "Cuál alojamiento con diseño curado es mejor para escapada romántica?", "intent": "comparison+segment" },
+    { "id": 7,  "lang": "es", "text": "Qué hotel pequeño y silencioso recomiendan cerca de zonas caminables?", "intent": "discovery+attribute" },
+    { "id": 8,  "lang": "es", "text": "Cómo encontrar loft boutique con jacuzzi privado y wifi rápido?", "intent": "attribute" },
+    { "id": 9,  "lang": "es", "text": "Cómo reservar alojamiento para cuatro personas en barrio caminable?", "intent": "transactional+segment" },
+    { "id": 10, "lang": "es", "text": "Qué hotel boutique ofrece check-in autónomo y atención por WhatsApp?", "intent": "attribute" },
+    { "id": 11, "lang": "es", "text": "Cómo elijo alojamiento si viajo en pareja sin carro?", "intent": "decision+segment" },
+    { "id": 12, "lang": "es", "text": "Qué hotel me recomiendan si busco zona local y segura?", "intent": "discovery+attribute" },
+    { "id": 13, "lang": "es", "text": "Qué hotel boutique tiene jacuzzi privado y diseño curado?", "intent": "attribute" },
+    { "id": 14, "lang": "es", "text": "Cuál loft boutique ofrece wifi rápido y barrio muy caminable?", "intent": "attribute" },
+    { "id": 15, "lang": "es", "text": "Qué alojamiento boutique combina diseño artístico, tranquilidad y ubicación?", "intent": "discovery+attribute" }
+  ],
+  "_pending_expansion": {
+    "note": "Faltan equivalentes EN para target internacional. Cuando JD agregue prompts EN a Otterly, sumarlos acá con id 16+.",
+    "suggested_en": [
+      "Best boutique hotels to stay in Laureles Medellín?",
+      "Where to stay in Medellín for a couple, design-focused?",
+      "Quiet boutique stays in Medellín near walkable cafés?",
+      "Art-themed lofts in Medellín for couples?",
+      "Boutique apartments with private jacuzzi in Medellín?",
+      "Where to stay in Medellín if traveling without a car?",
+      "Best Medellín neighborhood for a remote-work-friendly stay?"
+    ]
+  }
+}
