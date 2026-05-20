@@ -15,6 +15,67 @@
     {
       "ts": "2026-05-11T04:39:38.564Z",
       "audits": []
+    },
+    {
+      "ts": "2026-05-20T03:16:55.783Z",
+      "audits": [
+        {
+          "url": "https://casamuseolaureles.com/es",
+          "strategy": "mobile",
+          "fetched_at": "2026-05-20T03:16:05.824Z",
+          "performance": 87,
+          "accessibility": 97,
+          "bestPractices": 100,
+          "seo": 100,
+          "lcp": 3873.3948114910727,
+          "cls": 0,
+          "inp": null,
+          "tbt": 86,
+          "fcp": 904.5965409940485
+        },
+        {
+          "url": "https://casamuseolaureles.com/es",
+          "strategy": "desktop",
+          "fetched_at": "2026-05-20T03:16:26.243Z",
+          "performance": 98,
+          "accessibility": 97,
+          "bestPractices": 100,
+          "seo": 100,
+          "lcp": 790.5785945967423,
+          "cls": 0.000372,
+          "inp": null,
+          "tbt": 106,
+          "fcp": 317.5785945967423
+        },
+        {
+          "url": "https://casamuseolaureles.com/en",
+          "strategy": "mobile",
+          "fetched_at": "2026-05-20T03:16:39.400Z",
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 100,
+          "lcp": 1304.2854608278815,
+          "cls": 0.000151,
+          "inp": null,
+          "tbt": 28.5,
+          "fcp": 918.7910528171578
+        },
+        {
+          "url": "https://casamuseolaureles.com/en",
+          "strategy": "desktop",
+          "fetched_at": "2026-05-20T03:16:55.782Z",
+          "performance": 100,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 100,
+          "lcp": 375.9950489153747,
+          "cls": 0,
+          "inp": null,
+          "tbt": 31.5,
+          "fcp": 317.7121638208749
+        }
+      ]
     }
   ]
 }
