@@ -111,22 +111,30 @@ Abrí `data/agent-state.json` → `keywordsToTrack`. Si querés agregar o quitar
 - ANTHROPIC_API_KEY guardada, test OK (Sonnet 4.5 responde)
 - OPENAI_API_KEY guardada, test OK (gpt-image-2 confirmado)
 
-### 11.5 🆕 NUEVO — Revisar el primer draft que generó Claude
-El skill `content-draft-generator` ya generó su primer draft de ejemplo:
-- `site/src/content/blog/es/donde-quedarse-en-medellin-guia-barrios.md` (1476 palabras)
-- `site/src/content/blog/en/where-to-stay-in-medellin-neighborhoods-guide.md` (1532 palabras)
+### 11.5 🆕 Revisar el primer draft desde Notion (flujo nuevo)
 
-Ambos están con `draft: true` → **NO se publican hasta que las revises y cambies a `draft: false`**.
+El skill `content-draft-generator` generó su primer draft + creó tarjeta Notion `[BRAIN DRAFT REVIEW] donde quedarse en medellín` (status `Review`).
 
-**Lo que necesitas verificar manualmente:**
-- Las cifras específicas (precios COP, % seguridad, distancias) — Claude las puede haber alucinado. Validá las críticas contra fuentes reales.
-- Las URLs externas — confirmá que viven y son las correctas.
-- El tono — ajustá donde suene marketingero.
-- Los 5 FAQs del frontmatter — son los que más impactan en LLMs.
+**Flujo de revisión:**
 
-**Cuando esté OK:** abrir el .md, cambiar `draft: true` → `draft: false`, commit, push. Vercel deploya automático. La página queda live en `/es/blog/donde-quedarse-en-medellin-guia-barrios` y `/en/blog/where-to-stay-in-medellin-neighborhoods-guide`.
+1. Lee los .md:
+   - `site/src/content/blog/es/donde-quedarse-en-medellin-guia-barrios.md` (1476 palabras)
+   - `site/src/content/blog/en/where-to-stay-in-medellin-neighborhoods-guide.md` (1532 palabras)
+2. Verifica las cifras específicas (precios COP, % seguridad, distancias) contra fuentes reales.
+3. Verifica que las URLs en `external_sources` sean reales.
 
-**Si está malo:** borrar los archivos, ajustarme el system prompt en `scripts/skills/content-draft-generator.mjs` para próximos drafts.
+**Acción según resultado de tu revisión** — cambiá status a `Done` y:
+
+🟢 **Si está OK:** comentá `publicar` (o `publish`, `aprobado`, `lgtm`) en la tarea.
+   → El skill `draft-review-processor.mjs` (corre cada 4h en GH Actions) detecta el comentario, cambia `draft: true → false`, hace push a main, Vercel deploya. Queda live en `/es/blog/donde-quedarse-en-medellin-guia-barrios` y EN equivalente.
+
+🟡 **Si necesita ajustes:** comentá los cambios específicos (ej: *"la cifra 4.2 hurtos/10K hab está mal, según Alcaldía 2025 es 6.8"* / *"reescribí el FAQ 3 más concreto"* / *"el tono del intro suena marketingero, quitá las palabras 'descubrí' y 'sumergite'"*).
+   → El skill lee tus comentarios, le pasa a Claude el feedback exacto, regenera el draft con esas correcciones, hace force-push al PR, devuelve la tarea a `Review` con comentario "v2 lista".
+
+🔴 **Si está malo:** cambiá status a `Discarted` (sin comentarios).
+   → El skill cierra el PR, borra los .md, y el sistema no regenera ese gap por 30 días.
+
+**Nota:** este flujo aplica para TODOS los drafts que el brain genere de aquí en adelante. El próximo lunes va a generar hasta 3 drafts nuevos automáticamente (MAX_DRAFTS_PER_RUN=3), cada uno con su tarea Notion correspondiente.
 
 ---
 

@@ -11,7 +11,10 @@
         "site/src/content/blog/es/donde-quedarse-en-medellin-guia-barrios.md",
         "site/src/content/blog/en/where-to-stay-in-medellin-neighborhoods-guide.md"
       ],
-      "prUrl": null
+      "prUrl": null,
+      "notionTaskId": "36645399-79ca-81d9-9126-c91a05170afd",
+      "status": "pending_review",
+      "branch": null
     }
   ]
 }

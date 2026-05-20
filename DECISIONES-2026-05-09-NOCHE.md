@@ -65,6 +65,41 @@
 - **Decidí:** mantuve `categoryEs: "Hotel boutique"` y `categoryEn: "Boutique hotel"` en el state.
 - **Caveat:** técnicamente Casa Museo es un "serviced apartment" / "vacation rental" más que hotel tradicional. Lo dejé como "boutique hotel" porque es lo que la audiencia busca y lo que Google entiende mejor en SERP turismo. Pero si querés afinar más, lo cambiamos.
 
+## D14 · Workflow de revisión humana de drafts vía Notion (decisión del usuario 2026-05-10)
+
+**JD pidió:** que cada draft que el brain genere se revise vía Notion. Cuando JD lo pase a Done, el sistema detecta si hay comentarios (refinar) o no (publicar).
+
+**Lo que implementé:**
+
+1. **MAX_DRAFTS_PER_RUN = 3** (antes era 1). El brain ahora puede generar hasta 3 drafts/semana, uno por gap prioritario.
+
+2. **Cuando se genera draft → tarea Notion automática** `[BRAIN DRAFT REVIEW] <query>`:
+   - Status inicial: `Review`
+   - Type: `Content asset`
+   - Created by: `Brain`
+   - Linked PR: URL del PR del draft
+   - Acceptance criteria: instrucciones detalladas para JD (cómo aprobar/refinar/descartar)
+
+3. **Nuevo skill `draft-review-processor.mjs`** que corre cada 4 horas vía `draft-review.yml`:
+   - Lista tareas `[BRAIN DRAFT REVIEW]` en status `Done` o `Discarted`
+   - Detecta intent (PUBLISH/REFINE/DISCARD) leyendo comentarios + body de la página
+   - Ejecuta acción correspondiente
+
+4. **Convención de comentarios** (instrucciones detalladas en la acceptance criteria de cada tarea):
+   - "publicar" / "publish" / "aprobado" / "lgtm" → PUBLISH (cambia draft:true→false, push a main, cierra PR)
+   - Cualquier otro comentario sustantivo → REFINE (regenera draft con feedback, force-push al PR, vuelve a Review)
+   - Sin comentarios + status Done → PUBLISH (aprobación silenciosa)
+   - Status Discarted → DISCARD (borra .md, cierra PR)
+
+5. **Force-push estrategia para refines:** el draft refinado va al mismo branch del PR original (no PR nuevo). El PR queda "actualizado" y JD ve el diff de la v2 vs v1.
+
+**Cuándo NO funciona automáticamente:**
+- Si el draft se commitea directo a main (como pasó con el draft de prueba que generamos antes de implementar el flujo): el processor solo publica/refina/descarta los .md según la decisión. Sin PR para cerrar — pero igual edita el archivo y hace push.
+
+**Reversible:** ajustar `PUBLISH_KEYWORDS` array en `draft-review-processor.mjs` o cambiar el cron del workflow.
+
+---
+
 ## D13 · ESTRATEGIA AGRESIVA MULTI-TIER (2026-05-09 23:30 — decisión del usuario, ejecutada)
 
 **Cambio de estrategia explícito de JD:** "Para LLM positioning, seamos agresivos. Vamos por keywords de alto volumen e intención, está muy nuevo y casi nadie tiene dominancia. No nos vayamos solo por nuestro niche de hotel boutique, sino por los grandes keywords de hospedaje en Medellín / Laureles - Estadio."

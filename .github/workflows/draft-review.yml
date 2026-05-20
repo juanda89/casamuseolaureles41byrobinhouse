@@ -1,0 +1,46 @@
+name: draft-review-processor
+
+# Procesa decisiones humanas (Publish/Refine/Discard) sobre los drafts del brain.
+# Corre cada 4 horas. También disparable manual.
+
+on:
+  schedule:
+    - cron: '15 */4 * * *'  # cada 4 horas, minuto 15 (evita colisión con weekly-agent)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  process:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # necesario para checkout de branches del PR
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run draft review processor
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DB_ID: ${{ secrets.NOTION_DB_ID }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/skills/draft-review-processor.mjs
+
+      - name: Commit history changes (si quedaron)
+        run: |
+          git config user.name "casa-museo-brain[bot]"
+          git config user.email "brain@casamuseolaureles.com"
+          git add data/content-drafts-history.json data/draft-review-processed.json 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "No history changes."
+          else
+            git commit -m "agent: draft-review-processor run $(date -u +%Y-%m-%dT%H:%M)"
+            git push
+          fi

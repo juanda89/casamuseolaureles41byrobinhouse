@@ -25,7 +25,7 @@ const HISTORY_PATH = path.join(ROOT, 'data', 'content-drafts-history.json');
 
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 const MODEL = 'claude-sonnet-4-5';
-const MAX_DRAFTS_PER_RUN = 1; // conservador, no saturar
+const MAX_DRAFTS_PER_RUN = 3; // founder mode aggressive
 
 // ─────────────────────────────────────────────────────────────────
 // Prompt
@@ -338,9 +338,8 @@ async function createBranchAndPR({ branchName, files, title, body }) {
 // Main entry
 // ─────────────────────────────────────────────────────────────────
 
-function pickTopGap(gapsData) {
-  if (!gapsData?.gaps?.length) return null;
-  // Prioridad: content_gap (highest, vol-driven) > edge_of_page_1 > cannibalization > ctr_gap
+function pickTopGaps(gapsData, limit = MAX_DRAFTS_PER_RUN) {
+  if (!gapsData?.gaps?.length) return [];
   const priorityOrder = { content_gap: 0, edge_of_page_1: 1, cannibalization: 2, ctr_gap: 3 };
   const sorted = [...gapsData.gaps].sort((a, b) => {
     const pa = priorityOrder[a.type] ?? 99;
@@ -348,27 +347,72 @@ function pickTopGap(gapsData) {
     if (pa !== pb) return pa - pb;
     return (b.volume || b.impressions || 0) - (a.volume || a.impressions || 0);
   });
-  return sorted[0];
+  // Dedupe por query
+  const seen = new Set();
+  return sorted.filter((g) => {
+    const k = (g.query || g.kw || '').toLowerCase().trim();
+    if (!k || seen.has(k)) return false;
+    seen.add(k);
+    return true;
+  }).slice(0, limit);
 }
 
-export async function runContentDraftGenerator(state, gapsResult) {
-  if (!ANTHROPIC_API_KEY) {
-    return { ok: false, stale: true, summary: 'Content draft: sin ANTHROPIC_API_KEY', data: null, alerts: [] };
-  }
-  const gap = pickTopGap(gapsResult?.data);
-  if (!gap) {
-    return { ok: true, stale: true, summary: 'Content draft: sin gaps prioritarios para esta semana', data: { generated: [] }, alerts: [] };
-  }
+// ─────────────────────────────────────────────────────────────────
+// Notion review task creator
+// ─────────────────────────────────────────────────────────────────
 
-  const history = await loadHistory();
-  // Evitar regenerar lo mismo
-  const recentSlugs = new Set(history.drafts.slice(-20).map((d) => d.slug));
-  const queryKey = (gap.query || gap.kw || '').toLowerCase().replace(/[^a-z0-9]+/g, '-');
-  if (recentSlugs.has(queryKey)) {
-    return { ok: true, stale: true, summary: `Content draft: gap "${gap.query || gap.kw}" ya generado recientemente`, data: { generated: [] }, alerts: [] };
-  }
+async function createNotionReviewTask({ gap, generated, prUrl }) {
+  if (!process.env.NOTION_TOKEN || !process.env.NOTION_DB_ID) return null;
+  const title = `[BRAIN DRAFT REVIEW] ${(gap.query || gap.kw).slice(0, 100)}`;
+  const filesList = generated.map((g) => `• ${g.path} (${g.stats.wordCount}w, ${g.stats.quantData} datos)`).join('\n');
+  const acceptance = `📄 Draft generado automáticamente por Claude. ANTES de aprobar:
 
-  const systemPrompt = buildSystemPrompt(state);
+1. Abre el preview deploy del PR ${prUrl ? `(${prUrl})` : '(buscar PR en el repo)'}
+2. Lee los archivos:
+${filesList}
+3. Verifica con cuidado las cifras específicas (precios, %, distancias) — Claude puede alucinar números.
+4. Verifica que las URLs en external_sources sean reales y respondan 200.
+
+⚠️ CÓMO MARCAR DECISIÓN al cambiar el status a Done:
+
+🟢 PUBLICAR (queda live): escribe "publicar" o "publish" en un comentario de esta tarea.
+   → El sistema cambia draft:true→false, hace push, Vercel deploya, queda live en /blog/<slug>.
+
+🟡 REFINAR: escribe tus comentarios con cambios específicos (ej: "la cifra de 4.2 hurtos está mal, según Alcaldía es 6.8" / "el FAQ 3 está flojo, reescribilo más concreto").
+   → El sistema lee tus comentarios, regenera el draft con esas correcciones, force-push al mismo PR, devuelve la tarea a "To Do" para revisar v2.
+
+🔴 DESCARTAR: cambia status a Discarted directamente.
+   → El sistema cierra el PR sin merge y archiva los .md.`;
+
+  const props = {
+    Title: { title: [{ text: { content: title } }] },
+    Status: { status: { name: 'Review' } },
+    Priority: { select: { name: 'P1' } },
+    Type: { select: { name: 'Content asset' } },
+    'Created by': { select: { name: 'Brain' } },
+    'For use in': { rich_text: [{ text: { content: `Gap: ${gap.type} · ${(gap.rationale || '').slice(0, 1500)}` } }] },
+    'Acceptance criteria': { rich_text: [{ text: { content: acceptance.slice(0, 1999) } }] },
+  };
+  if (prUrl) props['Linked PR'] = { url: prUrl };
+
+  const r = await fetch('https://api.notion.com/v1/pages', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${process.env.NOTION_TOKEN}`,
+      'Notion-Version': '2022-06-28',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ parent: { database_id: process.env.NOTION_DB_ID }, properties: props }),
+  });
+  if (!r.ok) {
+    console.warn(`Notion review task create failed: ${r.status}`);
+    return null;
+  }
+  const j = await r.json();
+  return { id: j.id, url: j.url };
+}
+
+async function generateOneDraft({ state, gap, systemPrompt }) {
   const generated = [];
   const errors = [];
 
@@ -408,62 +452,88 @@ export async function runContentDraftGenerator(state, gapsResult) {
     generated.push({ lang, slug: validResult.slug, path: path.relative(ROOT, targetPath), stats: validResult.validation.stats });
   }
 
-  if (!generated.length) {
+  return { generated, errors };
+}
+
+export async function runContentDraftGenerator(state, gapsResult) {
+  if (!ANTHROPIC_API_KEY) {
+    return { ok: false, stale: true, summary: 'Content draft: sin ANTHROPIC_API_KEY', data: null, alerts: [] };
+  }
+  const candidates = pickTopGaps(gapsResult?.data, MAX_DRAFTS_PER_RUN);
+  if (!candidates.length) {
+    return { ok: true, stale: true, summary: 'Content draft: sin gaps prioritarios para esta semana', data: { generated: [] }, alerts: [] };
+  }
+
+  const history = await loadHistory();
+  const recentQueries = new Set(history.drafts.slice(-30).map((d) => (d.gap?.query || '').toLowerCase().trim()).filter(Boolean));
+
+  const systemPrompt = buildSystemPrompt(state);
+  const allDrafts = [];
+  const allErrors = [];
+
+  for (const gap of candidates) {
+    const queryKey = (gap.query || gap.kw || '').toLowerCase().trim();
+    if (recentQueries.has(queryKey)) {
+      console.log(`  skipping "${queryKey}" — ya generado recientemente`);
+      continue;
+    }
+
+    const { generated, errors } = await generateOneDraft({ state, gap, systemPrompt });
+    if (!generated.length) {
+      allErrors.push(`"${gap.query || gap.kw}": ${errors.join('; ')}`);
+      continue;
+    }
+
+    // PR
+    const slug = generated[0].slug;
+    const branchName = `brain/content-draft-${slug}-${new Date().toISOString().slice(0, 10)}`;
+    const files = generated.map((g) => ({ path: g.path }));
+    const prTitle = `[BRAIN DRAFT] ${gap.query || gap.kw} (${generated.length} idiomas)`;
+    const prBody = `Draft auto-generado por el brain.
+
+**Gap:** ${gap.type} · "${gap.query || gap.kw}"
+**Rationale:** ${gap.rationale || '—'}
+
+**Archivos:**
+${generated.map((g) => `- \`${g.path}\` (${g.stats.wordCount}w, ${g.stats.quantData} datos, ${g.stats.extLinks} links, ${g.stats.faqCount} FAQs)`).join('\n')}
+
+⚠️ Aprobación se hace desde Notion (tarea \`[BRAIN DRAFT REVIEW] ${gap.query || gap.kw}\`), no desde este PR. Ver acceptance criteria de la tarea.`;
+
+    const prUrl = await createBranchAndPR({ branchName, files, title: prTitle, body: prBody });
+
+    // Notion review task
+    const notionTask = await createNotionReviewTask({ gap, generated, prUrl });
+
+    allDrafts.push({ slug, gap, generated, prUrl, notionTask });
+    recentQueries.add(queryKey);
+
+    history.drafts.push({
+      ts: new Date().toISOString(),
+      gap: { type: gap.type, query: gap.query || gap.kw },
+      slug,
+      files: generated.map((g) => g.path),
+      prUrl,
+      branch: branchName,
+      notionTaskId: notionTask?.id || null,
+      status: 'pending_review',
+    });
+  }
+
+  await saveHistory(history);
+
+  if (!allDrafts.length) {
     return {
       ok: false, stale: false,
-      summary: `Content draft falló para todos los idiomas: ${errors.join(' | ')}`,
-      data: null,
-      alerts: errors,
+      summary: `Content draft falló: ${allErrors.join(' | ')}`,
+      data: null, alerts: allErrors,
     };
   }
 
-  // Crear PR
-  const slug = generated[0].slug;
-  const branchName = `brain/content-draft-${slug}-${new Date().toISOString().slice(0, 10)}`;
-  const files = generated.map((g) => ({ path: g.path }));
-  const prTitle = `[BRAIN DRAFT] ${gap.query || gap.kw} (${generated.length} idiomas)`;
-  const prBody = `Draft auto-generado por el brain semanal.
-
-**Gap detectado:**
-- Tipo: \`${gap.type}\`
-- Query: ${gap.query || gap.kw}
-- Acción: ${gap.action}
-- Rationale: ${gap.rationale || '—'}
-
-**Archivos generados:**
-${generated.map((g) => `- \`${g.path}\` (${g.stats.wordCount} palabras, ${g.stats.quantData} datos, ${g.stats.extLinks} links, ${g.stats.faqCount} FAQs)`).join('\n')}
-
-**Próximos pasos para el humano:**
-1. Revisar contenido del preview deploy de Vercel (link arriba)
-2. Verificar fuentes externas (que sean reales y vivas)
-3. Si OK: editar el frontmatter cambiando \`draft: true\` → \`draft: false\` y mergear
-4. Si necesita ajustes: editar el .md directamente y mergear
-5. Si malo: cerrar el PR
-
-**Reglas validadas automáticamente** (paper GEO Princeton):
-- Mínimo 4 datos cuantitativos ✓
-- Mínimo 2 fuentes externas ✓
-- Mínimo 3 FAQs ✓
-- 800+ palabras ✓
-`;
-
-  const prUrl = await createBranchAndPR({ branchName, files, title: prTitle, body: prBody });
-
-  history.drafts.push({
-    ts: new Date().toISOString(),
-    gap: { type: gap.type, query: gap.query || gap.kw },
-    slug,
-    files: generated.map((g) => g.path),
-    prUrl,
-  });
-  await saveHistory(history);
-
   return {
-    ok: true,
-    stale: false,
-    summary: `Content draft generado: ${generated.length} idiomas de "${gap.query || gap.kw}"${prUrl ? ' · PR abierto' : ''}`,
-    data: { generated, prUrl, gap },
-    alerts: errors,
+    ok: true, stale: false,
+    summary: `Content drafts generados: ${allDrafts.length} (${allDrafts.map((d) => `"${d.gap.query || d.gap.kw}"`).join(', ')})`,
+    data: { generated: allDrafts, drafts: allDrafts, gap: allDrafts[0].gap, prUrl: allDrafts[0].prUrl },
+    alerts: allErrors,
   };
 }
 
