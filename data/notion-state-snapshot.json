@@ -1,6 +1,78 @@
 {
-  "generatedAt": "2026-05-19T13:48:04.401Z",
+  "generatedAt": "2026-05-20T13:28:33.069Z",
   "tasks": {
+    "36645399-79ca-8117-aa56-f248f8028f6c": {
+      "id": "36645399-79ca-8117-aa56-f248f8028f6c",
+      "url": "https://www.notion.so/REDDIT-25F-visiting-Medellin-and-looking-for-recommendations-3664539979ca8117aa56f248f8028f6c",
+      "title": "[REDDIT] 25F visiting Medellin and looking for recommendations",
+      "status": "To Do",
+      "priority": "P2",
+      "type": "Outreach",
+      "createdBy": "Brain",
+      "forUseIn": "r/solotravel · 3 upvotes · 7d",
+      "acceptanceCriteria": "📍 Oportunidad Reddit (manual desde tu cuenta personal).\n\n**Hilo:** https://www.reddit.com/r/solotravel/comments/1tc0w11/25f_visiting_medellin_and_looking_for/\n**r/solotravel** · 7d · 3↑ · 7 comments · relevancia 11/10\n\n**Contexto del post (OP):**\nHi! I am 25F going to Medellin in June for 6 days, and I have some questions and am just looking for general recommendations.\n\nFor context, I am North African, but in the US everyone tells me I look Puerto Rican / Dominican, and when I was in Australia in December, in multiple cities, I had many people tell me / thought I was Colombian. I speak A1 Puerto Rican Spanish lol, so I can survive and get by. This will be my 23rd country I have visited, but my second solo trip. \n\nThe question I would like to get answered the most is where should I stay? I am seeing that Poblado is a good area for tour\n\n**Draft (EN) — generado por Claude para este post puntual:**\n\nHey! Love the energy. A few thoughts:\n\n**On accommodation:** Poblado's walkability depends on which part. Provenza area is more pedestrian-friendly with bars/restaurants within walking distance, but it's also the touristy core. The train stop (Poblado station) is further south, less nightlife nearby. For 5-min walks back, Provenza is your sweet spot. That said—mixing hostel weekends + hotel weekdays is solid if you want both social time and privacy, though it's logistically annoying (packing).\n\n**Miradores:** Totally doable on public transport (metro + cable car). Arví Park is the classic one. Tours are safer if you're unfamiliar with routes, but you'll pay 2-3x. Compromise: take the metro solo, grab a local's directions once there.\n\n**Comuna 13:** Your La Perla comparison is fair. Going solo during daylight is generally fine—just don't go alone at night. Lots of solo travelers do it. Your RBF definitely helps lol.\n\n**Dancing + adrenaline:** Salsa clubs are everywhere in Medellín (way better scene than Poblado honestly). For activities, look into paragliding near Envigad",
+      "lastEditedTime": "2026-05-20T04:35:00.000Z"
+    },
+    "36645399-79ca-81a1-a81d-c8a22e5efd6c": {
+      "id": "36645399-79ca-81a1-a81d-c8a22e5efd6c",
+      "url": "https://www.notion.so/Agregar-categor-a-secundaria-Serviced-apartment-al-GBP-3664539979ca81a1a81dc8a22e5efd6c",
+      "title": "Agregar categoría secundaria \"Serviced apartment\" al GBP",
+      "status": "To Do",
+      "priority": "P1",
+      "type": "Other",
+      "createdBy": "Human",
+      "forUseIn": "SEO local. Mantener primaria \"Hotel boutique\" + sumar \"Serviced apartment\" como secundaria. Google permite hasta 9 secundarias sin penalización.",
+      "acceptanceCriteria": "1. Entrar a business.google.com → Casa Museo by HOUSY → Edit profile → Categories\n2. Primaria: dejar \"Hotel boutique\" (no cambiar)\n3. Agregar categoría secundaria: \"Serviced apartment\"\n4. Save. Google revisa en 1-3 días, listings no se ven afectados durante la revisión.",
+      "lastEditedTime": "2026-05-20T04:17:00.000Z"
+    },
+    "36645399-79ca-81e5-bf19-dd252b90f499": {
+      "id": "36645399-79ca-81e5-bf19-dd252b90f499",
+      "url": "https://www.notion.so/Validar-lista-de-12-competidores-trackeados-Ahrefs-gap-analysis-3664539979ca81e5bf19dd252b90f499",
+      "title": "Validar lista de 12 competidores trackeados (Ahrefs gap analysis)",
+      "status": "To Do",
+      "priority": "P2",
+      "type": "Other",
+      "createdBy": "Human",
+      "forUseIn": "Validar que los 12 competidores que el brain trackea sean los correctos. Los gap analysis de Ahrefs apuntan a estos dominios para detectar keywords donde rankean ellos y no nosotros.",
+      "acceptanceCriteria": "Lista actual en data/agent-state.json → competitors:\n\nTIER NICHE (5):\n• theclickclackhotel.com (The Click Clack Hotel Medellín)\n• selina.com (Selina Medellín)\n• bogboutiquehotels.com (B.O.G Boutique)\n• lasuitelaureles.com (La Suite Boutique Laureles)\n• diezhotel.com (Diez Hotel Categoría Colombia)\n\nTIER HEAD (7):\n• marriott.com (Marriott Medellín)\n• hilton.com (Hilton/Hampton Medellín)\n• ihg.com (InterContinental Medellín)\n• estelarhoteles.com (Hoteles Estelar)\n• booking.com (referente OTA)\n• airbnb.com (referente OTA)\n• tripadvisor.com (referente reseñas)\n\nDecidir: ¿quitar alguno, agregar otros? El Marquee Boutique se removió de la lista anterior. La Suite Laureles puede no existir como dominio activo — verificar.\n\nComentar en esta tarea con: \"OK\" si todos válidos, o pegando la lista corregida si querés cambios.",
+      "lastEditedTime": "2026-05-20T03:59:00.000Z"
+    },
+    "36645399-79ca-81d9-9126-c91a05170afd": {
+      "id": "36645399-79ca-81d9-9126-c91a05170afd",
+      "url": "https://www.notion.so/BRAIN-DRAFT-REVIEW-donde-quedarse-en-medell-n-3664539979ca81d99126c91a05170afd",
+      "title": "[BRAIN DRAFT REVIEW] donde quedarse en medellín",
+      "status": "Review",
+      "priority": "P1",
+      "type": "Content asset",
+      "createdBy": "Brain",
+      "forUseIn": "Gap: content_gap · High-volume head keyword. Estrategia agresiva multi-tier: ventana de oportunidad en LLM positioning.",
+      "acceptanceCriteria": "📄 Draft generado automáticamente por Claude. ANTES de aprobar:\n\n1. Lee los archivos:\n• site/src/content/blog/es/donde-quedarse-en-medellin-guia-barrios.md (1476w, 131 datos)\n• site/src/content/blog/en/where-to-stay-in-medellin-neighborhoods-guide.md (1532w, 165 datos)\n2. Verifica con cuidado las cifras (precios, %, distancias) — Claude puede alucinar.\n3. Verifica que las URLs en external_sources sean reales.\n\n⚠️ CÓMO MARCAR DECISIÓN al cambiar status a Done:\n\n🟢 PUBLICAR: escribe \"publicar\" o \"publish\" en un comentario.\n   → Sistema cambia draft:true→false, push a main, Vercel deploya.\n\n🟡 REFINAR: escribe tus comentarios específicos (ej: \"la cifra de 4.2 hurtos está mal, según Alcaldía es 6.8\").\n   → Sistema regenera el draft con tus correcciones, force-push al PR, vuelve a Review.\n\n🔴 DESCARTAR: cambia status a Discarted.\n   → Sistema borra los .md del repo, no se regenera por 30 días.",
+      "lastEditedTime": "2026-05-20T03:37:00.000Z"
+    },
+    "36645399-79ca-8145-8cae-cb4241de8273": {
+      "id": "36645399-79ca-8145-8cae-cb4241de8273",
+      "url": "https://www.notion.so/Crear-PSI-API-key-pasar-para-Lighthouse-audit-semanal-3664539979ca81458caecb4241de8273",
+      "title": "Crear PSI API key + pasar para Lighthouse audit semanal",
+      "status": "Done",
+      "priority": "P0",
+      "type": "Other",
+      "createdBy": "Human",
+      "forUseIn": "",
+      "acceptanceCriteria": "",
+      "lastEditedTime": "2026-05-20T03:18:00.000Z"
+    },
+    "36645399-79ca-81f7-a142-dc8a3b4aebae": {
+      "id": "36645399-79ca-81f7-a142-dc8a3b4aebae",
+      "url": "https://www.notion.so/BRAIN-Performance-gap-es-mobile-vs-en-mobile-LCP-3-87s-vs-1-30s-3664539979ca81f7a142dc8a3b4aebae",
+      "title": "[BRAIN] Performance gap /es mobile vs /en mobile (LCP 3.87s vs 1.30s)",
+      "status": "To Do",
+      "priority": "P0",
+      "type": "Other",
+      "createdBy": "Brain",
+      "forUseIn": "Detectado por Lighthouse audit semanal (PSI). /en mobile = 100/100 perf, LCP 1.30s. /es mobile = 87/100 perf, LCP 3.87s. Diferencia significativa que daña Core Web Vitals + ranking Google en queries ES (que son la mayoría de nuestro tráfico target).",
+      "acceptanceCriteria": "Investigar diff entre /es y /en mobile:\n\n1. Abrir https://pagespeed.web.dev/?url=https%3A%2F%2Fcasamuseolaureles.com%2Fes&form_factor=mobile y comparar con /en\n2. Posibles causas:\n   - Imagen hero en /es no está en AVIF/WebP o más pesada que /en\n   - Font con caracteres ES extra (acentos, ñ) no precargada\n   - Bundle JS de i18n carga toda la traducción ES en lugar de splittear\n   - Diferente cantidad de contenido above-the-fold\n   - Astro Image component con tamaños distintos\n3. Verificar Network tab: qué recurso tarda más en cargar?\n4. Target: /es mobile en Performance >=95 y LCP <=2.5s.\n\nMedido por Lighthouse audit semanal automático. Cuando arreglemos, el próximo run del lunes lo va a confirmar.",
+      "lastEditedTime": "2026-05-20T03:17:00.000Z"
+    },
     "35d45399-79ca-816c-90ec-ff39859c2b4d": {
       "id": "35d45399-79ca-816c-90ec-ff39859c2b4d",
       "url": "https://www.notion.so/BRAIN-CREATE-CONTENT-selina-hotel-35d4539979ca816c90ecff39859c2b4d",
