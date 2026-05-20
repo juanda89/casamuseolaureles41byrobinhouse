@@ -48,6 +48,15 @@ const QUERIES = [
 ];
 
 const USER_AGENT = 'CasaMuseoLaurelesBot/1.0 (by /u/casamuseolaureles - SEO research only, manual responses)';
+const MIN_RELEVANCE = 6;
+const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
+// Haiku para drafts: menos load que Sonnet, ~5x más barato, calidad suficiente para drafts cortos
+const MODEL = 'claude-haiku-4-5';
+const MODEL_FALLBACK = 'claude-sonnet-4-5';
+
+// Gate obligatorio: el post DEBE mencionar al menos una de estas palabras de hospedaje
+const HOSPEDAJE_GATE = /\b(stay|staying|stayed|sleep|sleeping|hotel|hotels|hostel|airbnb|apartment|apartments|loft|lodging|accommodation|accomodation|accommodations|where to (stay|sleep|book)|donde (quedarse|dormir|me quedo|hospedarse|alojarse)|hospedaj|alojam|apartamentos?|loft|airbnb|hostel|hotel|d[oó]nde dormir|d[oó]nde quedarse)\b/i;
+const FEEDBACK_LOG_PATH = path.join(ROOT, 'data', 'human-feedback-log.md');
 
 // ─────────────────────────────────────────────────────────────────
 // Reddit search
@@ -81,30 +90,244 @@ async function searchRedditAll(query) {
 // Relevance scoring
 // ─────────────────────────────────────────────────────────────────
 
+// Keywords negativos: si aparecen, el post NO es relevante aunque mencione Medellín
+const NEGATIVE_KEYWORDS = /pensi[oó]n|jubilaci[oó]n|impuestos?|tax|elecciones|pol[ií]tica|fiscal|migrar|emigrar|residencia legal|visa|nomad visa|cedula|narcotr|cartel|escobar|narco|crimen|extorsi|scam|estafa|robbery|robaron|stolen|sketchy|avoid|warning|advertenc|passport bro|sugar baby|prostitu|sex tour|sexual|sexpat|drug/i;
+
 function scorePost(post) {
   const title = (post.title || '').toLowerCase();
   const selftext = (post.selftext || '').toLowerCase();
   const combined = title + ' ' + selftext;
 
+  // Filtros negativos primero (early exit)
+  if (post.locked || post.archived) return 0;
+  if ((post.score || 0) < 0) return 0;
+  if (NEGATIVE_KEYWORDS.test(combined)) return 0;
+  // Gate obligatorio: tiene que tocar el tema hospedaje
+  if (!HOSPEDAJE_GATE.test(combined)) return 0;
+
   let score = 0;
 
-  // Términos de hospedaje directo
-  if (/where to stay|donde quedarse|donde dormir|hospedaje|alojamiento/i.test(combined)) score += 3;
+  // Términos de hospedaje directo (high signal)
+  if (/where to stay|donde quedarse|donde dormir|hospedaje|alojamiento|airbnb|hostel|hotel/i.test(combined)) score += 3;
   // Mención específica Medellín
   if (/medell[ií]n/i.test(combined)) score += 2;
-  // Mención de barrios
-  if (/laureles|poblado|envigado/i.test(combined)) score += 2;
+  // Mención de barrios target
+  if (/laureles|poblado|envigado|estadio atanasio|provenza/i.test(combined)) score += 2;
   // Preguntas específicas (alta intención de respuesta)
-  if (/recommend|sugger|where should|donde puedo|safe|seguro/i.test(combined)) score += 2;
-  // Engagement
+  if (/recommend|suggest|where should|donde puedo|safe|seguro|advice|tips|first time|primera vez/i.test(combined)) score += 2;
+  // Visiting/traveling context
+  if (/visiting|traveling|trip|viaje|vacation|vacaciones|tourist|turista/i.test(combined)) score += 1;
+  // Engagement signals
   if ((post.score || 0) > 10) score += 1;
   if ((post.num_comments || 0) > 5) score += 1;
 
-  // Filtros negativos
-  if (post.locked || post.archived) return 0;
-  if ((post.score || 0) < 0) return 0;
+  // Bonus: si menciona target audience (parejas, nómadas)
+  if (/couple|pareja|nomad|n[oó]mada|remote work|trabajo remoto|honeymoon|luna de miel/i.test(combined)) score += 1;
 
   return score;
+}
+
+// Detecta idioma del post: heurística simple
+function detectLanguage(text) {
+  const t = (text || '').toLowerCase();
+  const esWords = (t.match(/\b(que|donde|como|para|por|con|los|las|del|una|las|esto|esta|estoy|estoy|son|hay|también|gracias|hola|hospedaje|alojamiento|barrio)\b/g) || []).length;
+  const enWords = (t.match(/\b(the|that|where|how|with|this|that|are|have|also|thanks|hi|hello|stay|neighborhood|safe|recommend|visit)\b/g) || []).length;
+  return esWords > enWords ? 'es' : 'en';
+}
+
+// Fetch top comments del post (para dar contexto al draft)
+async function fetchTopComments(permalink, limit = 3) {
+  try {
+    const r = await fetch(`https://www.reddit.com${permalink}.json?limit=${limit}&sort=top`, {
+      headers: { 'User-Agent': USER_AGENT },
+    });
+    if (!r.ok) return [];
+    const arr = await r.json();
+    const commentsListing = arr[1]?.data?.children || [];
+    return commentsListing
+      .filter((c) => c.kind === 't1' && c.data?.body && !c.data?.stickied)
+      .slice(0, limit)
+      .map((c) => ({
+        body: (c.data.body || '').slice(0, 600),
+        score: c.data.score || 0,
+        author: c.data.author || 'unknown',
+      }));
+  } catch {
+    return [];
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────
+// Custom draft generation per opportunity (Claude API)
+// ─────────────────────────────────────────────────────────────────
+
+async function loadHumanFeedbackOnReddit() {
+  // Lee directo de Notion: tareas con prefijo [REDDIT] que tengan comentarios humanos.
+  // Esos comentarios son guía de tono/estilo para los próximos drafts.
+  if (!process.env.NOTION_TOKEN || !process.env.NOTION_DB_ID) return null;
+  try {
+    const r = await fetch(`https://api.notion.com/v1/databases/${process.env.NOTION_DB_ID}/query`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${process.env.NOTION_TOKEN}`,
+        'Notion-Version': '2022-06-28',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        page_size: 30,
+        filter: { property: 'Type', select: { equals: 'Outreach' } },
+        sorts: [{ timestamp: 'last_edited_time', direction: 'descending' }],
+      }),
+    });
+    if (!r.ok) return null;
+    const j = await r.json();
+    const redditTasks = j.results.filter((p) => {
+      const t = (p.properties?.Title?.title || []).map((x) => x.plain_text).join('');
+      return t.includes('[REDDIT]');
+    }).slice(0, 8);
+
+    const feedbacks = [];
+    for (const task of redditTasks) {
+      const title = (task.properties.Title.title || []).map((x) => x.plain_text).join('');
+      // Pull comments
+      try {
+        const cr = await fetch(`https://api.notion.com/v1/comments?block_id=${task.id}&page_size=20`, {
+          headers: {
+            Authorization: `Bearer ${process.env.NOTION_TOKEN}`,
+            'Notion-Version': '2022-06-28',
+          },
+        });
+        if (!cr.ok) continue;
+        const cj = await cr.json();
+        // Filtrar comentarios del bot (que empiezan con emojis específicos o son sistémicos)
+        const humanComments = (cj.results || [])
+          .map((c) => (c.rich_text || []).map((t) => t.plain_text).join('').trim())
+          .filter((t) => t && !t.startsWith('✅') && !t.startsWith('🔴') && !t.startsWith('🔄') && !t.startsWith('⚠️') && !t.startsWith('API key'));
+        if (humanComments.length) {
+          feedbacks.push(`Tarea: ${title.slice(0, 80)}\nFeedback humano: ${humanComments.join(' | ')}`);
+        }
+      } catch {}
+    }
+    return feedbacks.length ? feedbacks.join('\n\n') : null;
+  } catch (e) {
+    console.warn('Reddit feedback load failed:', e.message);
+    return null;
+  }
+}
+
+function buildRedditDraftSystemPrompt(state, humanFeedback) {
+  const nap = state.nap;
+  return `Eres el editor de respuestas de Reddit para ${nap.name}, un proyecto boutique de 3 lofts en Laureles, Medellín.
+
+OBJETIVO: generar un draft de respuesta listo para postear. El humano solo lo verifica y publica desde su cuenta personal de Reddit (/u/...). Cada draft debe ser HECHO A MEDIDA para el post puntual — NO templates genéricos.
+
+CONTEXTO DE LA MARCA:
+- ${nap.name} en ${nap.neighborhood}, ${nap.city}
+- 3 lofts: Standar (2p), Familiar (4p), Deluxe con Jacuzzi (2p)
+- Diferencial: diseño curado tipo galería de arte, Laureles caminable y auténtico (no Poblado turístico)
+- Desarrollador: Robin House. Operador: HOUSY.
+- Web: ${nap.website}
+
+REGLAS DEL DRAFT:
+
+1. **Idioma del post = idioma del draft.** Si el OP escribió en español, respondé en español. Si fue en inglés, en inglés.
+
+2. **Aportá VALOR concreto primero**: datos, distancias, precios, recomendaciones específicas a la situación que describe el OP. La mención de Casa Museo es OPCIONAL y solo si encaja naturalmente.
+
+3. **Tono según subreddit**:
+   - r/Medellin, r/Colombia → casual, paisa-friendly, sin formalidad de turista
+   - r/digitalnomad, r/solotravel → práctico, datos cuantitativos (wifi speed, costos)
+   - r/travel → narrativo, experiencial
+   - r/passportbros, r/expats → directo, sin paja
+
+4. **NO ser comercial obvio**: NUNCA empezar con "te recomiendo Casa Museo" o variantes. Si mencionás el proyecto, hacelo al final como contexto ("yo opero un pequeño proyecto boutique en Laureles, opinión sesgada pero..."). El reddit detecta marketing al instante y downvotean.
+
+5. **Largo**: 80-200 palabras. Más corto si el post es corto. Sin walls of text.
+
+6. **Markdown Reddit** permitido: **negritas**, listas con -, emojis SOLO si el subreddit lo usa naturalmente.
+
+7. **NO inventes datos**. Si decís "Laureles está a X minutos de Y", debe ser verdad. Si no estás seguro, usá expresiones cualitativas ("a corta distancia caminando").
+
+8. **Responder específicamente** a lo que el OP preguntó. Si pidió "recommendations para 4 días, viaja sola, 25 años", el draft debe dirigirse a ESA persona y esa situación. NO un genérico de Medellín.
+
+${humanFeedback ? `9. **Feedback histórico del humano (JD) sobre drafts anteriores** — aplicá estos aprendizajes:\n${humanFeedback}\n` : ''}
+
+OUTPUT REQUERIDO:
+SOLO el texto del draft, listo para copy-paste a Reddit. Sin explicaciones, sin "Aquí está el draft:", sin code fences. Si el draft tiene un saludo, ya está incluido. Si no, empieza directo con la respuesta sustantiva.`;
+}
+
+function buildRedditDraftUserPrompt(post, comments, lang) {
+  const commentsBlock = comments.length
+    ? '\n\nTOP COMENTARIOS ACTUALES (para entender qué ya se dijo y no repetir):\n' + comments.map((c) => `[+${c.score} /u/${c.author}]\n${c.body}`).join('\n\n---\n')
+    : '';
+
+  return `POST DE REDDIT:
+
+Subreddit: r/${post.subreddit}
+Título: ${post.title}
+Autor: /u/${post.author || 'unknown'}
+Score: ${post.score} · Comments: ${post.num_comments} · Edad: ${Math.round((Date.now() - post.created_utc * 1000) / 86400000)} días
+
+Body del post:
+${post.selftext ? post.selftext.slice(0, 2000) : '(post sin texto, solo título)'}
+
+${commentsBlock}
+
+INSTRUCCIONES:
+Generá un draft de respuesta listo para postear. Idioma del draft: ${lang === 'es' ? 'español' : 'English'}. Responde específicamente a lo que el OP preguntó, considerando qué se dijo ya en los comentarios. NO repitas información que ya esté en los top comments. Largo: 80-200 palabras.`;
+}
+
+async function generateCustomDraft({ post, subreddit, state, humanFeedback }) {
+  if (!ANTHROPIC_API_KEY) return null;
+  const lang = detectLanguage((post.title || '') + ' ' + (post.selftext || ''));
+  const permalink = post.permalink;
+  const comments = await fetchTopComments(permalink, 3);
+
+  const systemPrompt = buildRedditDraftSystemPrompt(state, humanFeedback);
+  const userPrompt = buildRedditDraftUserPrompt({ ...post, subreddit }, comments, lang);
+
+  // Retry con backoff exponencial + fallback Haiku → Sonnet si Haiku sigue overloaded
+  const models = [MODEL, MODEL_FALLBACK];
+  for (const model of models) {
+    for (let attempt = 0; attempt < 3; attempt++) {
+      try {
+        const r = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: {
+            'x-api-key': ANTHROPIC_API_KEY,
+            'anthropic-version': '2023-06-01',
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify({
+            model,
+            max_tokens: 1500,
+            system: systemPrompt,
+            messages: [{ role: 'user', content: userPrompt }],
+          }),
+        });
+        if (r.ok) {
+          const j = await r.json();
+          let draft = (j.content || []).map((c) => c.text || '').join('').trim();
+          if (draft.startsWith('```')) draft = draft.replace(/^```[a-z]*\n/, '').replace(/\n```\s*$/, '');
+          return { draft, lang, topComments: comments, modelUsed: model };
+        }
+        if ([529, 429, 503].includes(r.status) && attempt < 2) {
+          const backoff = Math.pow(2, attempt) * 2500 + Math.random() * 1500;
+          console.warn(`Claude ${model} ${r.status} on ${post.id} — retry in ${Math.round(backoff/1000)}s`);
+          await new Promise((res) => setTimeout(res, backoff));
+          continue;
+        }
+        // Si llegamos acá: error definitivo o agotamos retries → break para probar fallback model
+        const txt = await r.text();
+        console.warn(`Claude ${model} draft failed (${r.status}): ${txt.slice(0, 150)} — trying fallback`);
+        break;
+      } catch (e) {
+        console.warn(`Claude ${model} draft error attempt ${attempt + 1}: ${e.message}`);
+        if (attempt < 2) await new Promise((res) => setTimeout(res, 3000));
+      }
+    }
+  }
+  return null;
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -125,28 +348,25 @@ async function createOpportunityTask(opp) {
   if (!process.env.NOTION_TOKEN || !process.env.NOTION_DB_ID) return null;
 
   const ageDays = Math.round((Date.now() - opp.createdUtc * 1000) / 86400000);
-  const draftResponse = suggestResponse(opp);
+  const draftBlock = opp.customDraft
+    ? `**Draft (${opp.draftLang === 'es' ? 'ES' : 'EN'}) — generado por Claude para este post puntual:**\n\n${opp.customDraft}\n\n---`
+    : `⚠️ Draft no se pudo generar (revisar el contexto del post manualmente).`;
 
-  const acceptance = `📍 Oportunidad de mención orgánica en Reddit (NO automatizada — respondé desde tu cuenta personal).
+  const acceptance = `📍 Oportunidad Reddit (manual desde tu cuenta personal).
 
 **Hilo:** ${opp.url}
-**Subreddit:** r/${opp.subreddit}
-**Título:** ${opp.title}
-**Edad:** ${ageDays} días · ${opp.score} upvotes · ${opp.numComments} comentarios
+**r/${opp.subreddit}** · ${ageDays}d · ${opp.score}↑ · ${opp.numComments} comments · relevancia ${opp.relevanceScore}/10
 
-**Contexto del post:**
-${(opp.selftext || '(sin texto)').slice(0, 500)}
+**Contexto del post (OP):**
+${(opp.selftext || '(solo título)').slice(0, 600)}
 
-**Draft de respuesta sugerida (editá antes de publicar):**
-${draftResponse}
+${draftBlock}
 
-⚠️ REGLAS para responder:
-1. Usá tu cuenta personal de Reddit, no una creada para esto.
-2. Sé honesto: identificate como dueño/equipo si vas a mencionar Casa Museo.
-3. APORTÁ VALOR primero — datos, recomendaciones útiles, opiniones honestas. La mención del proyecto es secundaria.
-4. Mencioná Casa Museo solo si encaja naturalmente (ej: "yo opero un proyecto boutique en Laureles, opinión sesgada pero...").
-5. Si el thread tiene >7 días o ya tiene muchas respuestas, salteá — el ROI baja mucho.
-6. NO copies el draft tal cual — adaptalo al tono del subreddit.`;
+⚠️ Verificar antes de postear:
+• Los datos cuantitativos (precios, distancias) — son verificables?
+• El tono encaja con el subreddit?
+• Algún top comment ya cubrió lo que estás por decir?
+• Si necesita ajustes: comentá ESTA tarea con feedback ("tono muy formal", "no menciones Casa Museo", etc.). El próximo run del conversation-finder lo tendrá en cuenta como guía.`;
 
   const props = {
     Title: { title: [{ text: { content: `[REDDIT] ${opp.title.slice(0, 80)}` } }] },
@@ -175,47 +395,13 @@ ${draftResponse}
   return r.json();
 }
 
-function suggestResponse(opp) {
-  const title = (opp.title || '').toLowerCase();
-  if (title.includes('laureles') && title.includes('poblado')) {
-    return `Soy parte de un proyecto boutique en Laureles, opinión sesgada pero intentando dar datos:
-
-- **Laureles** es más residencial/auténtico, ~40% más económico, más caminable. Sin Parque Lleras pero con La 70 cerca para vida nocturna.
-- **Poblado** es el hub turístico internacional. Más caro, más fácil en inglés, más opciones gastronómicas premium.
-- Para parejas o nómadas que quieren vivir Medellín "real": Laureles.
-- Para visita corta + vida nocturna intensa + comodidad turística: Poblado.
-
-¿Tipo de viaje + presupuesto? Puedo dar recomendaciones más específicas.`;
-  }
-  if (title.includes('safe') || title.includes('seguro')) {
-    return `Vivo y opero en Laureles, te puedo dar contexto real:
-
-- En zonas turísticas (Poblado, Laureles, Envigado) durante el día y noche temprana es seguro como cualquier capital LATAM.
-- Después de 11pm: usar Uber/DiDi siempre, no caminar zonas oscuras.
-- Evitar mostrar celular en la calle al detalle, especialmente en cruces concurridos.
-- "No dar papaya" es la regla local. Eso significa: no exhibir valor.
-- Estadísticas oficiales en medellin.gov.co/secretaria-seguridad si querés datos por comuna.
-
-¿Tenés algún plan específico que te genere duda?`;
-  }
-  if (title.includes('nomad') || title.includes('remote')) {
-    return `Para nómadas digitales recomiendo Laureles sobre Poblado por:
-- Wifi reliable ~200 Mbps en cafés (Pergamino, Café Velvet, Ritual)
-- Costo de vida ~30% menos que Poblado
-- Comunidad más mixta (no solo expats)
-- Caminable, sin la fatiga turística de Provenza
-- Cerca del metro (estación Estadio) si necesitás moverte
-
-¿Cuánto tiempo + presupuesto mensual?`;
-  }
-  return `Sugerencia: respondé con datos específicos (precios, distancias, tu experiencia personal). Mencioná Casa Museo Laureles solo si encaja naturalmente en el thread. Aportá valor primero.`;
-}
-
 // ─────────────────────────────────────────────────────────────────
 // Main
 // ─────────────────────────────────────────────────────────────────
 
 export async function runConversationFinder() {
+  const state = JSON.parse(await fs.readFile(path.join(ROOT, 'data', 'agent-state.json'), 'utf8'));
+  const humanFeedback = await loadHumanFeedbackOnReddit();
   const history = await loadHistory();
   const seenIds = new Set(history.opportunities.map((o) => o.id));
 
@@ -228,7 +414,7 @@ export async function runConversationFinder() {
       for (const p of posts) {
         if (seenIds.has(p.id)) continue;
         const score = scorePost(p);
-        if (score < 4) continue;
+        if (score < MIN_RELEVANCE) continue;
         candidates.set(p.id, { post: p, score, subreddit: sub });
       }
       // Rate limit respetuoso
@@ -242,7 +428,7 @@ export async function runConversationFinder() {
     for (const p of posts) {
       if (seenIds.has(p.id)) continue;
       const score = scorePost(p);
-      if (score < 4) continue;
+      if (score < MIN_RELEVANCE) continue;
       candidates.set(p.id, { post: p, score, subreddit: p.subreddit });
     }
     await new Promise((res) => setTimeout(res, 1500));
@@ -256,6 +442,7 @@ export async function runConversationFinder() {
     const opp = {
       id: post.id,
       title: post.title,
+      author: post.author,
       url: `https://www.reddit.com${post.permalink}`,
       subreddit,
       score: post.score,
@@ -265,6 +452,19 @@ export async function runConversationFinder() {
       relevanceScore: score,
       foundAt: new Date().toISOString(),
     };
+
+    // Generar draft custom con Claude (incluye top comments del hilo como contexto)
+    try {
+      const customResult = await generateCustomDraft({ post: { ...post, subreddit }, subreddit, state, humanFeedback });
+      if (customResult) {
+        opp.customDraft = customResult.draft;
+        opp.draftLang = customResult.lang;
+        opp.topCommentsConsidered = customResult.topComments.length;
+      }
+    } catch (e) {
+      console.warn(`Custom draft failed for ${post.id}: ${e.message}`);
+    }
+
     const task = await createOpportunityTask(opp);
     if (task?.id) {
       opp.notionTaskId = task.id;
