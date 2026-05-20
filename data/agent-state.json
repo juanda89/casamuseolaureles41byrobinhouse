@@ -46,7 +46,11 @@
     "lng": -75.5928653,
     "categoryEs": "Hotel boutique",
     "categoryEn": "Boutique hotel",
-    "instagram": "@casalaureles41"
+    "instagram": "@casalaureles41",
+    "secondaryCategories": [
+      "Serviced apartment"
+    ],
+    "categoryDecision": "2026-05-10 — JD confirmó: primaria \"Hotel boutique\" + secundaria \"Serviced apartment\". Razón: \"hotel\" tiene volumen de búsqueda mucho mayor en Medellín; \"Serviced apartment\" describe la realidad operativa."
   },
   "keywordsToTrack": [
     {
