@@ -27,6 +27,9 @@ import { runAhrefs } from './skills/ahrefs-research.mjs';
 import { runOtterly } from './skills/otterly-csv-ingest.mjs';
 import { runGapDetector } from './skills/keyword-gap-detector.mjs';
 import { runContentDraftGenerator } from './skills/content-draft-generator.mjs';
+import { runInternalLinker } from './skills/internal-linker.mjs';
+import { runImagePipeline } from './skills/image-pipeline.mjs';
+import { runConversationFinder } from './skills/conversation-opportunity-finder.mjs';
 import { renderEmail, sendReportEmail } from './lib/email-renderer.mjs';
 import { syncCitationTasks, syncGapTasks } from './lib/notion-sync.mjs';
 
@@ -39,6 +42,9 @@ const FLAGS = {
   noOtterly: process.argv.includes('--no-otterly'),
   noGaps: process.argv.includes('--no-gaps'),
   noContent: process.argv.includes('--no-content'),
+  noLinks: process.argv.includes('--no-links'),
+  noImages: process.argv.includes('--no-images'),
+  noConversation: process.argv.includes('--no-conversation'),
   noEmail: process.argv.includes('--no-email'),
   noNotion: process.argv.includes('--no-notion'),
 };
@@ -442,6 +448,42 @@ async function createGitHubIssue(title, body) {
     } catch (e) {
       console.error('✗ Content draft failed:', e.message);
       contentDraft = { ok: false, stale: true, summary: 'Content draft failed: ' + e.message, alerts: [], data: null };
+    }
+  }
+
+  // ─── Image pipeline (genera hero AI para drafts sin foto) ─
+  let imagePipeline = null;
+  if (!FLAGS.noImages) {
+    try {
+      imagePipeline = await runImagePipeline();
+      console.log('✓ Image pipeline:', imagePipeline.summary);
+    } catch (e) {
+      console.error('✗ Image pipeline failed:', e.message);
+      imagePipeline = { ok: false, stale: true, summary: 'Image pipeline failed: ' + e.message, alerts: [], data: null };
+    }
+  }
+
+  // ─── Internal linker (sugiere links internos a drafts existentes) ─
+  let linker = null;
+  if (!FLAGS.noLinks) {
+    try {
+      linker = await runInternalLinker();
+      console.log('✓ Internal linker:', linker.summary);
+    } catch (e) {
+      console.error('✗ Internal linker failed:', e.message);
+      linker = { ok: false, stale: true, summary: 'Internal linker failed: ' + e.message, alerts: [], data: null };
+    }
+  }
+
+  // ─── Conversation finder (Reddit) ─
+  let conversation = null;
+  if (!FLAGS.noConversation) {
+    try {
+      conversation = await runConversationFinder();
+      console.log('✓ Conversation finder:', conversation.summary);
+    } catch (e) {
+      console.error('✗ Conversation finder failed:', e.message);
+      conversation = { ok: false, stale: true, summary: 'Conversation finder failed: ' + e.message, alerts: [], data: null };
     }
   }
 

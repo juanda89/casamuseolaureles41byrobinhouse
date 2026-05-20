@@ -12,6 +12,8 @@
  *   NOTION_TOKEN, NOTION_DB_ID
  */
 
+import { sendTaskNotification } from './email-renderer.mjs';
+
 const NOTION_VERSION = '2022-06-28';
 
 function headers() {
@@ -72,7 +74,22 @@ export async function createNotionTask({ title, status = 'To Do', priority = 'P1
     console.warn(`Notion task create failed (${title.slice(0, 50)}): ${r.status} ${await r.text()}`);
     return null;
   }
-  return r.json();
+  const task = await r.json();
+
+  // Notificación email instantánea (no esperar al reporte semanal)
+  if (createdBy === 'Brain' && priority === 'P0') {
+    try {
+      await sendTaskNotification({
+        taskTitle: title,
+        taskUrl: task.url,
+        taskType: type,
+        priority,
+        rationale: forUseIn,
+      });
+    } catch {}
+  }
+
+  return task;
 }
 
 export async function syncCitationTasks(citations, nap) {

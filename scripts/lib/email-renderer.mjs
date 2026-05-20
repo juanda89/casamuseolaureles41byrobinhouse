@@ -167,10 +167,16 @@ export function renderEmail({ weekStr, gsc, bing, lighthouse, ahrefs, otterly, g
   return `<!DOCTYPE html><html><head><meta charset="utf-8"><style>${css}</style></head><body><div class="wrap"><h1>Reporte SEO/GEO · semana del ${weekStr}</h1><p style="color:#888; font-size:13px; margin-top:0;">Casa Museo Laureles · casamuseolaureles.com</p>${sections.join('\n')}</div></body></html>`;
 }
 
-export async function sendReportEmail({ subject, html }) {
+function parseRecipients(raw) {
+  if (!raw) return ['juandavid@robinhouse.co'];
+  if (Array.isArray(raw)) return raw;
+  return String(raw).split(',').map((s) => s.trim()).filter(Boolean);
+}
+
+export async function sendReportEmail({ subject, html, to }) {
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.RESEND_FROM_EMAIL || 'agente@reportes.casamuseolaureles.com';
-  const to = process.env.RESEND_TO_EMAIL || 'juandavid@robinhouse.co';
+  const recipients = parseRecipients(to ?? process.env.RESEND_TO_EMAIL);
   if (!apiKey) {
     console.warn('No RESEND_API_KEY — skipping email send');
     return { ok: false, error: 'missing key' };
@@ -180,7 +186,7 @@ export async function sendReportEmail({ subject, html }) {
     headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
       from: `Casa Museo Laureles <${from}>`,
-      to: Array.isArray(to) ? to : [to],
+      to: recipients,
       subject,
       html,
     }),
@@ -189,5 +195,38 @@ export async function sendReportEmail({ subject, html }) {
     return { ok: false, error: `Resend ${r.status}: ${await r.text()}` };
   }
   const j = await r.json();
-  return { ok: true, id: j.id };
+  return { ok: true, id: j.id, recipients };
+}
+
+/**
+ * Notificación email instantánea cuando el brain crea una tarea Notion (no esperar al lunes).
+ * Body minimalista con link a la tarjeta.
+ */
+export async function sendTaskNotification({ taskTitle, taskUrl, taskType, priority, rationale }) {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) return { ok: false, error: 'no key' };
+  const from = process.env.RESEND_FROM_EMAIL || 'agente@reportes.casamuseolaureles.com';
+  const recipients = parseRecipients(process.env.RESEND_TO_EMAIL);
+
+  const html = `<div style="font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;max-width:520px;margin:24px auto;padding:24px;color:#0B2A4A;background:#fff;border:1px solid #eee;border-radius:8px">
+<p style="margin:0 0 4px;font-size:12px;color:#888;letter-spacing:.06em;text-transform:uppercase">Nueva tarea del brain · ${priority}</p>
+<h2 style="margin:6px 0 14px;font-size:18px;color:#0B2A4A">${taskTitle}</h2>
+<p style="margin:0 0 16px;font-size:14px;color:#444;line-height:1.5">${rationale || ''}</p>
+<p style="margin:0 0 6px;font-size:13px;color:#888">Tipo: ${taskType}</p>
+<a href="${taskUrl}" style="display:inline-block;margin-top:10px;background:#0B2A4A;color:#fff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:13px;font-weight:600">Abrir en Notion →</a>
+<p style="margin:20px 0 0;font-size:11px;color:#aaa">Brain · Casa Museo Laureles</p>
+</div>`;
+
+  const r = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      from: `Casa Museo Laureles <${from}>`,
+      to: recipients,
+      subject: `🆕 ${priority} · ${taskTitle.slice(0, 80)}`,
+      html,
+    }),
+  });
+  if (!r.ok) return { ok: false, error: `Resend ${r.status}: ${await r.text()}` };
+  return { ok: true, id: (await r.json()).id };
 }

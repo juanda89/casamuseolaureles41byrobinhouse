@@ -18,6 +18,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';
+import { sendTaskNotification } from '../lib/email-renderer.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const BLOG_BASE = path.join(ROOT, 'site', 'src', 'content', 'blog');
@@ -409,6 +410,18 @@ ${filesList}
     return null;
   }
   const j = await r.json();
+
+  // Notificación email instantánea para revisar el draft
+  try {
+    await sendTaskNotification({
+      taskTitle: title,
+      taskUrl: j.url,
+      taskType: 'Content asset',
+      priority: 'P1',
+      rationale: `Nuevo draft generado por Claude para "${gap.query || gap.kw}". Lee los .md, decidí publicar/refinar/descartar en Notion.`,
+    });
+  } catch {}
+
   return { id: j.id, url: j.url };
 }
 

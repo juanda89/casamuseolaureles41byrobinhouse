@@ -1,0 +1,22 @@
+{
+  "images": [
+    {
+      "ts": "2026-05-20T04:05:59.596Z",
+      "slug": "donde-quedarse-en-medellin-guia-barrios",
+      "lang": "es",
+      "imageUrl": "/blog/donde-quedarse-en-medellin-guia-barrios/hero.jpg",
+      "prompt": "Concepto para ilustrar: \"Dónde Quedarse en Medellín: Guía por Barrios 2026\". Keyword: donde quedarse en medellín. Editorial photography style for a boutique design hotel blog. Medellín, Colombia setting. Warm natural light, soft shadows, mid-day sun. Aspirational but authentic — not stocky. No people in close-up faces. No text overlay. Subtle warm color palette: deep terracotta, sage green, cream, dark navy. Visual composition: rule of thirds, breathing room. Avoid neon signs, busy crowds, generic stock imagery.",
+      "sizeBytes": 386816,
+      "model": "gpt-image-1"
+    },
+    {
+      "ts": "2026-05-20T04:07:04.506Z",
+      "slug": "where-to-stay-in-medellin-neighborhoods-guide",
+      "lang": "en",
+      "imageUrl": "/blog/where-to-stay-in-medellin-neighborhoods-guide/hero.jpg",
+      "prompt": "Concept to illustrate: \"Where to Stay in Medellín: Complete 2025 Neighborhood Guide\". Keyword: where to stay in medellin. Editorial photography style for a boutique design hotel blog. Medellín, Colombia setting. Warm natural light, soft shadows, mid-day sun. Aspirational but authentic — not stocky. No people in close-up faces. No text overlay. Subtle warm color palette: deep terracotta, sage green, cream, dark navy. Visual composition: rule of thirds, breathing room. Avoid neon signs, busy crowds, generic stock imagery.",
+      "sizeBytes": 384832,
+      "model": "gpt-image-1"
+    }
+  ]
+}

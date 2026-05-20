@@ -29,6 +29,12 @@ external_sources:
 brain_generated: true
 validated_by_geo_rules: true
 draft: true
+internal_links:
+  - url: "/es/laureles"
+    anchor: "Guía completa de Laureles"
+hero_image: "/blog/donde-quedarse-en-medellin-guia-barrios/hero.jpg"
+hero_alt: "Ilustración: Dónde Quedarse en Medellín: Guía por Barrios 2026"
+hero_credit: "Imagen ilustrativa (AI-generated). Foto real próximamente."
 ---
 
 # Dónde Quedarse en Medellín: Guía por Barrios 2026

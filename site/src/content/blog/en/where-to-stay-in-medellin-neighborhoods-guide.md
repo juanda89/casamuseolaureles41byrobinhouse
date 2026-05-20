@@ -29,6 +29,12 @@ external_sources:
 brain_generated: true
 validated_by_geo_rules: true
 draft: true
+internal_links:
+  - url: "/en/laureles"
+    anchor: "Complete Laureles guide"
+hero_image: "/blog/where-to-stay-in-medellin-neighborhoods-guide/hero.jpg"
+hero_alt: "Ilustración: Where to Stay in Medellín: Complete 2025 Neighborhood Guide"
+hero_credit: "Imagen ilustrativa (AI-generated). Foto real próximamente."
 ---
 
 # Where to Stay in Medellín: Complete 2025 Neighborhood Guide
