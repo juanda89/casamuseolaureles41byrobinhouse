@@ -1,0 +1,118 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+import { t } from '../../../lib/i18n';
+import { SITE, NAP } from '../../../lib/constants';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => data.lang === 'en' && data.draft === false);
+  return posts.map((post) => ({
+    params: { slug: post.data.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const dict = t('en');
+const { Content, headings, remarkPluginFrontmatter } = await render(post);
+
+const pathname = `/en/blog/${post.data.slug}`;
+const wordCount = remarkPluginFrontmatter?.wordCount ?? null;
+const readTime = wordCount ? Math.max(1, Math.round(wordCount / 200)) : null;
+
+const blogPostingSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  inLanguage: 'en',
+  datePublished: post.data.date_published.toISOString(),
+  dateModified: (post.data.date_updated ?? post.data.date_published).toISOString(),
+  author: { '@type': 'Organization', name: post.data.author, url: SITE.url },
+  publisher: { '@type': 'Organization', name: NAP.name, url: SITE.url },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE.url}${pathname}` },
+  keywords: [post.data.primary_keyword, ...post.data.secondary_keywords].join(', '),
+  ...(post.data.hero_image ? { image: post.data.hero_image } : {}),
+};
+
+const faqSchema = post.data.faq.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: post.data.faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+} : null;
+
+const schemas = [blogPostingSchema, faqSchema].filter(Boolean);
+---
+<Base
+  locale="en"
+  title={`${post.data.title} · Casa Museo Laureles`}
+  description={post.data.description}
+  pathname={pathname}
+  image={post.data.hero_image}
+  schemas={schemas}
+>
+  <article class="container-default pt-12 md:pt-20 pb-16 md:pb-24 max-w-3xl">
+    <a href="/en/blog" class="label-caps text-ink-muted hover:text-ink transition-colors">{dict.blog.backToBlog}</a>
+
+    <header class="mt-6">
+      <p class="label-caps text-accent-deep">
+        {dict.blog.publishedOn} {new Date(post.data.date_published).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        {readTime && <span class="ml-3">· {readTime} {dict.blog.readTime}</span>}
+      </p>
+      <h1 class="mt-3 font-display font-light text-headline-lg md:text-display-md text-ink leading-tight">
+        {post.data.title}
+      </h1>
+      <p class="mt-4 text-ink-muted leading-relaxed text-body-lg">{post.data.description}</p>
+    </header>
+
+    {post.data.hero_image && (
+      <figure class="mt-8 -mx-4 md:mx-0">
+        <img src={post.data.hero_image} alt={post.data.hero_alt ?? post.data.title} loading="eager" decoding="async" class="w-full rounded-md" />
+        {post.data.hero_credit && (
+          <figcaption class="text-xs text-ink-muted mt-2 px-4 md:px-0">{post.data.hero_credit}</figcaption>
+        )}
+      </figure>
+    )}
+
+    <div class="prose prose-lg mt-10 max-w-none text-ink leading-relaxed">
+      <Content />
+    </div>
+
+    {post.data.faq.length > 0 && (
+      <section class="mt-16">
+        <h2 class="font-display font-light text-headline-md text-ink mb-6">Frequently asked questions</h2>
+        <dl class="space-y-6">
+          {post.data.faq.map((f) => (
+            <div class="border-t border-ink/10 pt-6">
+              <dt class="font-medium text-ink">{f.q}</dt>
+              <dd class="mt-2 text-ink-muted leading-relaxed">{f.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    )}
+
+    {post.data.external_sources.length > 0 && (
+      <section class="mt-12 text-sm text-ink-muted">
+        <h3 class="font-medium text-ink mb-3">Sources</h3>
+        <ul class="list-disc list-inside space-y-1">
+          {post.data.external_sources.map((s) => (
+            <li><a href={s.url} class="hover:underline" target="_blank" rel="noopener noreferrer">{s.title}</a></li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <aside class="mt-16 p-6 md:p-8 bg-accent-soft/10 rounded-lg border border-accent-soft/30">
+      <h3 class="font-display font-light text-headline-sm text-ink">{dict.blog.ctaTitle}</h3>
+      <p class="mt-3 text-ink-muted leading-relaxed">{dict.blog.ctaText}</p>
+      <a href="/en" class="mt-5 inline-block bg-ink text-paper px-6 py-3 rounded font-medium hover:bg-ink/90 transition-colors">
+        {dict.blog.ctaButton}
+      </a>
+    </aside>
+  </article>
+</Base>

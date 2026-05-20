@@ -52,10 +52,22 @@
     "title": "Laureles — the walkable side of Medellín",
     "body": "Five minutes from Laureles' First and Second Park. Specialty coffee (Ritual, Revolución, Semilla), restaurants on Avenida Nutibara, EnCicla bike routes, and the Atanasio Girardot Stadium. The local, walkable face of Medellín.",
     "highlights": [
-      { "title": "Specialty coffee", "body": "Ritual, Revolución and Semilla, all 5 min on foot." },
-      { "title": "1st & 2nd Park", "body": "Walkable parks with calm nightlife." },
-      { "title": "La 70 & Stadium", "body": "Bars, restaurants and matches a few minutes away." },
-      { "title": "MDE Airport", "body": "45 minutes via the Oriente Tunnel." }
+      {
+        "title": "Specialty coffee",
+        "body": "Ritual, Revolución and Semilla, all 5 min on foot."
+      },
+      {
+        "title": "1st & 2nd Park",
+        "body": "Walkable parks with calm nightlife."
+      },
+      {
+        "title": "La 70 & Stadium",
+        "body": "Bars, restaurants and matches a few minutes away."
+      },
+      {
+        "title": "MDE Airport",
+        "body": "45 minutes via the Oriente Tunnel."
+      }
     ],
     "moreLink": "Full Laureles guide →"
   },
@@ -97,5 +109,19 @@
   "language": {
     "switchTo": "Español",
     "label": "Language"
+  },
+  "blog": {
+    "title": "Blog · Medellín & Laureles Guides",
+    "metaDescription": "Honest guides about where to stay in Medellín, what to do in Laureles, real safety data, and how to make the most of your trip from a local perspective.",
+    "intro": "We write what we wish we'd read before traveling to Medellín. Real data, specific recommendations, and the perspective of someone who lives Laureles every day.",
+    "empty": "First articles coming soon.",
+    "readPost": "Read post →",
+    "publishedOn": "Published",
+    "updatedOn": "Updated",
+    "readTime": "min read",
+    "backToBlog": "← Back to blog",
+    "ctaTitle": "Coming to Medellín?",
+    "ctaText": "Casa Museo Laureles is three boutique lofts a 5-minute walk from Laureles' main avenue. Designed by Robin House, operated by HOUSY.",
+    "ctaButton": "Check availability"
   }
 }

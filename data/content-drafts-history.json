@@ -1,0 +1,17 @@
+{
+  "drafts": [
+    {
+      "ts": "2026-05-20T03:27:26.957Z",
+      "gap": {
+        "type": "content_gap",
+        "query": "donde quedarse en medellín"
+      },
+      "slug": "donde-quedarse-en-medellin-guia-barrios",
+      "files": [
+        "site/src/content/blog/es/donde-quedarse-en-medellin-guia-barrios.md",
+        "site/src/content/blog/en/where-to-stay-in-medellin-neighborhoods-guide.md"
+      ],
+      "prUrl": null
+    }
+  ]
+}

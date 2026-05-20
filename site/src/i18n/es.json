@@ -52,10 +52,22 @@
     "title": "Laureles, la Medellín que sí se camina",
     "body": "A 5 minutos de la Primera y Segunda de Laureles. Cafés especialty (Ritual, Revolución, Semilla), restaurantes en Avenida Nutibara, bici-rutas EnCicla y el Estadio Atanasio Girardot. La cara local y caminable de Medellín.",
     "highlights": [
-      { "title": "Cafés especialty", "body": "Ritual, Revolución y Semilla a 5 minutos a pie." },
-      { "title": "1ra y 2da de Laureles", "body": "Parques caminables con vida nocturna tranquila." },
-      { "title": "La 70 y el Estadio", "body": "Bares, restaurantes y partidos a pocos minutos." },
-      { "title": "Aeropuerto MDE", "body": "45 minutos por el Túnel de Oriente." }
+      {
+        "title": "Cafés especialty",
+        "body": "Ritual, Revolución y Semilla a 5 minutos a pie."
+      },
+      {
+        "title": "1ra y 2da de Laureles",
+        "body": "Parques caminables con vida nocturna tranquila."
+      },
+      {
+        "title": "La 70 y el Estadio",
+        "body": "Bares, restaurantes y partidos a pocos minutos."
+      },
+      {
+        "title": "Aeropuerto MDE",
+        "body": "45 minutos por el Túnel de Oriente."
+      }
     ],
     "moreLink": "Guía completa de Laureles →"
   },
@@ -97,5 +109,19 @@
   "language": {
     "switchTo": "English",
     "label": "Idioma"
+  },
+  "blog": {
+    "title": "Blog · Guías de Medellín y Laureles",
+    "metaDescription": "Guías honestas sobre dónde quedarse en Medellín, qué hacer en Laureles, seguridad real, y cómo aprovechar tu viaje como huésped local.",
+    "intro": "Escribimos lo que nos hubiera gustado leer antes de viajar a Medellín. Datos reales, recomendaciones específicas, y la mirada de quien vive Laureles cada día.",
+    "empty": "Próximamente publicamos los primeros artículos.",
+    "readPost": "Leer artículo →",
+    "publishedOn": "Publicado el",
+    "updatedOn": "Actualizado el",
+    "readTime": "min de lectura",
+    "backToBlog": "← Volver al blog",
+    "ctaTitle": "¿Vienes a Medellín?",
+    "ctaText": "Casa Museo Laureles son tres lofts boutique a 5 minutos caminando de la 1ra de Laureles. Diseñados por Robin House, operados por HOUSY.",
+    "ctaButton": "Ver disponibilidad"
   }
 }

@@ -107,16 +107,26 @@ Abrí `data/agent-state.json` y mirá el bloque `"competitors"`. Me inventé 6 b
 ### 10. Revisar las 18 keywords trackeadas · 2 min
 Abrí `data/agent-state.json` → `keywordsToTrack`. Si querés agregar o quitar alguna, decime. Sin tu feedback, el agent va a trackear esas 18 por default.
 
-### 11. Pasarme ANTHROPIC_API_KEY · 5 min
-Para construir las 3 skills que requieren LLM:
-- **content-draft-generator** — genera blog posts cuando el brain detecta gaps
-- **review-responder** — borradores de respuestas a reviews (cuando llegue review nueva)
-- **image-pipeline modo generic** — genera fotos AI para blogs (requiere también OPENAI_API_KEY para gpt-image-1)
+### 11. ✅ DONE · Anthropic + OpenAI API keys recibidas (2026-05-09 noche)
+- ANTHROPIC_API_KEY guardada, test OK (Sonnet 4.5 responde)
+- OPENAI_API_KEY guardada, test OK (gpt-image-2 confirmado)
 
-Pasos: console.anthropic.com → API Keys → Create key → pegámela.
+### 11.5 🆕 NUEVO — Revisar el primer draft que generó Claude
+El skill `content-draft-generator` ya generó su primer draft de ejemplo:
+- `site/src/content/blog/es/donde-quedarse-en-medellin-guia-barrios.md` (1476 palabras)
+- `site/src/content/blog/en/where-to-stay-in-medellin-neighborhoods-guide.md` (1532 palabras)
 
-### 12. Pasarme OPENAI_API_KEY (cuando quieras fotos AI para blogs) · 5 min
-Para image-pipeline modo generic. platform.openai.com → API Keys → Create.
+Ambos están con `draft: true` → **NO se publican hasta que las revises y cambies a `draft: false`**.
+
+**Lo que necesitas verificar manualmente:**
+- Las cifras específicas (precios COP, % seguridad, distancias) — Claude las puede haber alucinado. Validá las críticas contra fuentes reales.
+- Las URLs externas — confirmá que viven y son las correctas.
+- El tono — ajustá donde suene marketingero.
+- Los 5 FAQs del frontmatter — son los que más impactan en LLMs.
+
+**Cuando esté OK:** abrir el .md, cambiar `draft: true` → `draft: false`, commit, push. Vercel deploya automático. La página queda live en `/es/blog/donde-quedarse-en-medellin-guia-barrios` y `/en/blog/where-to-stay-in-medellin-neighborhoods-guide`.
+
+**Si está malo:** borrar los archivos, ajustarme el system prompt en `scripts/skills/content-draft-generator.mjs` para próximos drafts.
 
 ---
 

@@ -26,6 +26,7 @@ import { runLighthouse } from './skills/lighthouse-audit.mjs';
 import { runAhrefs } from './skills/ahrefs-research.mjs';
 import { runOtterly } from './skills/otterly-csv-ingest.mjs';
 import { runGapDetector } from './skills/keyword-gap-detector.mjs';
+import { runContentDraftGenerator } from './skills/content-draft-generator.mjs';
 import { renderEmail, sendReportEmail } from './lib/email-renderer.mjs';
 import { syncCitationTasks, syncGapTasks } from './lib/notion-sync.mjs';
 
@@ -37,6 +38,7 @@ const FLAGS = {
   noAhrefs: process.argv.includes('--no-ahrefs'),
   noOtterly: process.argv.includes('--no-otterly'),
   noGaps: process.argv.includes('--no-gaps'),
+  noContent: process.argv.includes('--no-content'),
   noEmail: process.argv.includes('--no-email'),
   noNotion: process.argv.includes('--no-notion'),
 };
@@ -404,12 +406,52 @@ async function createGitHubIssue(title, body) {
     }
   }
 
+  // ─── Content draft generator (Claude) — usa los gaps detectados ─
+  let contentDraft = null;
+  if (!FLAGS.noContent && gaps?.ok) {
+    try {
+      // Construimos una lista expandida de gaps: incluye keywords del tier "head"/"mid" sin tracking
+      // de Ahrefs (que vienen como oportunidades grandes aunque no estén en GSC todavía).
+      const expandedGaps = [
+        ...(gaps.data?.gaps || []),
+        // Si no hay gaps reales todavía (sitio nuevo), pero el ahrefs trae gapKeywords, usarlos
+        ...(ahrefs?.data?.gapKeywords || []).slice(0, 5).map((g) => ({
+          type: 'content_gap',
+          query: g.kw,
+          volume: g.volume,
+          kd: g.kd,
+          action: 'create-content',
+          rationale: `Competitor "${g.competitor}" rankea en pos ${g.position} para "${g.kw}" (vol ${g.volume}/mes). Nosotros no.`,
+        })),
+        // Si seguimos sin gaps, usar keywords tier head/mid del state como fallback (estrategia agresiva)
+        ...((!gaps.data?.gaps?.length && !(ahrefs?.data?.gapKeywords?.length))
+          ? (state.keywordsToTrack || [])
+              .filter((k) => ['head', 'mid'].includes(k.tier))
+              .slice(0, 3)
+              .map((k) => ({
+                type: 'content_gap',
+                query: k.kw,
+                kw: k.kw,
+                action: 'create-content',
+                rationale: `Keyword tier "${k.tier}" (${k.intent}) sin contenido propio. Estrategia agresiva multi-tier — atacar antes que la competencia se posicione en LLMs.`,
+              }))
+          : []),
+      ];
+      contentDraft = await runContentDraftGenerator(state, { data: { gaps: expandedGaps } });
+      console.log('✓ Content draft:', contentDraft.summary);
+    } catch (e) {
+      console.error('✗ Content draft failed:', e.message);
+      contentDraft = { ok: false, stale: true, summary: 'Content draft failed: ' + e.message, alerts: [], data: null };
+    }
+  }
+
   // ─── Consolidación de alertas y wins ─
   const allAlerts = [
     ...(lighthouse?.alerts || []),
     ...(ahrefs?.alerts || []),
     ...(otterly?.alerts || []),
     ...(gaps?.alerts || []),
+    ...(contentDraft?.alerts || []),
   ];
   const allWins = [];
   // Wins simples derivados:
@@ -422,6 +464,9 @@ async function createGitHubIssue(title, body) {
   if (otterly?.ok && !otterly.stale && otterly.data?.byEngine) {
     const totalCited = Object.values(otterly.data.byEngine).reduce((s, e) => s + e.cited, 0);
     if (totalCited > 0) allWins.push(`Citados en ${totalCited} respuestas de LLMs esta semana.`);
+  }
+  if (contentDraft?.ok && !contentDraft.stale && contentDraft.data?.prUrl) {
+    allWins.push(`Nuevo draft de blog generado por Claude (PR abierto): <a href="${contentDraft.data.prUrl}">${contentDraft.data.gap?.query || 'draft'}</a>`);
   }
 
   // ─── GitHub Issue (sigue siendo el respaldo técnico) ─
@@ -474,6 +519,8 @@ async function createGitHubIssue(title, body) {
       ahrefsOk: !!ahrefs?.ok,
       otterlyOk: !!otterly?.ok && !otterly?.stale,
       gapsOk: !!gaps?.ok,
+      contentDraftOk: !!contentDraft?.ok && !contentDraft?.stale,
+      contentDraftPr: contentDraft?.data?.prUrl || null,
       alertsCount: allAlerts.length,
       winsCount: allWins.length,
     },
