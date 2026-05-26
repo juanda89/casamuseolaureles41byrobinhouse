@@ -1,6 +1,30 @@
 {
-  "generatedAt": "2026-05-25T13:54:19.591Z",
+  "generatedAt": "2026-05-26T13:44:32.903Z",
   "tasks": {
+    "36b45399-79ca-815a-9bba-c0d8d7f343fb": {
+      "id": "36b45399-79ca-815a-9bba-c0d8d7f343fb",
+      "url": "https://www.notion.so/BRAIN-CREATE-CONTENT-selina-medellin-36b4539979ca815a9bbac0d8d7f343fb",
+      "title": "[BRAIN CREATE-CONTENT] \"selina medellin\"",
+      "status": "Done",
+      "priority": "P2",
+      "type": "Content asset",
+      "createdBy": "Brain",
+      "forUseIn": "content_gap detectado por gap-detector semanal.",
+      "acceptanceCriteria": "Competidores rankean acá, nosotros no. Vol 700/mes · KD ?.",
+      "lastEditedTime": "2026-05-25T16:14:00.000Z"
+    },
+    "36b45399-79ca-810a-89a0-fc7b5256e784": {
+      "id": "36b45399-79ca-810a-89a0-fc7b5256e784",
+      "url": "https://www.notion.so/BRAIN-DRAFT-REVIEW-selina-medellin-36b4539979ca810a89a0fc7b5256e784",
+      "title": "[BRAIN DRAFT REVIEW] selina medellin",
+      "status": "Review",
+      "priority": "P1",
+      "type": "Content asset",
+      "createdBy": "Brain",
+      "forUseIn": "Gap: content_gap · Competidores rankean acá, nosotros no. Vol 700/mes · KD ?.",
+      "acceptanceCriteria": "📄 Draft generado automáticamente por Claude. ANTES de aprobar:\n\n1. Abre el preview deploy del PR (buscar PR en el repo)\n2. Lee los archivos:\n• site/src/content/blog/es/selina-medellin-guia-completa-precios-ubicaciones.md (1672w, 192 datos)\n3. Verifica con cuidado las cifras específicas (precios, %, distancias) — Claude puede alucinar números.\n4. Verifica que las URLs en external_sources sean reales y respondan 200.\n\n⚠️ CÓMO MARCAR DECISIÓN al cambiar el status a Done:\n\n🟢 PUBLICAR (queda live): escribe \"publicar\" o \"publish\" en un comentario de esta tarea.\n   → El sistema cambia draft:true→false, hace push, Vercel deploya, queda live en /blog/<slug>.\n\n🟡 REFINAR: escribe tus comentarios con cambios específicos (ej: \"la cifra de 4.2 hurtos está mal, según Alcaldía es 6.8\" / \"el FAQ 3 está flojo, reescribilo más concreto\").\n   → El sistema lee tus comentarios, regenera el draft con esas correcciones, force-push al mismo PR, devuelve la tarea a \"To Do\" para revisar v2.\n\n🔴 DESCARTAR: cambia status a Discarted directamente.\n   → El sistema cierra el PR sin merge y archiva los .md.",
+      "lastEditedTime": "2026-05-25T15:50:00.000Z"
+    },
     "36645399-79ca-8117-aa56-f248f8028f6c": {
       "id": "36645399-79ca-8117-aa56-f248f8028f6c",
       "url": "https://www.notion.so/REDDIT-25F-visiting-Medellin-and-looking-for-recommendations-3664539979ca8117aa56f248f8028f6c",

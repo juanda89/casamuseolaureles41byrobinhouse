@@ -69,6 +69,18 @@ Bio actualizada el 9 de mayo. Quedó: "Lofts boutique en Laureles · Reservas �
 
 ---
 
+### 2026-05-26 08:44 · [BRAIN CREATE-CONTENT] "selina medellin"
+- **Notion task:** [d7f343fb](https://www.notion.so/BRAIN-CREATE-CONTENT-selina-medellin-36b4539979ca815a9bbac0d8d7f343fb)
+- **Tipo:** Content asset · **Prioridad:** P2 · **Created by:** Brain
+- **Cambio:** tarea nueva detectada (status inicial: `Done`)
+
+**Comentarios nuevos:**
+> _2d32de7a-69ff-44ed-b5b9-1c35a278d2fd · 2026-05-25T16:14:00.000Z_
+> pblcar
+
+
+---
+
 ## Insights consolidados
 
 _(El brain trimestral con Opus 4.7 procesa este log y extrae patrones recurrentes acá. Por ejemplo: "El humano consistentemente pide cambiar 'tono profesional' por 'tono cercano' en respuestas de reviews → ajustar prompt del review-responder")_
