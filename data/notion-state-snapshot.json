@@ -1,6 +1,30 @@
 {
-  "generatedAt": "2026-06-01T16:30:14.465Z",
+  "generatedAt": "2026-06-02T14:40:59.461Z",
   "tasks": {
+    "37245399-79ca-8173-98ec-c3ab01467e1f": {
+      "id": "37245399-79ca-8173-98ec-c3ab01467e1f",
+      "url": "https://www.notion.so/BRAIN-CREATE-CONTENT-selina-medellin-3724539979ca817398ecc3ab01467e1f",
+      "title": "[BRAIN CREATE-CONTENT] \"selina medellin\"",
+      "status": "To Do",
+      "priority": "P2",
+      "type": "Content asset",
+      "createdBy": "Brain",
+      "forUseIn": "content_gap detectado por gap-detector semanal.",
+      "acceptanceCriteria": "Competidores rankean acá, nosotros no. Vol 700/mes · KD ?.",
+      "lastEditedTime": "2026-06-01T18:35:00.000Z"
+    },
+    "37245399-79ca-8111-b402-e908cf20f501": {
+      "id": "37245399-79ca-8111-b402-e908cf20f501",
+      "url": "https://www.notion.so/BRAIN-CONSOLIDATE-casa-museo-laureles-3724539979ca8111b402e908cf20f501",
+      "title": "[BRAIN CONSOLIDATE] \"casa museo laureles\"",
+      "status": "To Do",
+      "priority": "P0",
+      "type": "Content asset",
+      "createdBy": "Brain",
+      "forUseIn": "cannibalization detectado por gap-detector semanal.",
+      "acceptanceCriteria": "6 URLs propias rotando por esta query. Consolidar contenido en la URL con más backlinks; redirect 301 la otra.",
+      "lastEditedTime": "2026-06-01T18:35:00.000Z"
+    },
     "36b45399-79ca-815a-9bba-c0d8d7f343fb": {
       "id": "36b45399-79ca-815a-9bba-c0d8d7f343fb",
       "url": "https://www.notion.so/BRAIN-CREATE-CONTENT-selina-medellin-36b4539979ca815a9bbac0d8d7f343fb",
