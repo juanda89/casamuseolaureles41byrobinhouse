@@ -1,6 +1,18 @@
 {
-  "generatedAt": "2026-06-15T16:11:09.087Z",
+  "generatedAt": "2026-06-16T15:47:13.899Z",
   "tasks": {
+    "38045399-79ca-81ca-9e7e-ee0cf8602d1a": {
+      "id": "38045399-79ca-81ca-9e7e-ee0cf8602d1a",
+      "url": "https://app.notion.com/p/BRAIN-CONSOLIDATE-casa-museo-laureles-medellin-3804539979ca81ca9e7eee0cf8602d1a",
+      "title": "[BRAIN CONSOLIDATE] \"casa museo laureles medellin\"",
+      "status": "To Do",
+      "priority": "P0",
+      "type": "Content asset",
+      "createdBy": "Brain",
+      "forUseIn": "cannibalization detectado por gap-detector semanal.",
+      "acceptanceCriteria": "4 URLs propias rotando por esta query. Consolidar contenido en la URL con más backlinks; redirect 301 la otra.",
+      "lastEditedTime": "2026-06-15T17:51:00.000Z"
+    },
     "37245399-79ca-8173-98ec-c3ab01467e1f": {
       "id": "37245399-79ca-8173-98ec-c3ab01467e1f",
       "url": "https://app.notion.com/p/BRAIN-CREATE-CONTENT-selina-medellin-3724539979ca817398ecc3ab01467e1f",
