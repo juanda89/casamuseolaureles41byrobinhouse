@@ -1,6 +1,18 @@
 {
-  "generatedAt": "2026-06-22T15:46:26.344Z",
+  "generatedAt": "2026-06-23T13:33:40.066Z",
   "tasks": {
+    "38745399-79ca-8153-a1c2-cd7b4ce282be": {
+      "id": "38745399-79ca-8153-a1c2-cd7b4ce282be",
+      "url": "https://app.notion.com/p/BRAIN-CONSOLIDATE-casa-laureles-41-3874539979ca8153a1c2cd7b4ce282be",
+      "title": "[BRAIN CONSOLIDATE] \"casa laureles 41\"",
+      "status": "To Do",
+      "priority": "P0",
+      "type": "Content asset",
+      "createdBy": "Brain",
+      "forUseIn": "cannibalization detectado por gap-detector semanal.",
+      "acceptanceCriteria": "3 URLs propias rotando por esta query. Consolidar contenido en la URL con más backlinks; redirect 301 la otra.",
+      "lastEditedTime": "2026-06-22T17:27:00.000Z"
+    },
     "38045399-79ca-81ca-9e7e-ee0cf8602d1a": {
       "id": "38045399-79ca-81ca-9e7e-ee0cf8602d1a",
       "url": "https://app.notion.com/p/BRAIN-CONSOLIDATE-casa-museo-laureles-medellin-3804539979ca81ca9e7eee0cf8602d1a",
